@@ -598,7 +598,6 @@ tr:last-child td{border-bottom:0}
 
     <div class="tabs" role="tablist">
       <button class="tab on" data-tab="members">البطاقات والأرصدة</button>
-      <button class="tab" data-tab="empdata">داتا موظفين</button>
       <button class="tab" data-tab="dups">التكرار</button>
       <button class="tab" data-tab="tx">سجل العمليات</button>
       <button class="tab" data-tab="gifts">إهداء الرصيد</button>
@@ -831,28 +830,6 @@ tr:last-child td{border-bottom:0}
         </table>
         <div class="empty hidden" id="dEmpty"></div>
       </div>
-    </div>
-
-    <!-- داتا الموظفين: الاسم الثلاثي ورقم البطاقة فقط -->
-    <div id="tab-empdata" class="hidden">
-      <div class="tools">
-        <input type="search" id="eSearch" placeholder="ابحثي بالاسم والكنية، مثلاً: ياسمين دبانه">
-        <select id="eBy" aria-label="البحث في">
-          <option value="all">الاسم والكنية</option>
-          <option value="kunya">الكنية فقط</option>
-        </select>
-        <label class="btn btn-soft" style="display:inline-grid;place-items:center;cursor:pointer">استيراد من Excel<input type="file" id="eXls" accept=".xlsx,.xls,.csv" hidden></label>
-      </div>
-      <p class="hint" id="eInfo">يُستورد من الملف عمودا «الاسم الثلاثي» و«رقم البطاقة» فقط.</p>
-      <p class="hint" style="margin-top:0">قبل الاستيراد تنزل نسخة احتياطية تلقائياً. الاستيراد يدمج مع الداتا الحالية ولا يمحيها: الرقم الجديد يُضاف، والرقم الموجود يُعدَّل اسمه (ومعه اسم بطاقتها في السوق إن كانت مضافة)، ومن ليست في الملف تبقى.</p>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>رقم البطاقة</th><th>الاسم الثلاثي</th><th>بطاقة السوق</th></tr></thead>
-          <tbody id="eRows"></tbody>
-        </table>
-        <div class="empty hidden" id="eEmpty"></div>
-      </div>
-      <div class="more"><button class="btn btn-ghost hidden" id="eMore" type="button">عرض المزيد</button></div>
     </div>
 
     <!-- import -->
@@ -1798,7 +1775,6 @@ function queueDraw(...parts) {
     drawT = null; const d = dirty; dirty = new Set();
     if (d.has("stats")) renderStats();
     if (d.has("members") && adminTab === "members") renderMembers();
-    if (d.has("members") && adminTab === "empdata" && empRows) renderEmpData();
     if (d.has("members") && adminTab === "dups") renderDups();
     if (d.has("tx") && adminTab === "tx") renderTx();
     if (d.has("report") && (adminTab === "report" || adminTab === "sales")) renderReport();
@@ -1810,7 +1786,6 @@ function queueDraw(...parts) {
 }
 const stale = new Set();
 function drawTab(tab) {
-  if (tab === "empdata") loadEmpData();
   if (tab === "dups") renderDups();
   if (tab === "gifts") renderGifts();
   if (tab === "fund") renderFund();
@@ -3177,104 +3152,21 @@ $("resetBtn").onclick = async () => {
 let impRows = [];
 /* ---------- داتا الموظفين ---------- */
 const EMPD = db.collection("zp_empdata").doc("list");   // {v: "رقم<TAB>الاسم" سطر لكل موظفة, n, at} — للإدارة فقط
-let empRows = null, empLoading = null, eLimit = 100;
+let empRows = null, empLoading = null;
 function parseEmp(v) {
   return String(v || "").split("\n").filter(Boolean).map(l => { const [c, ...r] = l.split("\t"), name = r.join(" ").trim(); return { card: +c, name, _n: norm(name) }; }).filter(x => x.card > 0 && x.name);
 }
+// تبويب «داتا موظفين» محذوف من اللوحة؛ الداتا ما زالت تُقرأ لعمود «معرف موظفين» وفحوص التكرار والتصدير
 function loadEmpData(force) {
-  if (empRows && !force) return renderEmpData();
+  if (empRows && !force) return Promise.resolve();
   if (empLoading) return empLoading;
-  $("eRows").innerHTML = ""; $("eEmpty").classList.remove("hidden"); $("eEmpty").textContent = "جارٍ التحميل…";
-  return empLoading = EMPD.get().then(d => { empRows = d.exists ? parseEmp(d.data().v) : []; renderEmpData(); })
-    .catch(e => { console.error(e); $("eEmpty").textContent = e.code === "permission-denied" ? "لا توجد صلاحية. انشري قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر التحميل: " + e.message; })
+  return empLoading = EMPD.get().then(d => { empRows = d.exists ? parseEmp(d.data().v) : []; })
+    .catch(e => console.error("empdata", e?.code || e))
     .finally(() => { empLoading = null; });
 }
 const empKey = card => keyOf(empBc(card));
 // بطاقة السوق لموظفة من الداتا: بالباركود المعتاد، أو أي بطاقة موظفة بنفس الرقم (لو كُتب الباركود أو الرقم بشكل آخر)
 const empMember = card => members.get(empKey(card)) || [...members.values()].find(m => isEmpId(m.id) && (m.card === card || empCard(m.card || 0) === card));
-function empFiltered() {
-  const raw = latinDigits($("eSearch").value), q = norm(raw), words = q.split(" ").filter(Boolean), kunya = $("eBy").value === "kunya";
-  const noAl = w => w.length > 3 && w.startsWith("ال") ? w.slice(2) : w;
-  let list = empRows || [];
-  if (words.length) list = list.filter(e => {
-    if (/^\d+$/.test(q)) return String(e.card).includes(q);                    // رقم البطاقة
-    const ws = e._n.split(" ");
-    if (kunya) {   // الكنية: ما بعد الاسم الأول واسم الأب، وتُقبل بـ«ال» أو بدونها
-      const tail = ws.slice(Math.min(2, ws.length - 1)), tailS = tail.map(noAl).join(" "), qq = words.map(noAl).join(" ");
-      return tailS.includes(qq) || tail.join("").includes(words.join(""));
-    }
-    if (words.length > 1 && e._n.replace(/ /g, "").includes(words.join(""))) return true;
-    return words.every(w => wordIn(e._n, w));
-  });
-  return list.slice().sort((a, b) => a.card - b.card);
-}
-function renderEmpData() {
-  if (!empRows) return;
-  const list = empFiltered(), shown = list.slice(0, eLimit);
-  $("eInfo").textContent = empRows.length ? `${fmt(empRows.length)} موظفة في الداتا${$("eSearch").value.trim() ? ` · ${fmt(list.length)} نتيجة` : ""}` : "يُستورد من الملف عمودا «الاسم الثلاثي» و«رقم البطاقة» فقط، ويُدمج مع الموجود.";
-  $("eRows").innerHTML = shown.map(e => {
-    const m = empMember(e.card);
-    return `<tr><td dir="ltr" style="text-align:right">${AR(e.card)}</td><td>${esc(e.name)}</td>
-      <td>${m ? `<span class="hint" style="margin:0">مضافة · ${fmt(m.balance || 0)} ${esc(S.unit)}</span>` : `<button class="mini p" data-eadd="${e.card}">إضافة للسوق</button>`}</td></tr>`;
-  }).join("");
-  $("eEmpty").classList.toggle("hidden", list.length > 0);
-  $("eEmpty").textContent = empRows.length ? "لا توجد نتائج." : "لا توجد داتا بعد. اضغطي «استيراد من Excel».";
-  $("eMore").classList.toggle("hidden", list.length <= eLimit);
-}
-let eT = null;
-$("eSearch").addEventListener("input", () => { clearTimeout(eT); eT = setTimeout(() => { eLimit = 100; renderEmpData(); }, 150); });
-$("eBy").onchange = () => { $("eSearch").placeholder = $("eBy").value === "kunya" ? "اكتبي الكنية، مثلاً: اللحام" : "ابحثي بالاسم والكنية، مثلاً: ياسمين دبانه"; eLimit = 100; renderEmpData(); $("eSearch").focus(); };
-$("eMore").onclick = () => { eLimit += 200; renderEmpData(); };
-$("eRows").addEventListener("click", e => {
-  const b = e.target.closest("[data-eadd]"); if (!b) return;
-  const x = (empRows || []).find(r => r.card === +b.dataset.eadd); if (x) openAddCard({ card: x.card, name: x.name });
-});
-$("eXls").addEventListener("change", async e => {
-  const file = e.target.files[0]; e.target.value = ""; if (!file) return;
-  const info = $("eInfo");
-  try {
-    info.textContent = "جارٍ قراءة الملف…";
-    await loadXLSX();
-    const wb = XLSX.read(await file.arrayBuffer());
-    const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: "" });
-    const hi = rows.findIndex(r => r.some(c => norm(c) === norm("الاسم الثلاثي")));
-    if (hi < 0) throw new Error("لم أجد عمود «الاسم الثلاثي» في الملف.");
-    const h = rows[hi].map(c => norm(c)), ni = h.indexOf(norm("الاسم الثلاثي")), ci = h.indexOf(norm("رقم البطاقة"));
-    if (ci < 0) throw new Error("لم أجد عمود «رقم البطاقة» في الملف.");
-    const seen = new Map(); let skipped = 0;
-    rows.slice(hi + 1).forEach(r => {
-      const name = String(r[ni] ?? "").replace(/[\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF]/g, "").replace(/[\t\n\r]+/g, " ").replace(/\s+/g, " ").trim();
-      const card = toCode(r[ci]);
-      if (!name && !card) return;
-      if (!name || !card) { skipped++; return; }
-      seen.set(card, name);   // نفس الرقم مرتين: يبقى الأخير
-    });
-    if (!seen.size) throw new Error("لا توجد صفوف فيها اسم ورقم بطاقة.");
-    // الاستيراد يدمج ولا يمحي: رقم جديد يُضاف، رقم موجود يُعدَّل اسمه، ومن ليست في الملف تبقى كما هي
-    info.textContent = "جارٍ مقارنة الملف بالداتا الحالية…";
-    const curDoc = await EMPD.get({ source: "server" });
-    const cur = new Map(parseEmp(curDoc.exists ? curDoc.data().v : "").map(x => [x.card, x.name]));
-    let added = 0, changed = 0, same = 0;
-    seen.forEach((name, card) => { const o = cur.get(card); if (o === undefined) added++; else if (o !== name) changed++; else same++; });
-    // بطاقات السوق المضافة مسبقاً لهؤلاء الموظفات: يُحدَّث الاسم فقط، والرصيد والسجل لا يتغيران
-    const memUps = [];
-    seen.forEach((name, card) => { const m = empMember(card); if (m && m.name !== name) memUps.push([m, name]); });
-    if (!added && !changed && !memUps.length) { info.textContent = `لا جديد: كل الـ${fmt(seen.size)} موظفة في الملف موجودات بنفس الأسماء.${skipped ? ` تُجوهل ${fmt(skipped)} صفاً ناقصاً.` : ""}`; return; }
-    if (!confirm(`في الملف ${seen.size} موظفة:\n• ${added} جديدة تُضاف\n• ${changed} يُعدَّل اسمها\n• ${same} بدون تغيير${memUps.length ? `\n• ${memUps.length} بطاقة في السوق يُحدَّث اسمها (الرصيد لا يتغير)` : ""}${skipped ? `\n• ${skipped} صفاً ناقصاً يُتجاهل` : ""}\n\nالموظفات غير الموجودات في الملف يبقين كما هنّ.\nستُنزَّل نسخة احتياطية أولاً.`)) { info.textContent = ""; renderEmpData(); return; }
-    if (!await backupFirst("قبل استيراد داتا الموظفين", t => { info.textContent = t; })) { info.textContent = ""; renderEmpData(); return; }
-    seen.forEach((name, card) => cur.set(card, name));
-    const v = [...cur].sort((a, b) => a[0] - b[0]).map(([c, n]) => c + "\t" + n).join("\n");
-    if (v.length > 900000) throw new Error("الملف كبير جداً.");
-    await EMPD.set({ v, n: cur.size, at: FV.serverTimestamp() });
-    for (let i = 0; i < memUps.length; i += 400) {
-      const b = db.batch(); memUps.slice(i, i + 400).forEach(([m, name]) => b.update(MEM.doc(m.id), { name, updatedAt: FV.serverTimestamp() })); await b.commit();
-    }
-    if (memUps.length) await syncBalBatch(memUps.map(([m, name]) => [m.id, { name: firstName(name), at: FV.serverTimestamp() }]));
-    empRows = parseEmp(v); eLimit = 100; renderEmpData(); empTried = false; renderMembers();
-    info.textContent = `تم: ${fmt(added)} جديدة، ${fmt(changed)} معدّلة، ${fmt(same)} بدون تغيير${memUps.length ? `، و${fmt(memUps.length)} بطاقة سوق تحدّث اسمها` : ""}. المجموع ${fmt(cur.size)} موظفة.${skipped ? ` تُجوهل ${fmt(skipped)} صفاً ناقصاً.` : ""}`;
-    toast("تم تحديث داتا الموظفين بنجاح");
-  } catch (ex) { console.error(ex); info.textContent = ex.code === "permission-denied" ? "لا توجد صلاحية للحفظ. انشري قواعد Firestore الجديدة." : "لم يتم الاستيراد: " + ex.message; }
-});
 
 const loadXLSX = () => window.XLSX ? Promise.resolve() : new Promise((ok, no) => { const s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"; s.onload = ok; s.onerror = () => no(new Error("تعذّر تحميل مكتبة Excel")); document.head.appendChild(s); });
 $("grpFile").addEventListener("change", async e => {
