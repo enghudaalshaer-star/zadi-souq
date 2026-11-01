@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FBF6F8">
+<title>حسابي | سوق ملتقى زادي</title>
+<meta name="description" content="اكتبي رقم بطاقتك واعرفي رصيدك وسجل مشترياتك في سوق ملتقى زادي.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ملتقى زادي">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:url" content="https://souq-multaqa-zadi.netlify.app/rasid/">
+<meta property="og:title" content="حسابي | سوق ملتقى زادي">
+<meta property="og:description" content="اكتبي رقم بطاقتك واعرفي رصيدك وسجل مشترياتك في سوق ملتقى زادي.">
+<meta property="og:image" content="https://zadi-session.netlify.app/og-zadi.jpg">
+<meta property="og:image:secure_url" content="https://zadi-session.netlify.app/og-zadi.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="حسابي | سوق ملتقى زادي">
+<meta name="twitter:image" content="https://zadi-session.netlify.app/og-zadi.jpg">
+<link rel="icon" href="https://zadi-session.netlify.app/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --mint:#9FD4D0; --mint-soft:#E6F4F2; --mint-deep:#2F7F7A;
+  --pink:#F2A3BA; --pink-soft:#FCE9EF; --pink-deep:#B9496E;
+  --ink:#22343A; --muted:#66777C; --line:#EADFE3; --bg:#FBF6F8;
+  --bad:#C93B3B; --warn:#B7791F;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;font-family:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;color:var(--ink);
+  background:radial-gradient(900px 500px at 100% -10%,var(--pink-soft),transparent 60%),
+             radial-gradient(800px 500px at -10% 110%,var(--mint-soft),transparent 60%),var(--bg);
+  min-height:100vh;font-size:16px;line-height:1.6;-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}
+.hidden{display:none!important}
+.wrap{max-width:440px;margin:0 auto;padding:28px 16px 40px}
+.head{text-align:center}
+.head img{width:72px;height:72px;object-fit:contain}
+.title{font-family:"Aref Ruqaa Ink","Amiri",serif;font-weight:700;font-size:34px;line-height:1.25;margin:4px 0 0;
+  background:linear-gradient(90deg,var(--pink-deep),var(--mint-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);font-size:15px;margin:4px 0 0}
+form{margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;display:grid;gap:10px}
+label span{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+input{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;min-height:56px;
+  font-size:24px;text-align:center;direction:ltr;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+input:focus{border-color:var(--mint);outline:3px solid var(--mint-soft)}
+.btn{border:0;border-radius:14px;padding:12px 18px;font-weight:700;cursor:pointer;min-height:52px;background:var(--mint-deep);color:#fff;font-size:17px}
+.btn:active{transform:scale(.98)}
+.btn[disabled]{opacity:.55}
+.msg{min-height:22px;margin:4px 0 0;font-size:15px;text-align:center}
+.msg.bad{color:var(--bad)}
+.ticket{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;animation:up .2s ease-out}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ticket{animation:none}}
+.t-head{padding:18px 20px 14px;background:linear-gradient(135deg,var(--mint-soft),#fff 55%,var(--pink-soft))}
+.t-hi{font-size:15px;color:var(--muted)}
+.t-name{font-size:24px;font-weight:700;line-height:1.3}
+.t-card{font-size:13px;color:var(--muted)}
+.perf{height:16px;position:relative;background:
+  radial-gradient(circle at 0 50%,var(--bg) 9px,transparent 10px) left/16px 16px no-repeat,
+  radial-gradient(circle at 100% 50%,var(--bg) 9px,transparent 10px) right/16px 16px no-repeat}
+.perf::after{content:"";position:absolute;left:18px;right:18px;top:50%;border-top:2px dashed var(--line)}
+.t-body{padding:6px 20px 20px;text-align:center}
+.t-bal{font-size:64px;font-weight:700;line-height:1.1;color:var(--mint-deep);font-variant-numeric:tabular-nums}
+.t-unit{color:var(--muted);font-size:15px}
+.t-zero .t-bal{color:var(--pink-deep)}
+.t-at{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.hist{margin:0;padding:0 14px 14px;list-style:none;display:grid;gap:6px}
+.hist-h{font-size:15px;font-weight:700;margin:0;padding:4px 16px 8px;color:var(--ink)}
+.hist li{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--bg);border-radius:14px;padding:9px 12px}
+.hist .w{min-width:0}
+.hist .d{font-weight:600;font-size:14.5px;line-height:1.4;overflow-wrap:anywhere}
+.hist small{display:block;color:var(--muted);font-size:12px}
+.hist .a{flex:none;text-align:left}
+.hist .a b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
+.hist .minus{color:var(--pink-deep)}.hist .plus{color:var(--mint-deep)}
+.hist li.u{opacity:.5}.hist li.u .d,.hist li.u .a b{text-decoration:line-through}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:1px 8px;margin-left:6px;background:var(--mint-soft);color:var(--mint-deep)}
+.tag.buy{background:var(--pink-soft);color:var(--pink-deep)}
+.tag.tr{background:#E8EEFF;color:#3A4FA8}
+.tag.gf{background:var(--pink-soft);color:var(--pink-deep)}
+.tag.fd{background:#FFF1D6;color:#9A5B00}
+/* إهداء لصندوق المؤسسة */
+.fbtn{display:block;width:100%;margin-top:8px;border:1.5px dashed #E2B65C;background:#FFF8EA;color:#9A5B00;border-radius:14px;padding:11px;font-weight:700;font-size:16px;cursor:pointer}
+.fbtn:active{transform:scale(.98)}
+.fbox{border:1.5px solid #F3D9A4;background:#FFF8EA;border-radius:14px;padding:10px 12px;font-size:15px;color:#7A4A00}
+.fbox b{display:block;font-size:17px}
+.qamt{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.qamt button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 0;font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums}
+.qamt button:active{background:#FFF8EA}
+/* إهداء الرصيد */
+.gbtn{display:block;width:100%;margin-top:14px;border:1.5px dashed var(--pink);background:var(--pink-soft);color:var(--pink-deep);border-radius:14px;padding:11px;font-weight:700;font-size:16px;cursor:pointer}
+.gbtn:active{transform:scale(.98)}
+.glist{margin:0;padding:0 14px 14px;list-style:none;display:grid;gap:6px}
+.glist li{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px dashed var(--line);border-radius:14px;padding:8px 12px;font-size:14px}
+.glist small{display:block;color:var(--muted);font-size:12px}
+.gst{flex:none;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;background:#FFF3DF;color:var(--warn)}
+.gst.done{background:var(--mint-soft);color:var(--mint-deep)}.gst.rejected,.gst.undone{background:#EEF0F2;color:var(--muted)}
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(34,52,58,.45);display:flex;align-items:flex-end;justify-content:center;padding:0 10px}
+.sbox{width:100%;max-width:440px;background:#fff;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));display:grid;gap:10px;max-height:92vh;overflow:auto;animation:up .2s ease-out}
+.sbox h3{margin:0;font-size:20px}
+.ssub{margin:0;color:var(--muted);font-size:14px}
+.kseg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:14px;padding:4px;gap:4px}
+.kseg button{border:0;background:none;border-radius:10px;padding:9px;font-weight:700;color:var(--muted);cursor:pointer}
+.kseg button.on{background:var(--mint-deep);color:#fff}
+.gto{min-height:22px;font-size:15px;text-align:center}
+.gto.ok{color:var(--mint-deep);font-weight:700}.gto.bad{color:var(--bad)}
+.gres{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;max-height:240px;overflow:auto}
+.gres:empty{display:none}
+.gres li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;font-size:15px}
+.gres li:last-child{border-bottom:0}.gres li:active,.gres li:hover{background:var(--mint-soft)}
+.gres small{color:var(--muted);font-size:12.5px;flex:none}
+.ktag{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:0 7px;margin-inline-end:6px;background:var(--mint-soft);color:var(--mint-deep)}
+.ktag.e{background:#E8EEFF;color:#3A4FA8}
+.gpick{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1.5px solid var(--mint-deep);background:var(--mint-soft);border-radius:14px;padding:10px 12px;font-size:15px}
+.gpick b{display:block;font-size:17px}
+.gpick button{border:0;background:#fff;color:var(--mint-deep);font-weight:700;border-radius:10px;padding:6px 10px;cursor:pointer;flex:none}
+input.txt{font-size:16px;direction:rtl;text-align:right;letter-spacing:0;min-height:48px}
+.gdone{text-align:center;padding:10px 0}
+.gdone b{display:block;font-size:42px;line-height:1.2}
+.empty{color:var(--muted);font-size:14px;text-align:center;padding:4px 0 14px}
+.again{display:block;margin:18px auto 0;background:none;border:0;color:var(--pink-deep);font-weight:600;cursor:pointer;font-size:15px}
+.mode{display:inline-block;margin-top:8px;padding:2px 12px;border-radius:999px;font-size:13px;font-weight:700;background:var(--pink-soft);color:var(--pink-deep)}
+.mode.emp{background:#E8EEFF;color:#3A4FA8}
+.foot{text-align:center;color:var(--muted);font-size:13px;margin-top:22px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="head">
+    <img id="logo" alt="" hidden>
+    <h1 class="title" id="title">سوق ملتقى زادي</h1>
+    <p class="sub">اكتبي رقم بطاقتك لتري رصيدك وسجلك</p>
+    <span class="mode" id="mode"></span>
+  </div>
+
+  <form id="f" autocomplete="off">
+    <label><span>رقم بطاقتك</span><input type="text" id="code" inputmode="numeric" placeholder="مثلاً 4588" spellcheck="false"></label>
+    <button class="btn" type="submit" id="go">دخول</button>
+    <p class="msg" id="msg" role="status"></p>
+  </form>
+
+  <div id="out"></div>
+  <p class="foot">الرصيد والسجل يتحدّثان تلقائياً مع كل شراء أو شحن أو إهداء.</p>
+</main>
+
+<script src="../firebase-app-compat.js"></script>
+<script>window.firebase || document.write('<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"><\/script>');</script>
+<script src="../firebase-firestore-compat.js"></script>
+<script>(window.firebase && firebase.firestore) || document.write('<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"><\/script>');</script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDQsXLkPJAYSpejNDkH8TxkTpVrdEVTgHI",
+  authDomain: "point-system-2d5c7.firebaseapp.com",
+  databaseURL: "https://point-system-2d5c7-default-rtdb.firebaseio.com",
+  projectId: "point-system-2d5c7",
+  storageBucket: "point-system-2d5c7.firebasestorage.app",
+  messagingSenderId: "15273382125",
+  appId: "1:15273382125:web:7db6258f43861509717ce4",
+  measurementId: "G-0KC7DGE263"
+};
+const $ = id => document.getElementById(id);
+const AR = n => String(n).replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+const fmt = n => AR(Number(n || 0).toLocaleString("en-US"));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const latin = v => String(v ?? "").replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+const keyOf = v => latin(v).toUpperCase().replace(/[^0-9A-Z]/g, "");
+
+/* logo */
+(() => { const im = new Image(); im.onload = () => { $("logo").src = im.src; $("logo").hidden = false; }; im.src = "https://zadi-session.netlify.app/logo.webp"; })();
+
+if (typeof firebase === "undefined" || !firebase.firestore) {
+  $("msg").className = "msg bad"; $("msg").textContent = "تعذّر التحميل. تحققي من الإنترنت ثم أعيدي فتح الصفحة.";
+  throw new Error("firebase not loaded");
+}
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const BAL = db.collection("zp_bal");
+let unit = "نقطة", unsubs = [];
+const FUND = db.collection("zp_fund"), GIFTS = db.collection("zp_gifts"), MEM = db.collection("zp_members"), TX = db.collection("zp_tx");
+let GIFT = { on: false, max: 0 };   // إهداء الرصيد: يُفعَّل من لوحة التحكم
+db.collection("zp_settings").doc("main").onSnapshot(s => {
+  const d = s.exists ? s.data() : {};
+  if (d.unit) unit = d.unit;
+  if (d.title) { $("title").textContent = d.title; }
+  GIFT = { on: d.giftOn === true, max: Number(d.giftMax) || 0 };
+  if (!GIFT.on) closeGift();
+  draw();
+}, () => {});
+
+let found = [];
+const EMP = () => location.hash === "#e";                       // رابط الموظفات: /rasid/#e
+const MEMK = () => EMP() ? "zp_rasid_e" : "zp_rasid";            // الجوال يتذكر بطاقة كل رابط على حدة
+const isEmpId = id => /^ET/.test(id);                            // بطاقات الموظفات: الباركود E.T.2xxxx
+const empId = n => "ET" + ((n >= 20000 && n < 30000) || n >= 200000 ? n : "2" + String(n).padStart(4, "0"));   // 4 ← ET20004، 10880 ← ET210880
+// بطاقة الموظفة بالرقم: الباركود المعتاد E.T.2xxxx، أو أي بطاقة موظفة محفوظة بنفس الرقم (لو كُتب الرقم أو الباركود بشكل آخر)
+async function empDocs(k) {
+  const digits = /^\d+$/.test(k);
+  if (!digits) { if (!isEmpId(k)) return []; const d = await BAL.doc(k).get(); return d.exists ? [{ id: d.id, ...d.data() }] : []; }
+  const n = +k, nums = [...new Set([n, n >= 200000 ? n - 200000 : n >= 20000 && n < 30000 ? n - 20000 : n])];
+  const ids = [...new Set([empId(n), "ET" + n])];
+  const tasks = ids.map(id => BAL.doc(id).get().then(d => d.exists ? [{ id: d.id, ...d.data() }] : []));
+  nums.forEach(c => tasks.push(BAL.where("card", "==", c).limit(30).get().then(q => q.docs.map(d => ({ id: d.id, ...d.data() }))).catch(() => [])));
+  const all = (await Promise.all(tasks)).flat().filter(c => isEmpId(c.id)), out = new Map();
+  all.forEach(c => out.set(c.id, c));
+  const exact = [...out.values()].filter(c => c.id === empId(n) || c.card === n);   // المطابقة المباشرة أولاً
+  return exact.length ? exact : [...out.values()];
+}
+function setMode() { const m = $("mode"); m.textContent = EMP() ? "حساب الموظفة" : "حساب المتطوعة"; m.classList.toggle("emp", EMP()); }
+const KIND = { buy: "شراء", topup: "شحن", refund: "استرجاع", adjust: "تعديل", transfer: "نقل رصيد", gift: "إهداء", fund: "إهداء" };
+const when = ms => new Date(ms).toLocaleString("ar", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+function histHtml(list) {
+  const rows = (Array.isArray(list) ? list : []).slice().sort((a, b) => (b.t || 0) - (a.t || 0));
+  if (!rows.length) return `<p class="empty">لا توجد عمليات بعد.</p>`;
+  return `<ul class="hist">${rows.map(h => {
+    const minus = h.k === "buy" || h.a < 0;
+    return `<li class="${h.u ? "u" : ""}"><div class="w"><div class="d"><span class="tag ${h.k === "buy" ? "buy" : h.k === "transfer" ? "tr" : h.k === "gift" ? "gf" : h.k === "fund" ? "fd" : ""}">${KIND[h.k] || ""}</span>${esc(h.d || "")}</div>
+      <small>${h.t ? esc(when(h.t)) : ""}${h.s ? " · " + esc(h.s) : ""}${h.u ? " · أُلغيت" : ""}</small></div>
+      <div class="a"><b dir="ltr" class="${minus ? "minus" : "plus"}">${minus ? "−" : "+"}${fmt(Math.abs(h.a || 0))}</b>${h.b != null ? `<small>الرصيد ${fmt(h.b)}</small>` : ""}</div></li>`;
+  }).join("")}</ul>`;
+}
+function stop() { unsubs.forEach(u => u()); unsubs = []; gUnsubs.forEach(u => u()); gUnsubs = []; myGifts = new Map(); closeGift(); }
+
+/* ---------- إهداء الرصيد ---------- */
+// صاحبة البطاقة تهدي من رصيدها لرفيقتها (متطوعة أو موظفة)، فينتقل المبلغ فوراً ويظهر في سجل البطاقتين
+let gFund = false, gUnsubs = [], myGifts = new Map(), gTo = null, gKind = "v", gFrom = null, gSeq = 0, gT = null;
+const G_ST = { pending: "بانتظار الموافقة", done: "وصل ✓", rejected: "مرفوض", undone: "أُلغي" };
+const whoKind = id => isEmpId(id) ? "موظفة" : "متطوعة";
+const gKey = id => "zp_gifts_" + id;
+const gIds = id => { try { return JSON.parse(localStorage.getItem(gKey(id)) || "[]"); } catch (_) { return []; } };
+function watchGifts(id) {
+  gIds(id).forEach(gid => {
+    if (myGifts.has(gid)) return; myGifts.set(gid, null);
+    gUnsubs.push(GIFTS.doc(gid).onSnapshot(s => { if (s.exists) { myGifts.set(gid, { id: gid, ...s.data() }); draw(); } }, () => {}));
+  });
+}
+function giftsHtml(id) {
+  const list = gIds(id).map(g => myGifts.get(g)).filter(g => g && g.from === id).sort((a, b) => (b.at?.toMillis?.() || 0) - (a.at?.toMillis?.() || 0)).slice(0, 10);
+  if (!list.length) return "";
+  return `<h2 class="hist-h">إهداءاتي</h2><ul class="glist">${list.map(g => `<li><div>إلى ${isEmpId(g.to) ? "الموظفة" : "المتطوعة"} <b>${esc(g.toName || "")}</b> · ${fmt(g.amount)} ${esc(unit)}
+    <small>${g.at?.toDate ? esc(when(g.at.toDate())) : ""}${g.reason ? " · " + esc(g.reason) : ""}</small></div><span class="gst ${esc(g.status)}">${G_ST[g.status] || ""}</span></li>`).join("")}</ul>`;
+}
+function closeGift() { $("gSheet")?.remove(); gTo = null; gFrom = null; gFund = false; }
+// فهرس الأسماء العام (zp_pub/names): مفتاح البطاقة ورقمها والاسم الكامل — يُقرأ مرة واحدة عند فتح الإهداء
+const normAr = v => String(v ?? "").replace(/[\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF\u00AD]/g, "").replace(/[\u064B-\u065F\u0670\u0640]/g, "")
+  .replace(/[أإآٱ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي").replace(/ؤ/g, "و").replace(/ئ/g, "ي").replace(/\s+/g, " ").trim().toLowerCase();
+let PUB = null, pubLoad = null;
+function loadPub() {
+  if (PUB) return Promise.resolve(PUB);
+  if (!pubLoad) pubLoad = db.collection("zp_pub").doc("names").get().then(d => {
+    const rows = String(d.exists ? d.data().v || "" : "").split("\n").filter(Boolean).map(l => { const [id, c, ...r] = l.split("\t"), name = r.join(" ").trim(); return { id, card: c === "" ? null : +c, name, _n: normAr(name) }; });
+    if (!rows.length) { pubLoad = null; return null; }   // الفهرس لم يُجهَّز بعد: نعيد المحاولة في المرة القادمة
+    PUB = rows; return PUB;
+  }).catch(e => { console.warn("pub", e?.code || e); pubLoad = null; return null; });
+  return pubLoad;
+}
+const fullName = id => PUB?.find(x => x.id === id)?.name || "";
+// رابط المتطوعات: الإهداء لمتطوعة فقط — رابط الموظفات: لموظفة أو متطوعة
+const canKinds = () => EMP() ? (gKind === "e" ? ["e"] : ["v"]) : ["v"];
+const kindOk = id => canKinds().includes(isEmpId(id) ? "e" : "v");
+async function findCard(raw) {   // بالرقم أو الباركود، من صفحة الأرصدة (احتياط إذا الفهرس غير جاهز)
+  const k = keyOf(raw); if (!k) return [];
+  const digits = /^\d+$/.test(k), emp = canKinds()[0] === "e";
+  if (emp) return empDocs(k);
+  const tasks = [BAL.doc(k).get().then(d => d.exists ? [{ id: d.id, ...d.data() }] : [])];
+  if (digits) tasks.push(BAL.where("card", "==", +k).limit(6).get().then(q => q.docs.map(d => ({ id: d.id, ...d.data() }))));
+  return (await Promise.all(tasks)).flat().filter(c => !isEmpId(c.id));
+}
+// طرق البحث: «الاسم» (الاسم الأول) — «الاسم والكنية» — «الكنية فقط» (بـ«ال» أو بدونها، وتقبل الكنية المركبة)، ورقم البطاقة يعمل دائماً
+let gBy = "full";
+const noAl = w => w.length > 3 && w.startsWith("ال") ? w.slice(2) : w;
+function nameHit(x, words) {
+  const ws = x._n.split(" ");
+  if (gBy === "name") return words.every((w, i) => (ws[i] || "").startsWith(w));
+  if (gBy === "kunya") {
+    const tail = ws.slice(Math.min(2, ws.length - 1)), tailS = tail.map(noAl).join(" "), qq = words.map(noAl).join(" ");
+    return tailS.includes(qq) || tail.join("").includes(words.join(""));
+  }
+  if (words.length > 1 && x._n.replace(/ /g, "").includes(words.join(""))) return true;
+  return words.every(w => ws.some(p => p.startsWith(w) || noAl(p).startsWith(noAl(w))));
+}
+function searchPub(raw) {
+  const k = keyOf(raw), q = normAr(raw), words = q.split(" ").filter(Boolean);
+  const digits = /^\d+$/.test(k) && !/[\u0600-\u06FF]/.test(raw);
+  return PUB.filter(x => x.id !== gFrom.id && kindOk(x.id) && (digits ? x.card === +k || x.id === k : (x.id === k || (words.length && nameHit(x, words)))))
+    .sort((a, b) => (a.card ?? 1e9) - (b.card ?? 1e9)).slice(0, 15);
+}
+function openGift(id) {
+  const c = found.find(x => x.id === id); if (!c || !GIFT.on) return;
+  closeGift(); gFrom = c; gKind = EMP() ? "e" : "v";
+  const el = document.createElement("div"); el.className = "sheet"; el.id = "gSheet";
+  el.innerHTML = `<div class="sbox" role="dialog" aria-modal="true" aria-labelledby="gH">
+    <h3 id="gH">🎁 إهداء رصيد</h3>
+    <p class="ssub">من بطاقة <b id="gFromName">${esc(c.name || "")}</b>${c.card != null ? ` (${AR(c.card)})` : ""} · رصيدك <b id="gBal">${fmt(c.balance)}</b> ${esc(unit)}</p>
+    ${EMP() ? `<div class="kseg" id="gK"><button type="button" class="on" data-k="e">لموظفة</button><button type="button" data-k="v">لمتطوعة</button></div>` : `<p class="ssub">الإهداء من رابط المتطوعات لمتطوعة فقط.</p>`}
+    <div id="gFind">
+      <div class="kseg" id="gBy" style="grid-template-columns:repeat(3,1fr);margin-bottom:8px"><button type="button" data-by="name">الاسم</button><button type="button" class="on" data-by="full">الاسم والكنية</button><button type="button" data-by="kunya">الكنية فقط</button></div>
+      <label><span id="gToLbl">رقم بطاقة رفيقتك، أو اسمها وكنيتها</span><input type="text" class="txt" id="gTo" autocomplete="off" spellcheck="false" placeholder="مثلاً 25 أو سارة الأحمد"></label>
+      <div class="gto" id="gToName"></div>
+      <ul class="gres" id="gRes"></ul>
+    </div>
+    <div class="gpick hidden" id="gPick"></div>
+    <label><span>المبلغ${GIFT.max ? ` (حتى ${fmt(GIFT.max)})` : ""}</span><input type="text" id="gAmt" inputmode="numeric" autocomplete="off"></label>
+    <label><span>رسالة لها (اختياري)</span><input type="text" class="txt" id="gNote" maxlength="120" autocomplete="off"></label>
+    <button class="btn" type="button" id="gSend" disabled>إهداء الآن</button>
+    <p class="msg" id="gOut" role="status"></p>
+    <button class="again" type="button" id="gClose" style="margin-top:0">إلغاء</button>
+  </div>`;
+  document.body.appendChild(el);
+  el.onclick = e => { if (e.target === el) closeGift(); };
+  $("gClose").onclick = closeGift;
+  $("gK") && ($("gK").onclick = e => { const b = e.target.closest("[data-k]"); if (!b) return; gKind = b.dataset.k; $("gK").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); pickTo(null); lookTo(); });
+  $("gTo").oninput = () => { clearTimeout(gT); gT = setTimeout(lookTo, 300); };
+  gBy = "full";
+  const BY = { name: ["رقم بطاقة رفيقتك، أو اسمها", "مثلاً 25 أو سارة"], full: ["رقم بطاقة رفيقتك، أو اسمها وكنيتها", "مثلاً 25 أو سارة الأحمد"], kunya: ["رقم بطاقة رفيقتك، أو كنيتها", "مثلاً 25 أو الأحمد"] };
+  $("gBy").onclick = e => { const b = e.target.closest("[data-by]"); if (!b) return; gBy = b.dataset.by; $("gBy").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); $("gToLbl").textContent = BY[gBy][0]; $("gTo").placeholder = BY[gBy][1]; lookTo(); $("gTo").focus(); };
+  $("gRes").onclick = e => { const li = e.target.closest("[data-to]"); if (li) pickTo(gList.find(x => x.id === li.dataset.to)); };
+  $("gAmt").oninput = check;
+  $("gSend").onclick = sendGift;
+  loadPub().then(() => { if ($("gFromName") && fullName(c.id)) $("gFromName").textContent = fullName(c.id); });
+  $("gTo").focus();
+}
+let gList = [];
+function pickTo(c) {
+  gTo = c || null;
+  $("gFind").classList.toggle("hidden", !!gTo); $("gPick").classList.toggle("hidden", !gTo);
+  if (gTo) {
+    $("gPick").innerHTML = `<div>إلى ${isEmpId(gTo.id) ? "الموظفة" : "المتطوعة"}<b>${esc(gTo.full || gTo.name || "")}</b>${gTo.card != null ? `<small style="color:var(--muted)">بطاقة ${AR(gTo.card)}</small>` : ""}</div><button type="button" id="gChange">تغيير</button>`;
+    $("gChange").onclick = () => { pickTo(null); $("gTo").focus(); };
+  }
+  check();
+}
+async function lookTo() {
+  const v = $("gTo")?.value || "", seq = ++gSeq, out = $("gToName");
+  gList = []; $("gRes").innerHTML = "";
+  if (!v.trim()) { out.className = "gto"; out.textContent = ""; return; }
+  const digits = /^\d+$/.test(keyOf(v)) && !/[\u0600-\u06FFa-z]/i.test(latin(v).replace(/[0-9]/g, ""));
+  if (!digits && normAr(v).length < 2) { out.className = "gto"; out.textContent = ""; return; }
+  out.className = "gto"; out.textContent = "جارٍ البحث…";
+  try {
+    const pub = await loadPub(); if (seq !== gSeq || !$("gSheet")) return;
+    if (pub && pub.length) gList = searchPub(v).map(x => ({ ...x, full: x.name }));
+    else if (digits) gList = (await findCard(v)).filter(x => x.id !== gFrom.id);   // احتياط: بالرقم فقط والاسم الأول
+    if (seq !== gSeq || !$("gSheet")) return;
+    if (!gList.length) {
+      out.className = "gto bad";
+      out.textContent = !pub && !digits ? "البحث بالاسم يحتاج تجهيز فهرس الأسماء من لوحة التحكم. اكتبي رقم بطاقتها الآن."
+        : EMP() ? `لم نجد ${gKind === "e" ? "موظفة" : "متطوعة"} بهذا البحث.${gKind === "e" ? " إذا كانت متطوعة اختاري «لمتطوعة»." : ""}`
+        : "لم نجد متطوعة بهذا البحث.";
+      return;
+    }
+    out.className = "gto"; out.textContent = gList.length > 1 ? "اختاري رفيقتك:" : "";
+    $("gRes").innerHTML = gList.map(x => `<li data-to="${esc(x.id)}"><span><span class="ktag ${isEmpId(x.id) ? "e" : ""}">${isEmpId(x.id) ? "موظفة" : "متطوعة"}</span>${esc(x.full || x.name || "")}</span><small>${x.card != null ? "بطاقة " + AR(x.card) : ""}</small></li>`).join("");
+  } catch (ex) { if (seq === gSeq) { out.className = "gto bad"; out.textContent = "تعذّر البحث. تحققي من الإنترنت."; } }
+}
+const amtOf = v => { const n = parseInt(latin(v).replace(/[^0-9]/g, ""), 10); return Number.isFinite(n) ? n : 0; };
+function check() {
+  if (!$("gSheet")) return;
+  const cur = found.find(x => x.id === gFrom?.id) || gFrom || {}, bal = cur.balance || 0, a = amtOf($("gAmt").value), out = $("gOut");
+  $("gBal").textContent = fmt(bal);
+  let err = "";
+  if (a && a > bal) err = "المبلغ أكبر من رصيدك.";
+  else if (a && GIFT.max && a > GIFT.max) err = `الحد الأعلى للإهداء ${fmt(GIFT.max)} ${unit}.`;
+  if (out.dataset.sent !== "1") { out.className = "msg" + (err ? " bad" : ""); out.textContent = err; }
+  $("gSend").disabled = !((gTo || gFund) && a > 0 && !err);
+}
+// الإهداء كله في دفعة واحدة: رصيد البطاقتين + سجل الإهداء + عمليتا السجل + صفحة «رصيدي» للاثنتين
+// والقواعد تتأكد أن المبلغ نفسه نقص من الأولى وزاد للثانية، وأن الإهداء مفعّل وضمن الحد والرصيد يكفي
+async function giftBatch(fromId, toId, a, note) {
+  const [fs, ts] = await Promise.all([BAL.doc(fromId).get({ source: "server" }), BAL.doc(toId).get({ source: "server" })]);
+  if (!fs.exists || !ts.exists) throw new Error("gone");
+  const F = fs.data(), T = ts.data(), fb = (F.balance || 0) - a, tb = (T.balance || 0) + a;
+  const FN = (fullName(fromId) || F.name || "").slice(0, 80), TN = (fullName(toId) || T.name || "").slice(0, 80);
+  if (fb < 0) throw new Error("low");
+  const SV = firebase.firestore.FieldValue.serverTimestamp, now = Date.now();
+  const gRef = GIFTS.doc(), outRef = TX.doc(), inRef = TX.doc(), m = note ? ` · «${note}»` : "";
+  const outNote = `إهداء إلى ${whoKind(toId)} «${TN}»${T.card != null ? ` (${AR(T.card)})` : ""}${m}`.slice(0, 200);
+  const inNote = `إهداء من ${whoKind(fromId)} «${FN}»${F.card != null ? ` (${AR(F.card)})` : ""}${m}`.slice(0, 200);
+  const base = { type: "gift", station: "إهداء", by: "self", gift: gRef.id };
+  const b = db.batch();
+  b.update(MEM.doc(fromId), { balance: firebase.firestore.FieldValue.increment(-a), updatedAt: SV(), lastGift: gRef.id });
+  b.update(MEM.doc(toId), { balance: firebase.firestore.FieldValue.increment(a), updatedAt: SV(), lastGift: gRef.id });
+  b.set(gRef, { from: fromId, to: toId, fromName: FN, toName: TN,
+    fromCard: F.card ?? null, toCard: T.card ?? null, amount: a, msg: note, status: "done", txOut: outRef.id, txIn: inRef.id, at: SV() });
+  b.set(outRef, { ...base, mid: fromId, card: F.card ?? null, name: FN, amount: -a, balanceAfter: fb, pair: inRef.id,
+    peerMid: toId, peerName: TN, peerCard: T.card ?? null, note: outNote, at: SV() });
+  b.set(inRef, { ...base, mid: toId, card: T.card ?? null, name: TN, amount: a, balanceAfter: tb, pair: outRef.id,
+    peerMid: fromId, peerName: FN, peerCard: F.card ?? null, note: inNote, at: SV() });
+  const hist = (D, e) => [...(Array.isArray(D.hist) ? D.hist : []), e].slice(-500);
+  b.set(BAL.doc(fromId), { card: F.card ?? null, name: String(F.name || "").slice(0, 40), balance: fb, at: SV(), hist: hist(F, { i: outRef.id, k: "gift", a: -a, d: outNote, s: "إهداء", b: fb, t: now }) });
+  b.set(BAL.doc(toId), { card: T.card ?? null, name: String(T.name || "").slice(0, 40), balance: tb, at: SV(), hist: hist(T, { i: inRef.id, k: "gift", a, d: inNote, s: "إهداء", b: tb, t: now }) });
+  await b.commit();
+  return { gid: gRef.id, toName: TN };
+}
+/* ---------- إهداء لصندوق المؤسسة ---------- */
+// نفس طريقة الإهداء لرفيقة: ينخصم المبلغ فوراً من رصيدها، ويُسجَّل في سجلها وفي لوحة التحكم (تبويب «صندوق المؤسسة»)
+function openFund(id) {
+  const c = found.find(x => x.id === id); if (!c || !GIFT.on) return;
+  closeGift(); gFrom = c; gFund = true;
+  const el = document.createElement("div"); el.className = "sheet"; el.id = "gSheet";
+  const qs = [1000, 2000, 5000, 10000].filter(v => !GIFT.max || v <= GIFT.max);
+  el.innerHTML = `<div class="sbox" role="dialog" aria-modal="true" aria-labelledby="gH">
+    <h3 id="gH">💝 إهداء لصندوق المؤسسة</h3>
+    <p class="ssub">من بطاقة <b id="gFromName">${esc(c.name || "")}</b>${c.card != null ? ` (${AR(c.card)})` : ""} · رصيدك <b id="gBal">${fmt(c.balance)}</b> ${esc(unit)}</p>
+    <div class="fbox">إلى<b>صندوق المؤسسة</b></div>
+    <label><span>المبلغ${GIFT.max ? ` (حتى ${fmt(GIFT.max)})` : ""}</span><input type="text" id="gAmt" inputmode="numeric" autocomplete="off"></label>
+    ${qs.length ? `<div class="qamt" id="gQ">${qs.map(v => `<button type="button" data-v="${v}">${fmt(v)}</button>`).join("")}</div>` : ""}
+    <label><span>كلمة مع الإهداء (اختياري)</span><input type="text" class="txt" id="gNote" maxlength="120" autocomplete="off"></label>
+    <button class="btn" type="button" id="gSend" disabled>أهدي الآن</button>
+    <p class="msg" id="gOut" role="status"></p>
+    <button class="again" type="button" id="gClose" style="margin-top:0">إلغاء</button>
+  </div>`;
+  document.body.appendChild(el);
+  el.onclick = e => { if (e.target === el) closeGift(); };
+  $("gClose").onclick = closeGift;
+  $("gQ") && ($("gQ").onclick = e => { const b = e.target.closest("[data-v]"); if (!b) return; $("gAmt").value = b.dataset.v; check(); });
+  $("gAmt").oninput = check;
+  $("gSend").onclick = sendFund;
+  loadPub().then(() => { if ($("gFromName") && fullName(c.id)) $("gFromName").textContent = fullName(c.id); });
+  check(); $("gAmt").focus();
+}
+// دفعة واحدة: ينقص رصيد البطاقة + سجل الإهداء في zp_fund + عملية في السجل + صفحة «رصيدي»
+// والقواعد تتأكد أن المبلغ نفسه نقص، وأن الإهداء مفعّل وضمن الحد والرصيد يكفي
+async function fundBatch(fromId, a, note) {
+  const fs = await BAL.doc(fromId).get({ source: "server" });
+  if (!fs.exists) throw new Error("gone");
+  const F = fs.data(), fb = (F.balance || 0) - a;
+  if (fb < 0) throw new Error("low");
+  const FN = (fullName(fromId) || F.name || "").slice(0, 80);
+  const SV = firebase.firestore.FieldValue.serverTimestamp, now = Date.now();
+  const fRef = FUND.doc(), outRef = TX.doc();
+  const outNote = `إهداء لصندوق المؤسسة${note ? ` · «${note}»` : ""}`.slice(0, 200);
+  const b = db.batch();
+  b.update(MEM.doc(fromId), { balance: firebase.firestore.FieldValue.increment(-a), updatedAt: SV(), lastFund: fRef.id });
+  b.set(fRef, { from: fromId, fromName: FN, fromCard: F.card ?? null, amount: a, msg: note, status: "done", txOut: outRef.id, at: SV() });
+  b.set(outRef, { type: "fund", station: "صندوق المؤسسة", by: "self", fund: fRef.id, mid: fromId, card: F.card ?? null, name: FN, amount: -a, balanceAfter: fb, note: outNote, at: SV() });
+  b.set(BAL.doc(fromId), { card: F.card ?? null, name: String(F.name || "").slice(0, 40), balance: fb, at: SV(),
+    hist: [...(Array.isArray(F.hist) ? F.hist : []), { i: outRef.id, k: "fund", a: -a, d: outNote, s: "صندوق المؤسسة", b: fb, t: now }].slice(-500) });
+  await b.commit();
+}
+async function sendFund() {
+  const a = amtOf($("gAmt").value), out = $("gOut"), from = found.find(x => x.id === gFrom.id) || gFrom;
+  if (!(a > 0)) return;
+  if (!confirm(`إهداء ${a} ${unit} من رصيدك لصندوق المؤسسة؟\nينخصم المبلغ فوراً.`)) return;
+  $("gSend").disabled = true; out.className = "msg"; out.textContent = "جارٍ الإهداء…";
+  const note = $("gNote").value.replace(/\s+/g, " ").trim().slice(0, 120);
+  try {
+    try { await fundBatch(from.id, a, note); }
+    catch (ex) {   // الرصيد تغيّر للتو: نعيد المحاولة مرة واحدة بالرصيد الجديد
+      if (ex.code !== "permission-denied" && ex.code !== "failed-precondition") throw ex;
+      await new Promise(res => setTimeout(res, 2500));
+      await fundBatch(from.id, a, note);
+    }
+    $("gSheet").querySelector(".sbox").innerHTML = `<div class="gdone"><b>💝</b><h3>جزاكِ الله خيراً</h3>
+      <p class="ssub">وصل ${fmt(a)} ${esc(unit)} إلى صندوق المؤسسة، ويظهر الإهداء في سجلك.</p></div>
+      <button class="btn" type="button" id="gOk">تم</button>`;
+    $("gOk").onclick = closeGift;
+  } catch (ex) {
+    console.error(ex); $("gSend").disabled = false; out.className = "msg bad";
+    out.textContent = ex.message === "low" ? "رصيدك لا يكفي هذا المبلغ."
+      : ex.message === "gone" ? "لم نعد نجد بطاقتك. راجعي نقطة الشحن."
+      : ex.code === "permission-denied" ? "لم يتم الإهداء: تأكدي أن المبلغ ضمن رصيدك والحد المسموح. إذا تكرر، راجعي نقطة الشحن."
+      : "تعذّر الإهداء. تحققي من الإنترنت وحاولي مجدداً.";
+    if (ex.code) out.textContent += ` (${ex.code})`;
+  }
+}
+async function sendGift() {
+  const a = amtOf($("gAmt").value), out = $("gOut"), to = gTo, from = found.find(x => x.id === gFrom.id) || gFrom;
+  if (!to || !(a > 0) || to.id === from.id || !kindOk(to.id)) return;
+  if (!confirm(`إهداء ${a} ${unit} من رصيدك إلى «${to.full || to.name || ""}»؟\nينتقل المبلغ فوراً.`)) return;
+  $("gSend").disabled = true; out.className = "msg"; out.textContent = "جارٍ الإهداء…";
+  const note = $("gNote").value.replace(/\s+/g, " ").trim().slice(0, 120);
+  try {
+    let r;
+    try { r = await giftBatch(from.id, to.id, a, note); }
+    catch (ex) {   // الرصيد تغيّر للتو (شراء أو شحن بنفس اللحظة): نعيد المحاولة مرة واحدة بالرصيد الجديد
+      if (ex.code !== "permission-denied" && ex.code !== "failed-precondition") throw ex;
+      await new Promise(res => setTimeout(res, 2500));
+      r = await giftBatch(from.id, to.id, a, note);
+    }
+    const ids = [r.gid, ...gIds(from.id)].slice(0, 20);
+    try { localStorage.setItem(gKey(from.id), JSON.stringify(ids)); } catch (_) {}
+    watchGifts(from.id);
+    $("gSheet").querySelector(".sbox").innerHTML = `<div class="gdone"><b>🎁</b><h3>تم الإهداء بنجاح</h3>
+      <p class="ssub">وصل ${fmt(a)} ${esc(unit)} إلى «${esc(r.toName || to.full || to.name || "")}». يظهر الإهداء في سجلك وسجلها.</p></div>
+      <button class="btn" type="button" id="gOk">تم</button>`;
+    $("gOk").onclick = closeGift;
+  } catch (ex) {
+    console.error(ex); $("gSend").disabled = false; out.className = "msg bad";
+    out.textContent = ex.message === "low" ? "رصيدك لا يكفي هذا المبلغ."
+      : ex.message === "gone" ? "لم نعد نجد إحدى البطاقتين. راجعي نقطة الشحن."
+      : ex.code === "permission-denied" ? "لم يتم الإهداء: تأكدي أن المبلغ ضمن رصيدك والحد المسموح. إذا تكرر، راجعي نقطة الشحن."
+      : "تعذّر الإهداء. تحققي من الإنترنت وحاولي مجدداً.";
+    if (ex.code) out.textContent += ` (${ex.code})`;
+  }
+}
+function draw() {
+  $("out").innerHTML = found.map(c => {
+    const bal = c.balance || 0, d = c.at?.toDate ? c.at.toDate() : null;
+    return `<section class="ticket ${bal ? "" : "t-zero"}">
+      <div class="t-head"><div class="t-hi">أهلاً</div><div class="t-name">${esc(c.name || "")}</div>
+        <div class="t-card">${c.card != null ? "رقم البطاقة " + AR(c.card) : ""}</div></div>
+      <div class="perf"></div>
+      <div class="t-body"><div class="t-bal">${fmt(bal)}</div><div class="t-unit">${esc(unit)} في رصيدك</div>
+        ${d ? `<div class="t-at">آخر تحديث ${esc(d.toLocaleString("ar", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }))}</div>` : ""}
+        ${GIFT.on && c.name ? `<button class="gbtn" type="button" data-gift="${esc(c.id)}">🎁 إهداء رصيد لرفيقتي</button>
+        <button class="fbtn" type="button" data-fund="${esc(c.id)}">💝 إهداء لصندوق المؤسسة</button>` : ""}</div>
+      <h2 class="hist-h">سجلي</h2>
+      ${histHtml(c.hist)}
+    </section>`;
+  }).join("") + (found.length ? `<button class="again" type="button" id="again">بطاقة أخرى</button>` : "");
+  $("out").querySelectorAll("[data-gift]").forEach(b => b.onclick = () => openGift(b.dataset.gift));
+  $("out").querySelectorAll("[data-fund]").forEach(b => b.onclick = () => openFund(b.dataset.fund));
+  $("again") && ($("again").onclick = () => { stop(); found = []; draw(); $("f").classList.remove("hidden"); $("code").value = ""; $("code").focus(); localStorage.removeItem(MEMK()); });
+}
+async function lookup(raw) {
+  const k = keyOf(raw), msg = $("msg");
+  if (!k) { msg.className = "msg bad"; msg.textContent = "اكتبي رقم بطاقتك."; return; }
+  $("go").disabled = true; msg.className = "msg"; msg.textContent = "جارٍ البحث…";
+  try {
+    const digits = /^\d+$/.test(k);
+    let ids;
+    if (EMP()) {
+      // الموظفة: الرقم يتحول مباشرة إلى باركودها، قراءة بطاقة واحدة
+      ids = (await empDocs(k)).map(c => c.id);
+    } else {
+      // المتطوعة: الباركود أو رقم البطاقة، ولا تظهر بطاقات الموظفات أبداً
+      const tasks = [BAL.doc(k).get().then(d => d.exists ? [d.id] : [])];   // الباركود مثل V.T.20003
+      if (digits) tasks.push(BAL.where("card", "==", +k).limit(6).get().then(q => q.docs.map(d => d.id)));
+      ids = [...new Set((await Promise.all(tasks)).flat())].filter(id => !isEmpId(id));
+    }
+    if (!ids.length) {
+      msg.className = "msg bad";
+      msg.textContent = "لم نجد بطاقة بهذا الرقم. تأكدي منه، أو راجعي نقطة الشحن." + (EMP() ? "" : " إذا كنتِ موظفة، افتحي رابط الموظفات.");
+      return;
+    }
+    stop(); found = ids.map(id => ({ id }));
+    ids.forEach((id, i) => unsubs.push(BAL.doc(id).onSnapshot(s => { if (s.exists) { found[i] = { id, ...s.data() }; draw(); check(); } }, err => console.warn(err))));
+    ids.forEach(watchGifts);
+    msg.textContent = ""; $("f").classList.add("hidden");
+    localStorage.setItem(MEMK(), k);
+  } catch (ex) {
+    console.error(ex); msg.className = "msg bad";
+    msg.textContent = ex.code === "permission-denied" ? "الصفحة غير مفعّلة بعد. راجعي الإدارة." : "تعذّر الاتصال. تحققي من الإنترنت وحاولي مجدداً.";
+  } finally { $("go").disabled = false; }
+}
+$("f").addEventListener("submit", e => { e.preventDefault(); lookup($("code").value); });
+function start() {
+  stop(); found = []; draw(); setMode();
+  $("f").classList.remove("hidden"); $("msg").textContent = ""; $("code").value = "";
+  let last = null; try { last = localStorage.getItem(MEMK()); } catch (_) {}   // الجوال يتذكر آخر بطاقة
+  if (last) { $("code").value = last; lookup(last); } else $("code").focus();
+}
+window.addEventListener("hashchange", start);
+start();
+</script>
+</body>
+</html>
