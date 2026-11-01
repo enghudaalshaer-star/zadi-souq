@@ -207,7 +207,7 @@ async function empDocs(k) {
   const n = +k, nums = [...new Set([n, n >= 200000 ? n - 200000 : n >= 20000 && n < 30000 ? n - 20000 : n])];
   const ids = [...new Set([empId(n), "ET" + n])];
   const tasks = ids.map(id => BAL.doc(id).get().then(d => d.exists ? [{ id: d.id, ...d.data() }] : []));
-  nums.forEach(c => tasks.push(BAL.where("card", "==", c).limit(30).get().then(q => q.docs.map(d => ({ id: d.id, ...d.data() }))).catch(() => [])));
+  nums.forEach(c => tasks.push(BAL.where("card", "==", c).limit(6).get().then(q => q.docs.map(d => ({ id: d.id, ...d.data() }))).catch(() => [])));
   const all = (await Promise.all(tasks)).flat().filter(c => isEmpId(c.id)), out = new Map();
   all.forEach(c => out.set(c.id, c));
   const exact = [...out.values()].filter(c => c.id === empId(n) || c.card === n);   // المطابقة المباشرة أولاً
