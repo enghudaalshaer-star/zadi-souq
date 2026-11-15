@@ -347,6 +347,60 @@ tr:last-child td{border-bottom:0}
 .badge.transfer{background:#E8EEFF;color:#3A4FA8}
 .badge.gift{background:#FCE9EF;color:#B9496E}
 .badge.fund{background:#FFF1D6;color:#9A5B00}
+/* ===== VR: قطع التذاكر، قائمة الانتظار، الجرد اليومي (بيانات مستقلة في zp_vr) ===== */
+.badge.vr{background:#E8EEFF;color:#3A4FA8}
+.badge.wait{background:#FFF3DF;color:var(--warn)}
+.badge.in{background:#E3F4EA;color:var(--ok)}
+.badge.refunded{background:#EEF0F2;color:var(--muted)}
+.badge.free{background:var(--pink-soft);color:var(--pink-deep)}
+.badge.paid{background:var(--mint-soft);color:var(--mint-deep)}
+#vrSeg button.on{background:#3A4FA8}
+.vr-form{display:grid;gap:10px}
+.vr-two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vr-sug{display:grid;gap:6px}
+.vr-sug button{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px dashed #B9C4F2;background:#F4F6FF;color:var(--ink);border-radius:12px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer;text-align:right}
+.vr-sug button b{font-weight:700}
+.vr-sug button small{color:var(--muted);font-variant-numeric:tabular-nums}
+.vr-pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vr-pay button{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:8px 10px;font:inherit;font-weight:600;color:var(--muted);cursor:pointer}
+.vr-pay button b{display:block;font-size:20px;line-height:1.2;font-variant-numeric:tabular-nums}
+.vr-pay button.on{border-color:var(--mint-deep);background:var(--mint-soft);color:var(--mint-deep)}
+.vr-pay button.on[data-free="1"]{border-color:var(--pink-deep);background:var(--pink-soft);color:var(--pink-deep)}
+#vrGo{background:#3A4FA8;font-size:17px}
+.vr-done{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;margin-top:12px;background:#F4F6FF;border:1.5px solid #B9C4F2;border-radius:18px;padding:12px 16px}
+.vr-done .no{font-size:44px;font-weight:700;line-height:1;color:#3A4FA8;font-variant-numeric:tabular-nums}
+.vr-done b{display:block;font-size:17px}
+.vr-done small{color:var(--muted)}
+.vr-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 8px}
+.vr-bar h3{margin:0;font-size:16px}
+.vr-bar input{max-width:58%;min-height:40px;padding:8px 12px}
+.vr-q{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.vr-q li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:4px 12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}
+.vr-q li.next{border-color:#B9C4F2;box-shadow:0 0 0 3px #EEF1FF}
+.vr-q .no{grid-row:span 2;align-self:start;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#E8EEFF;color:#3A4FA8;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.vr-q .who{min-width:0}
+.vr-q .who b{display:block;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vr-q .who small{color:var(--muted);font-size:13px}
+.vr-q .who small bdi{font-variant-numeric:tabular-nums}
+.vr-q .acts{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.vr-q .acts .btn{min-height:40px;padding:8px 16px;font-size:15px}
+.vr-q .acts .mini{font-size:13px;padding:6px}
+#vrInvSum div{background:#fff;border:1px solid var(--line)}
+.vr-q li.u{opacity:.6}
+.vr-q li.u .who b{text-decoration:line-through}
+.vr-empty{padding:22px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:16px}
+.vr-warn{background:#FFF3DF;color:#7A4A00;border:1px solid #F3D9A4;border-radius:14px;padding:10px 12px;margin-bottom:10px;font-size:14px}
+.vr-close{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px}
+.vr-close h4{margin:0 0 8px;font-size:15px}
+.vr-close .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vr-close .res{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:15px}
+.vr-close .res b{font-size:20px;font-variant-numeric:tabular-nums}
+.vr-diff.ok{color:var(--ok)}.vr-diff.bad{color:var(--bad)}
+.vr-grid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr) minmax(0,320px);align-items:start;margin-bottom:14px}
+@media (max-width:820px){.vr-grid{grid-template-columns:1fr}}
+tr.vsel td{background:#F4F6FF}
+tr.vtot td{font-weight:700;background:#FDF9FA}
+@media (max-width:420px){.vr-bar input{max-width:52%}}
 /* سجل تقرير البيع: عنوان لكل يوم، والتاريخ والوقت واضحان لكل عملية */
 #rvList li.dh{background:none;border:0;padding:8px 2px 0;font-weight:700;font-size:13px;color:var(--ink);display:flex;justify-content:space-between}
 #rvList li.dh small{color:var(--muted);font-weight:600}
@@ -575,6 +629,65 @@ tr:last-child td{border-bottom:0}
   </div>
 </section>
 
+<!-- ================= VR ================= -->
+<!-- حساب VR: قطع التذاكر + قائمة الانتظار + الجرد اليومي. بياناته مستقلة (zp_vr / zp_vrday) ولا تمس البطاقات والأرصدة -->
+<section id="vrView" class="hidden">
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <div class="brand"><img class="zlogo" alt="" hidden><h1 class="title">تذاكر VR</h1></div>
+        <div class="station"><span>الحساب:</span> <strong id="vrWho"></strong></div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <a class="btn btn-ghost hidden" id="vrToAdmin" href="#admin" style="display:inline-grid;place-items:center;text-decoration:none;white-space:nowrap">اللوحة</a>
+        <button class="btn btn-ghost" type="button" data-logout>خروج</button>
+      </div>
+    </div>
+
+    <div class="seg" id="vrSeg" role="tablist">
+      <button type="button" data-vt="cut" class="on">قطع وانتظار</button>
+      <button type="button" data-vt="in">دخلوا</button>
+      <button type="button" data-vt="inv">الجرد</button>
+    </div>
+    <div class="vr-warn hidden" id="vrErrBox"></div>
+
+    <div id="vrCut">
+      <div class="vr-warn hidden" id="vrClosedBox"></div>
+      <form class="panel vr-form" id="vrForm" autocomplete="off">
+        <div class="vr-two">
+          <label class="f"><span>الاسم</span><input type="text" id="vrFirst" maxlength="30" enterkeyhint="next" spellcheck="false"></label>
+          <label class="f"><span>الكنية</span><input type="text" id="vrLastName" maxlength="30" enterkeyhint="next" spellcheck="false"></label>
+        </div>
+        <label class="f"><span>رقم الجوال</span><input type="text" id="vrPhone" inputmode="tel" dir="ltr" maxlength="20" placeholder="09xxxxxxxx" enterkeyhint="done"></label>
+        <div class="vr-sug hidden" id="vrSug"></div>
+        <div class="vr-pay" id="vrPay">
+          <button type="button" data-free="0" class="on">مدفوع<b id="vrPriceLbl"></b></button>
+          <button type="button" data-free="1">مجاني<b>٠</b></button>
+        </div>
+        <button class="btn btn-main" type="submit" id="vrGo">قطع تذكرة VR</button>
+        <p class="msg" id="vrMsg" role="status" style="margin:0"></p>
+      </form>
+      <div class="vr-done hidden" id="vrDone"></div>
+
+      <div class="vr-bar"><h3 id="vrWaitH">قائمة الانتظار</h3><input type="search" id="vrQ" placeholder="اسم، جوال أو رقم الدور" autocomplete="off" spellcheck="false"></div>
+      <ol class="vr-q" id="vrWait"></ol>
+    </div>
+
+    <div id="vrIn" class="hidden">
+      <div class="vr-bar" style="margin-top:4px"><h3 id="vrInH">دخلوا اليوم</h3><input type="search" id="vrInQ" placeholder="اسم، جوال أو رقم الدور" autocomplete="off" spellcheck="false"></div>
+      <ol class="vr-q" id="vrInList"></ol>
+    </div>
+
+    <div id="vrInv" class="hidden">
+      <div class="rv-bar"><h3>الجرد اليومي</h3><select class="rv-sel" id="vrInvDay" aria-label="اليوم"></select></div>
+      <div class="daygrid" id="vrInvSum"></div>
+      <div class="vr-close" id="vrCloseBox"></div>
+      <div class="vr-bar"><h3 id="vrLogH">تذاكر اليوم</h3><button class="btn btn-soft" type="button" id="vrInvExport" style="min-height:40px;padding:8px 14px">تصدير Excel</button></div>
+      <ol class="vr-q" id="vrLog"></ol>
+    </div>
+  </div>
+</section>
+
 <!-- ================= ADMIN ================= -->
 <section id="adminView" class="hidden">
   <div class="wrap wide">
@@ -608,6 +721,7 @@ tr:last-child td{border-bottom:0}
       <button class="tab" data-tab="staff">الحسابات والصلاحيات</button>
       <button class="tab" data-tab="report">تقرير الشحن</button>
       <button class="tab" data-tab="sales">تقرير نقاط البيع</button>
+      <button class="tab" data-tab="vr">VR</button>
     </div>
     <div class="bkbar"><button class="btn btn-main" type="button" id="quickAdd">➕ إضافة بطاقة</button><button class="btn btn-soft" type="button" data-bk>💾 نسخة احتياطية لكل شيء</button><span class="bkst" role="status"></span></div>
 
@@ -773,10 +887,11 @@ tr:last-child td{border-bottom:0}
           <h3>إضافة حساب</h3>
           <label class="f"><span>اسم الحساب (يظهر في صفحة الدخول وفي السجل)</span><input type="text" id="stName" placeholder="مثلاً: كشك البوظة" maxlength="40"></label>
           <label class="f" style="margin-top:10px"><span>نوع الحساب</span>
-            <select id="stRole"><option value="sell">نقطة بيع: تخصم ثمن المنتجات فقط</option><option value="topup">نقطة شحن: تشحن الرصيد فقط</option><option value="both">بيع وشحن: تبيع المنتجات وتشحن الرصيد</option></select></label>
+            <select id="stRole"><option value="sell">نقطة بيع: تخصم ثمن المنتجات فقط</option><option value="topup">نقطة شحن: تشحن الرصيد فقط</option><option value="both">بيع وشحن: تبيع المنتجات وتشحن الرصيد</option><option value="vr">حساب VR: يقطع تذاكر VR ويدير قائمة الانتظار فقط</option></select></label>
           <div id="stItemsBox" style="margin-top:10px"><span class="hint" style="display:block">المنتجات التي تبيعها (بدون تحديد = كل المنتجات)</span><div class="checks" id="stItems"></div></div>
           <span class="hint" style="display:block;margin-top:10px">الصلاحيات</span>
-          <div class="checks"><label><input type="checkbox" id="stReport"> يرى تقرير حسابات الشحن</label><label><input type="checkbox" id="stSales"> يرى تقرير نقاط البيع</label></div>
+          <div class="checks" id="stRepBox"><label><input type="checkbox" id="stReport"> يرى تقرير حسابات الشحن</label><label><input type="checkbox" id="stSales"> يرى تقرير نقاط البيع</label></div>
+          <div class="checks hidden" id="stVrBox"><label><input type="checkbox" id="stVrFree" checked> يقطع تذاكر مجانية</label><label><input type="checkbox" id="stVrRefund" checked> يرجّع المبلغ</label><label><input type="checkbox" id="stVrInv" checked> يرى الجرد اليومي ويغلق اليوم</label></div>
           <label class="f" style="margin-top:10px"><span>كلمة المرور (٦ أحرف على الأقل)</span><input type="text" id="stPw" dir="ltr" autocomplete="new-password"></label>
           <button class="btn btn-main" type="submit" id="stGo" style="width:100%;margin-top:12px">إنشاء الحساب</button>
           <p class="msg" id="stMsg" role="status"></p>
@@ -786,8 +901,49 @@ tr:last-child td{border-bottom:0}
           <div class="tablewrap">
             <table><thead><tr><th>الحساب</th><th>الصلاحية</th><th>المنتجات</th><th>الحالة</th><th></th></tr></thead><tbody id="stRows"></tbody></table>
           </div>
-          <p class="hint">حساب «الإدارة» ثابت وله كل الصلاحيات. لا يمكن تغيير كلمة مرور حساب من هنا، احذفيه وأنشئي حساباً جديداً بكلمة مرور جديدة.</p>
+          <p class="hint">حساب «VR» يرى واجهة قطع تذاكر VR فقط، وبياناته في تبويب «VR». حساب «الإدارة» ثابت وله كل الصلاحيات. لا يمكن تغيير كلمة مرور حساب من هنا، احذفيه وأنشئي حساباً جديداً بكلمة مرور جديدة.</p>
         </div>
+      </div>
+    </div>
+
+    <!-- VR: تحكم كامل بحساب VR — السعر، الجرد اليومي، كل التذاكر (بيانات مستقلة في zp_vr) -->
+    <div id="tab-vr" class="hidden">
+      <p class="hint" style="margin-top:0">حساب «VR» يقطع التذاكر ويدير قائمة الانتظار من واجهته الخاصة. هنا السعر والجرد اليومي وكل التذاكر مع التعديل والإرجاع والحذف. بيانات VR مستقلة تماماً ولا تمس البطاقات والأرصدة. أنشئي حساب VR وحدّدي صلاحياته من تبويب «الحسابات والصلاحيات».</p>
+      <div class="fund-sum" id="vSum"></div>
+      <div class="vr-grid">
+        <div class="panel set" style="min-width:0">
+          <h3>الجرد اليومي</h3>
+          <div class="tablewrap">
+            <table><thead><tr><th>اليوم</th><th>قُطعت</th><th>مدفوعة</th><th>مجانية</th><th>مُرجعة</th><th>دخلوا</th><th>لم يدخلوا</th><th>صافي الصندوق</th><th>الموجود فعلياً</th><th>الفرق</th><th></th></tr></thead><tbody id="vDays"></tbody></table>
+            <div class="empty hidden" id="vDaysEmpty"></div>
+          </div>
+          <p class="hint">«صافي الصندوق» = التذاكر المدفوعة بعد طرح المُرجعة. اضغطي «إغلاق» آخر اليوم واكتبي المبلغ الموجود فعلياً ليظهر الفرق. اضغطي على اليوم لعرض تذاكره وتفصيله حسب الحساب.</p>
+          <h3 style="margin-top:14px" id="vAccH">حسب الحساب</h3>
+          <div class="tablewrap"><table><thead><tr><th>الحساب</th><th>قُطعت</th><th>مدفوعة</th><th>مجانية</th><th>مُرجعة</th><th>صافي الصندوق</th></tr></thead><tbody id="vAcc"></tbody></table></div>
+        </div>
+        <form class="panel set" id="vSetForm" autocomplete="off">
+          <h3>إعدادات VR</h3>
+          <label class="f"><span>سعر التذكرة</span><input type="text" id="vPrice" inputmode="numeric" dir="ltr"></label>
+          <button class="btn btn-main" type="submit" style="width:100%;margin-top:10px">حفظ السعر</button>
+          <p class="msg" id="vSetMsg" role="status"></p>
+          <a class="btn btn-soft" href="#vr" style="display:grid;place-items:center;text-decoration:none;margin-top:4px">فتح واجهة القطع</a>
+          <p class="hint">تغيير السعر يسري على التذاكر الجديدة فقط، والتذاكر السابقة تبقى بسعرها.</p>
+        </form>
+      </div>
+      <div class="tools">
+        <select id="vDay" aria-label="اليوم"></select>
+        <select id="vStatus" aria-label="الحالة"><option value="">كل الحالات</option><option value="wait">بالانتظار</option><option value="in">دخلوا</option><option value="refunded">مُرجعة / ملغاة</option></select>
+        <select id="vType" aria-label="النوع"><option value="">مدفوع ومجاني</option><option value="paid">مدفوع</option><option value="free">مجاني</option></select>
+        <select id="vBy" aria-label="الحساب"></select>
+        <input type="search" id="vSearch" placeholder="ابحثي بالاسم أو الجوال أو رقم الدور">
+        <button class="btn btn-soft" type="button" id="vExport">تصدير Excel</button>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>الدور</th><th>الوقت</th><th>الاسم</th><th>الجوال</th><th>النوع</th><th>المبلغ</th><th>الحالة</th><th>الحساب</th><th></th></tr></thead>
+          <tbody id="vRows"></tbody>
+        </table>
+        <div class="empty hidden" id="vEmpty"></div>
       </div>
     </div>
 
@@ -950,6 +1106,11 @@ const FUND = db.collection("zp_fund");
 let gifts = [], gFilter = "", funds = [], fFilter = "", fundErr = null;
 // فهرس الأسماء: وثيقة واحدة فيها رقم كل بطاقة واسمها ومجموعتها، فالبحث بالاسم يقرأ وثيقة واحدة بدل كل البطاقات
 const IDX = db.collection(COL.index).doc("names");
+// VR — بيانات مستقلة عن البطاقات والأرصدة:
+// zp_vr: تذاكر VR {no رقم الدور, day, first, last, name, phone, free, amount, status: wait|in|refunded, by, station, ms, at, inAt, inBy, refundAt, refundBy, freeBy}
+// zp_vrday/{YYYY-MM-DD}: {n آخر رقم دور, closed, cash المبلغ الموجود فعلياً, note, closedBy, closedAt}
+const VR = db.collection("zp_vr"), VRDAY = db.collection("zp_vrday"), VR_PRICE = 50000;
+let vrT = [], vrDays = new Map(), vrUnsubs = [], vrReady = false, vrErr = null, vrTab = "cut", vrFree = false, vrBusy = false, vrDoneId = null, vrInvDay = "", vrDrawT = null, vDaySel = "";
 
 const $ = id => document.getElementById(id);
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -1011,17 +1172,17 @@ function listenSettings() {
     if (!Array.isArray(S.items)) S.items = DEFAULTS.items;
     // الفئات الجديدة (٥٬٠٠٠ إلى ١٠٠٬٠٠٠) تُكتب مرة واحدة عند أول دخول للإدارة
     if (role === "admin" && s.exists && !S.amountsV && !amountsMigrated) { amountsMigrated = true; SET.set({ quick: AMOUNTS, openQuick: AMOUNTS, amountsV: 2 }, { merge: true }).catch(e => console.warn(e)); }
-    applyTexts();
+    applyTexts(); vrChanged();
     if (role) { renderGrid(); if (document.activeElement?.id !== "topCustom") renderResult(); else paintTopup(); if (!$("adminView").classList.contains("hidden")) { fillItemsForm(false); fillSettingsForm(false); refreshItemFilter(); renderStats(); drawStaffItems(); renderStaff(); } }
   }, err => console.warn("settings", err));
 }
 
 /* ---------- auth ---------- */
-function show(v) { window.__booted = true; $("bootView").style.display = "none"; ["loginView", "posView", "adminView"].forEach(k => $(k).classList.toggle("hidden", k !== v)); }
+function show(v) { window.__booted = true; $("bootView").style.display = "none"; ["loginView", "posView", "vrView", "adminView"].forEach(k => $(k).classList.toggle("hidden", k !== v)); }
 if (window.__pendingFail) window.__bootFail(window.__pendingFail);
 /* login: pick an account, then password */
-const ROLE_LABEL = { sell: "نقطة بيع", topup: "شحن رصيد", both: "بيع وشحن" };
-const ROLE_LONG = { sell: "بيع المنتجات", topup: "شحن الرصيد", both: "بيع وشحن" };
+const ROLE_LABEL = { sell: "نقطة بيع", topup: "شحن رصيد", both: "بيع وشحن", vr: "تذاكر VR" };
+const ROLE_LONG = { sell: "بيع المنتجات", topup: "شحن الرصيد", both: "بيع وشحن", vr: "تذاكر VR" };
 let accounts = [], accUnsub = null, pickedAcc = localStorage.getItem("zp_acc") || "";
 function listenAccounts() {
   if (accUnsub) return;
@@ -1067,15 +1228,19 @@ auth.onAuthStateChanged(u => {
   const id = email.slice(0, -DOMAIN.length); let first = true;
   meUnsub = STAFF.doc(id).onSnapshot(s => {
     const d = s.exists ? s.data() : null;
-    if (!d || !d.active || !["sell", "topup", "both"].includes(d.role)) { auth.signOut(); setTimeout(() => loggedOut("هذا الحساب معطّل أو محذوف. راجعي الإدارة."), 50); return; }
-    const changed = !me || me.role !== d.role || JSON.stringify(me.items || []) !== JSON.stringify(d.items || []) || me.name !== d.name || !!me.report !== !!d.report || !!me.salesReport !== !!d.salesReport;
+    if (!d || !d.active || !["sell", "topup", "both", "vr"].includes(d.role)) { auth.signOut(); setTimeout(() => loggedOut("هذا الحساب معطّل أو محذوف. راجعي الإدارة."), 50); return; }
+    const changed = !me || me.role !== d.role || JSON.stringify(me.items || []) !== JSON.stringify(d.items || []) || me.name !== d.name || !!me.report !== !!d.report || !!me.salesReport !== !!d.salesReport || ["vrFree", "vrRefund", "vrInv"].some(k => !!me[k] !== !!d[k]);
+    const roleWas = me?.role;
     role = d.role; me = { id, ...d };
-    if (first) { first = false; listenSettings(); route(); } else if (changed && !$("posView").classList.contains("hidden")) initPos();
+    if (first) { first = false; listenSettings(); route(); } else if (roleWas !== d.role) route();
+    else if (changed && !$("posView").classList.contains("hidden")) initPos(); else if (changed && !$("vrView").classList.contains("hidden")) initVr();
   }, err => { console.error(err); auth.signOut(); setTimeout(() => loggedOut("تعذّر التحقق من الحساب. تحققي من الإنترنت وقواعد Firestore."), 50); });
 });
 window.addEventListener("hashchange", () => role && route());
 function route() {
-  if (location.hash === "#admin" && role === "admin") { stopCam(); show("adminView"); startAdmin(); }
+  // حساب VR يرى واجهة التذاكر فقط، والإدارة تفتحها من #vr
+  if (role === "vr" || (location.hash === "#vr" && role === "admin")) { stopCam(); stopAdmin(); show("vrView"); initVr(); }
+  else if (location.hash === "#admin" && role === "admin") { stopCam(); show("adminView"); startAdmin(); }
   else { stopAdmin(); show("posView"); initPos(); }
 }
 
@@ -1802,7 +1967,7 @@ function queueDraw(...parts) {
     if (d.has("members") && adminTab === "dups") renderDups();
     if (d.has("tx") && adminTab === "tx") renderTx();
     if (d.has("report") && (adminTab === "report" || adminTab === "sales")) renderReport();
-    if (d.has("staff")) renderStaff();
+    if (d.has("staff")) { renderStaff(); if (adminTab === "vr") renderVrAdmin(); }
     if (d.has("gifts") || (d.has("members") && adminTab === "gifts")) { if (adminTab === "gifts") renderGifts(); }
     if ((d.has("fund") || d.has("members")) && adminTab === "fund") renderFund();
     ["members", "tx", "report"].forEach(k => { if (d.has(k) && !((k === "members" && adminTab === "members") || (k === "tx" && adminTab === "tx") || (k === "report" && (adminTab === "report" || adminTab === "sales")))) stale.add(k); });
@@ -1814,6 +1979,7 @@ function drawTab(tab) {
   if (tab === "dups") renderDups();
   if (tab === "gifts") renderGifts();
   if (tab === "fund") renderFund();
+  if (tab === "vr") { vrListen(); renderVrAdmin(); loadXLSX().catch(() => {}); }
   if (tab === "members" && stale.delete("members")) renderMembers();
   if (tab === "tx" && stale.delete("tx")) renderTx();
   if ((tab === "report" || tab === "sales") && stale.delete("report")) renderReport();
@@ -1884,7 +2050,7 @@ function startAdmin() {
     err => { fundErr = err; console.warn("fund", err?.code || err); queueDraw("fund"); }));
   fillItemsForm(true); fillSettingsForm(true); refreshItemFilter(); drawStaffItems();
 }
-function stopAdmin() { if (idxT) { clearTimeout(idxT); writeIdx(); } idxAdminUnsub?.(); idxAdminUnsub = null; idxRemote = null; clearTimeout(idxT); unsubs.forEach(u => u()); unsubs = []; members = new Map(); txs = []; gifts = []; funds = []; clearTimeout(drawT); drawT = null; dirty = new Set(); stale.clear(); }
+function stopAdmin() { vrStop(); if (idxT) { clearTimeout(idxT); writeIdx(); } idxAdminUnsub?.(); idxAdminUnsub = null; idxRemote = null; clearTimeout(idxT); unsubs.forEach(u => u()); unsubs = []; members = new Map(); txs = []; gifts = []; funds = []; clearTimeout(drawT); drawT = null; dirty = new Set(); stale.clear(); }
 function adminErr(err) { console.error(err); $("mEmpty").classList.remove("hidden"); $("mEmpty").textContent = err.code === "permission-denied" ? "لا توجد صلاحية للقراءة. انسخي قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر تحميل البيانات: " + err.message; }
 
 document.querySelectorAll(".tab").forEach(b => b.onclick = () => {
@@ -1917,13 +2083,14 @@ function drawStaffItems(sel = null) {
   const keep = sel || [...$("stItems").querySelectorAll("input:checked")].map(i => i.value);
   $("stItems").innerHTML = S.items.map(i => `<label><input type="checkbox" value="${esc(i.id)}" ${keep.includes(i.id) ? "checked" : ""}> ${esc(i.name)}</label>`).join("");
 }
-$("stRole").onchange = () => $("stItemsBox").classList.toggle("hidden", $("stRole").value === "topup");
+$("stRole").onchange = () => { const r = $("stRole").value; $("stItemsBox").classList.toggle("hidden", r === "topup" || r === "vr"); $("stRepBox").classList.toggle("hidden", r === "vr"); $("stVrBox").classList.toggle("hidden", r !== "vr"); };
+const vrPerms = s => [s.vrFree && "مجاني", s.vrRefund && "إرجاع المبلغ", s.vrInv && "الجرد"].filter(Boolean);
 function renderStaff() {
   const rows = [...staff].sort((a, b) => (a.role > b.role ? 1 : -1) || String(a.name).localeCompare(String(b.name), "ar"));
   $("stRows").innerHTML = `<tr><td class="name">الإدارة</td><td><span class="badge buy">كل الصلاحيات</span></td><td>—</td><td>فعّال</td><td></td></tr>` +
     rows.map(s => `<tr><td class="name">${esc(s.name)}</td>
-      <td><span class="badge ${s.role === "topup" ? "topup" : s.role === "both" ? "buy" : "sell"}">${ROLE_LONG[s.role] || "بيع المنتجات"}</span>${s.report ? ` <span class="badge adjust">تقرير الشحن</span>` : ""}${s.salesReport ? ` <span class="badge adjust">تقرير البيع</span>` : ""}</td>
-      <td style="white-space:normal">${s.role === "topup" ? "—" : esc(itemNames(s.items))}</td>
+      <td><span class="badge ${s.role === "vr" ? "vr" : s.role === "topup" ? "topup" : s.role === "both" ? "buy" : "sell"}">${ROLE_LONG[s.role] || "بيع المنتجات"}</span>${s.role === "vr" ? vrPerms(s).map(x => ` <span class="badge adjust">${x}</span>`).join("") : `${s.report ? ` <span class="badge adjust">تقرير الشحن</span>` : ""}${s.salesReport ? ` <span class="badge adjust">تقرير البيع</span>` : ""}`}</td>
+      <td style="white-space:normal">${s.role === "topup" || s.role === "vr" ? "—" : esc(itemNames(s.items))}</td>
       <td>${s.active ? "فعّال" : `<span class="badge off">معطّل</span>`}</td>
       <td><button class="mini" data-sedit="${esc(s.id)}">تعديل</button><button class="mini ${s.active ? "r" : ""}" data-stog="${esc(s.id)}">${s.active ? "تعطيل" : "تفعيل"}</button><button class="mini r" data-sdel="${esc(s.id)}">حذف</button></td></tr>`).join("");
 }
@@ -1931,7 +2098,8 @@ let creatorApp = null;
 $("staffForm").onsubmit = async e => {
   e.preventDefault();
   const name = $("stName").value.replace(/\s+/g, " ").trim(), roleV = $("stRole").value, pw = $("stPw").value, msg = $("stMsg");
-  const items = roleV !== "topup" ? [...$("stItems").querySelectorAll("input:checked")].map(i => i.value) : [], report = $("stReport").checked, salesReport = $("stSales").checked;
+  const isVr = roleV === "vr", items = roleV !== "topup" && !isVr ? [...$("stItems").querySelectorAll("input:checked")].map(i => i.value) : [], report = !isVr && $("stReport").checked, salesReport = !isVr && $("stSales").checked;
+  const vrP = isVr ? { vrFree: $("stVrFree").checked, vrRefund: $("stVrRefund").checked, vrInv: $("stVrInv").checked } : {};
   const err = x => { msg.className = "msg bad"; msg.textContent = x; };
   if (name.length < 2) return err("اكتبي اسماً للحساب.");
   if (staff.some(s => s.name === name)) return err("يوجد حساب بنفس الاسم.");
@@ -1944,7 +2112,7 @@ $("staffForm").onsubmit = async e => {
     await ca.setPersistence(firebase.auth.Auth.Persistence.NONE);
     await ca.createUserWithEmailAndPassword(id + DOMAIN, pw);
     await ca.signOut();
-    await STAFF.doc(id).set({ name, role: roleV, items, report, salesReport, active: true, createdAt: FV.serverTimestamp() });
+    await STAFF.doc(id).set({ name, role: roleV, items, report, salesReport, ...vrP, active: true, createdAt: FV.serverTimestamp() });
     $("stName").value = ""; $("stPw").value = ""; $("stReport").checked = false; $("stSales").checked = false; drawStaffItems([]);
     msg.className = "msg ok"; msg.textContent = `تم إنشاء حساب «${name}». يظهر الآن في صفحة الدخول، وكلمة مروره: ${pw}`;
   } catch (ex) {
@@ -1961,19 +2129,20 @@ $("stRows").addEventListener("click", async e => {
   if (b.dataset.sdel) { if (confirm(`حذف حساب «${s.name}»؟ لن يستطيع الدخول بعدها، وسجل عملياته يبقى.`)) await STAFF.doc(s.id).delete(); return; }
   openModal(`<h3>تعديل حساب</h3><form id="mf">
     <label class="f" style="margin-top:10px"><span>اسم الحساب</span><input type="text" id="mfName" value="${esc(s.name)}" maxlength="40"></label>
-    <label class="f" style="margin-top:10px"><span>نوع الحساب</span><select id="mfRole"><option value="sell" ${s.role === "sell" ? "selected" : ""}>نقطة بيع: تخصم ثمن المنتجات فقط</option><option value="topup" ${s.role === "topup" ? "selected" : ""}>نقطة شحن: تشحن الرصيد فقط</option><option value="both" ${s.role === "both" ? "selected" : ""}>بيع وشحن: تبيع المنتجات وتشحن الرصيد</option></select></label>
-    <div id="mfItemsBox" style="margin-top:10px" class="${s.role === "topup" ? "hidden" : ""}"><span class="hint" style="display:block">المنتجات التي تبيعها (بدون تحديد = كل المنتجات)</span>
+    <label class="f" style="margin-top:10px"><span>نوع الحساب</span><select id="mfRole"><option value="sell" ${s.role === "sell" ? "selected" : ""}>نقطة بيع: تخصم ثمن المنتجات فقط</option><option value="topup" ${s.role === "topup" ? "selected" : ""}>نقطة شحن: تشحن الرصيد فقط</option><option value="both" ${s.role === "both" ? "selected" : ""}>بيع وشحن: تبيع المنتجات وتشحن الرصيد</option><option value="vr" ${s.role === "vr" ? "selected" : ""}>حساب VR: يقطع تذاكر VR ويدير قائمة الانتظار فقط</option></select></label>
+    <div id="mfItemsBox" style="margin-top:10px" class="${s.role === "topup" || s.role === "vr" ? "hidden" : ""}"><span class="hint" style="display:block">المنتجات التي تبيعها (بدون تحديد = كل المنتجات)</span>
       <div class="checks">${S.items.map(i => `<label><input type="checkbox" value="${esc(i.id)}" ${(s.items || []).includes(i.id) ? "checked" : ""}> ${esc(i.name)}</label>`).join("")}</div></div>
     <span class="hint" style="display:block;margin-top:10px">الصلاحيات</span>
-    <div class="checks"><label><input type="checkbox" id="mfReport" ${s.report ? "checked" : ""}> يرى تقرير حسابات الشحن</label><label><input type="checkbox" id="mfSales" ${s.salesReport ? "checked" : ""}> يرى تقرير نقاط البيع</label></div>
+    <div class="checks ${s.role === "vr" ? "hidden" : ""}" id="mfRepBox"><label><input type="checkbox" id="mfReport" ${s.report ? "checked" : ""}> يرى تقرير حسابات الشحن</label><label><input type="checkbox" id="mfSales" ${s.salesReport ? "checked" : ""}> يرى تقرير نقاط البيع</label></div>
+    <div class="checks ${s.role === "vr" ? "" : "hidden"}" id="mfVrBox"><label><input type="checkbox" id="mfVrFree" ${s.role !== "vr" || s.vrFree ? "checked" : ""}> يقطع تذاكر مجانية</label><label><input type="checkbox" id="mfVrRefund" ${s.role !== "vr" || s.vrRefund ? "checked" : ""}> يرجّع المبلغ</label><label><input type="checkbox" id="mfVrInv" ${s.role !== "vr" || s.vrInv ? "checked" : ""}> يرى الجرد اليومي ويغلق اليوم</label></div>
     <div class="acts"><button class="btn btn-main" type="submit">حفظ</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="mfMsg"></p></form>`);
-  $("mfRole").onchange = () => $("mfItemsBox").classList.toggle("hidden", $("mfRole").value === "topup");
+  $("mfRole").onchange = () => { const r = $("mfRole").value; $("mfItemsBox").classList.toggle("hidden", r === "topup" || r === "vr"); $("mfRepBox").classList.toggle("hidden", r === "vr"); $("mfVrBox").classList.toggle("hidden", r !== "vr"); };
   $("mf").onsubmit = async ev => {
     ev.preventDefault();
     const name = $("mfName").value.replace(/\s+/g, " ").trim(), r = $("mfRole").value;
     if (name.length < 2) { $("mfMsg").className = "msg bad"; $("mfMsg").textContent = "اكتبي اسماً للحساب."; return; }
-    const items = r !== "topup" ? [...$("mfItemsBox").querySelectorAll("input:checked")].map(i => i.value) : [];
-    try { await STAFF.doc(s.id).update({ name, role: r, items, report: $("mfReport").checked, salesReport: $("mfSales").checked }); closeModal(); } catch (ex) { $("mfMsg").className = "msg bad"; $("mfMsg").textContent = "لم يتم الحفظ: " + ex.message; }
+    const isVr = r === "vr", items = r !== "topup" && !isVr ? [...$("mfItemsBox").querySelectorAll("input:checked")].map(i => i.value) : [];
+    try { await STAFF.doc(s.id).update({ name, role: r, items, report: !isVr && $("mfReport").checked, salesReport: !isVr && $("mfSales").checked, vrFree: isVr && $("mfVrFree").checked, vrRefund: isVr && $("mfVrRefund").checked, vrInv: isVr && $("mfVrInv").checked }); closeModal(); } catch (ex) { $("mfMsg").className = "msg bad"; $("mfMsg").textContent = "لم يتم الحفظ: " + ex.message; }
   };
 });
 
@@ -3363,7 +3532,7 @@ $("impGo").onclick = async () => {
 };
 
 /* ---------- النسخة الاحتياطية: كل مجموعات Firestore + ملفات الموقع في ZIP واحد ---------- */
-const BK_COLS = ["zp_members", "zp_tx", "zp_settings", "zp_staff", "zp_bal", "zp_index", "zp_pub", "zp_empdata", "zp_gifts", "zp_fund"];
+const BK_COLS = ["zp_members", "zp_tx", "zp_settings", "zp_staff", "zp_bal", "zp_index", "zp_pub", "zp_empdata", "zp_gifts", "zp_fund", "zp_vr", "zp_vrday"];
 const BK_FILES = ["index.html", "rasid/index.html", "firebase-app-compat.js", "firebase-auth-compat.js", "firebase-firestore-compat.js", "zxing.min.js", "zxing_min.js"];
 const loadZip = () => window.JSZip ? Promise.resolve() : new Promise((ok, no) => { const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"; sc.onload = ok; sc.onerror = () => no(new Error("تعذّر تحميل مكتبة ZIP")); document.head.appendChild(sc); });
 // التواريخ تُحفظ {__ts: ملي ثانية} لترجع تواريخ Firestore حقيقية عند الاسترجاع
@@ -3682,6 +3851,356 @@ $("exportAll").onclick = async () => {
   const add = (rows, name, w) => { const ws = XLSX.utils.json_to_sheet(rows.length ? rows : [{}]); ws["!cols"] = w.map(x => ({ wch: x })); XLSX.utils.book_append_sheet(wb, ws, name); };
   add(ms, "البطاقات", [12, 14, 32, 18, 14, 12, 10, 10, 10]); add(ts, "العمليات", [20, 10, 12, 32, 30, 10, 12, 16, 8]); add(ss, "المبيعات", [20, 10, 12]);
   XLSX.writeFile(wb, `سوق-زادي-${new Date().toISOString().slice(0, 10)}.xlsx`);
+};
+
+/* ====================================================================== */
+/* ================================= VR ================================= */
+/* ====================================================================== */
+// حساب VR (role: "vr") يرى هذه الواجهة فقط: قطع تذكرة (مدفوعة افتراضياً، أو مجانية بضغطة) ← قائمة الانتظار ← «تم الدخول».
+// البيانات مستقلة تماماً عن البطاقات والأرصدة: zp_vr للتذاكر و zp_vrday لرقم الدور وإغلاق الجرد اليومي.
+// صلاحيات الحساب من لوحة التحكم: vrFree (مجاني) · vrRefund (إرجاع المبلغ) · vrInv (الجرد وإغلاق اليوم)
+const vrPrice = () => { const p = Math.round(Number(S.vrPrice)); return S.vrPrice != null && S.vrPrice !== "" && Number.isFinite(p) && p >= 0 ? p : VR_PRICE; };
+const vrCan = k => role === "admin" || !!me?.[k];
+const vrWho = () => me?.id || role;
+const vrMs = t => tsDate(t.at)?.getTime() ?? t.ms ?? 0;
+const vrDayOf = t => t.day || dayKey(vrMs(t));
+const vrName = t => t.name || `${t.first || ""} ${t.last || ""}`.trim();
+const vrDigits = v => String(v ?? "").replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+const vrPhoneOf = v => { const s = vrDigits(v).trim(); return (s.startsWith("+") ? "+" : "") + s.replace(/\D/g, ""); };
+const vrInt = v => { const s = vrDigits(v).replace(/[^\d]/g, ""); return s === "" ? NaN : parseInt(s, 10); };
+const vrStatus = t => t.status === "refunded" ? (t.free ? "أُلغيت" : "أُرجع المبلغ") : t.status === "in" ? "دخل" : "بالانتظار";
+const vrByName = t => staff.find(s => s.id === t.by)?.name || t.station || (t.by === "admin" ? "الإدارة" : t.by || "");
+const vrTime = t => { const ms = vrMs(t); return ms ? timeStr(new Date(ms)) : "…"; };
+const vrTypeBadge = t => `<span class="badge ${t.free ? "free" : "paid"}">${t.free ? "مجاني" : "مدفوع " + fmt(t.amount)}</span>`;
+const vrDaysList = () => { const set = new Set(vrT.map(vrDayOf)); set.add(dayKey(Date.now())); return [...set].filter(Boolean).sort().reverse(); };
+// الجرد: «صافي الصندوق» = مجموع التذاكر المدفوعة غير المُرجعة
+function vrStats(list) {
+  const r = { n: 0, paid: 0, free: 0, ref: 0, refSum: 0, cancel: 0, in: 0, wait: 0, net: 0 };
+  list.forEach(t => {
+    r.n++;
+    if (t.status === "refunded") { if (t.free) r.cancel++; else { r.ref++; r.refSum += t.amount || 0; } return; }
+    if (t.free) r.free++; else { r.paid++; r.net += t.amount || 0; }
+    if (t.status === "in") r.in++; else r.wait++;
+  });
+  return r;
+}
+function vrMatch(t, raw) {
+  const q = norm(raw); if (!q) return true;
+  const dg = vrDigits(raw).replace(/\D/g, ""), nm = norm(vrName(t));
+  if (dg && (String(t.no) === dg || String(t.phone || "").includes(dg))) return true;
+  return q.split(" ").every(w => wordIn(nm, w));
+}
+function vrListen() {
+  if (vrUnsubs.length) return;
+  vrReady = false; vrErr = null;
+  vrUnsubs.push(VR.onSnapshot(q => { vrT = q.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })); vrReady = true; vrErr = null; vrChanged(); },
+    err => { vrErr = err; console.warn("vr", err?.code || err); vrChanged(); }));
+  vrUnsubs.push(VRDAY.onSnapshot(q => { vrDays = new Map(q.docs.map(d => [d.id, d.data()])); vrChanged(); }, err => console.warn("vrday", err?.code || err)));
+}
+function vrStop() { vrUnsubs.forEach(u => u()); vrUnsubs = []; vrT = []; vrDays = new Map(); vrReady = false; vrErr = null; clearTimeout(vrDrawT); }
+function vrChanged() {
+  clearTimeout(vrDrawT);
+  vrDrawT = setTimeout(() => {
+    if (!$("vrView").classList.contains("hidden")) vrDraw();
+    if (!$("adminView").classList.contains("hidden") && adminTab === "vr") renderVrAdmin();
+  }, 40);
+}
+
+/* ---------- واجهة حساب VR ---------- */
+function initVr() {
+  $("vrWho").textContent = station();
+  $("vrToAdmin").classList.toggle("hidden", role !== "admin");
+  const inv = vrCan("vrInv");
+  $("vrSeg").querySelector('[data-vt="inv"]').classList.toggle("hidden", !inv);
+  $("vrSeg").style.gridTemplateColumns = `repeat(${inv ? 3 : 2},1fr)`;
+  $("vrPay").classList.toggle("hidden", !vrCan("vrFree"));
+  if (!vrCan("vrFree")) vrFree = false;
+  if (vrTab === "inv" && !inv) vrTab = "cut";
+  vrListen(); vrSetTab(vrTab);
+}
+function vrSetTab(t) {
+  vrTab = t;
+  $("vrSeg").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.vt === t));
+  $("vrCut").classList.toggle("hidden", t !== "cut"); $("vrIn").classList.toggle("hidden", t !== "in"); $("vrInv").classList.toggle("hidden", t !== "inv");
+  if (t === "inv") loadXLSX().catch(() => {});   // مكتبة Excel جاهزة قبل الضغط على «تصدير»
+  vrDraw();
+}
+$("vrSeg").onclick = e => { const b = e.target.closest("[data-vt]"); if (b) vrSetTab(b.dataset.vt); };
+function vrItem(t, i, mode) {
+  const id = `data-id="${esc(t.id)}"`, acts = [];
+  if (t.status === "wait") {
+    acts.push(`<button type="button" class="btn btn-main" data-va="in" ${id}>تم الدخول</button>`);
+    if (vrCan("vrFree")) acts.push(`<button type="button" class="mini p" data-va="free" ${id}>${t.free ? "اجعليه مدفوعاً" : "اجعليه مجانياً"}</button>`);
+    if (vrCan("vrRefund")) acts.push(`<button type="button" class="mini r" data-va="refund" ${id}>${t.free ? "إلغاء التذكرة" : "إرجاع المبلغ"}</button>`);
+  } else if (t.status === "in") acts.push(`<button type="button" class="mini" data-va="back" ${id}>تراجع عن الدخول</button>`);
+  const inAt = tsDate(t.inAt), extra = t.status === "in" ? ` · دخل ${inAt ? timeStr(inAt) : ""}` : "";
+  return `<li class="${t.status === "refunded" ? "u" : ""} ${mode === "wait" && i === 0 ? "next" : ""}">
+    <span class="no">${AR(t.no ?? "")}</span>
+    <div class="who"><b>${esc(vrName(t))}</b><small><bdi dir="ltr">${esc(t.phone || "")}</bdi> · قُطعت ${vrTime(t)}${extra}</small></div>
+    <div class="acts">${acts.join("")}<span style="margin-inline-start:auto">${vrTypeBadge(t)}${mode === "log" ? ` <span class="badge ${esc(t.status)}">${vrStatus(t)}</span>` : ""}</span></div></li>`;
+}
+function vrSumHtml(r) {
+  return `<div class="p"><b>${fmt(r.net)}</b><span>صافي الصندوق</span></div>
+    <div><b>${fmt(r.n)}</b><span>تذكرة قُطعت</span></div>
+    <div><b>${fmt(r.paid)}</b><span>مدفوعة</span></div>
+    <div><b>${fmt(r.free)}</b><span>مجانية</span></div>
+    <div class="s"><b>${fmt(r.ref)}</b><span>مُرجعة · ${fmt(r.refSum)}</span></div>
+    <div><b>${fmt(r.in)}</b><span>دخلوا</span></div>
+    <div><b>${fmt(r.wait)}</b><span>لم يدخلوا</span></div>${r.cancel ? `<div><b>${fmt(r.cancel)}</b><span>مجانية ملغاة</span></div>` : ""}`;
+}
+function vrDraw() {
+  if (!role) return;
+  const today = dayKey(Date.now()), all = vrT.filter(t => vrDayOf(t) === today);
+  const wait = all.filter(t => t.status === "wait").sort((a, b) => (a.no || 0) - (b.no || 0));
+  const ins = all.filter(t => t.status === "in").sort((a, b) => (tsDate(b.inAt)?.getTime() || 0) - (tsDate(a.inAt)?.getTime() || 0));
+  $("vrSeg").querySelector('[data-vt="cut"]').textContent = `قطع وانتظار${wait.length ? ` (${AR(wait.length)})` : ""}`;
+  $("vrSeg").querySelector('[data-vt="in"]').textContent = `دخلوا${ins.length ? ` (${AR(ins.length)})` : ""}`;
+  $("vrPriceLbl").textContent = fmt(vrPrice());
+  $("vrPay").querySelectorAll("button").forEach(b => b.classList.toggle("on", (b.dataset.free === "1") === vrFree));
+  $("vrGo").innerHTML = vrFree ? "قطع تذكرة <bdi>VR</bdi> مجانية" : `قطع تذكرة <bdi>VR</bdi> بـ <bdi>${fmt(vrPrice())}</bdi>`;
+  $("vrErrBox").classList.toggle("hidden", !vrErr);
+  if (vrErr) $("vrErrBox").textContent = vrErr.code === "permission-denied" ? "لا توجد صلاحية لقراءة تذاكر VR. انشري قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر تحميل التذاكر: " + (vrErr.message || vrErr);
+  const closed = !!vrDays.get(today)?.closed;
+  $("vrClosedBox").classList.toggle("hidden", !closed);
+  if (closed) $("vrClosedBox").textContent = "جرد اليوم مُغلق، فلا يمكن قطع تذاكر جديدة. لإعادة فتحه: الجرد ← «إعادة فتح اليوم».";
+  $("vrGo").disabled = closed || vrBusy;
+  if (vrTab === "cut") {
+    const d = vrDoneId && vrT.find(t => t.id === vrDoneId);
+    $("vrDone").classList.toggle("hidden", !d);
+    if (d) $("vrDone").innerHTML = `<span class="no">${AR(d.no)}</span><div><b>${esc(vrName(d))}</b><small>رقم الدور · ${d.status === "refunded" ? vrStatus(d) : d.free ? "مجاني" : "مدفوع " + fmt(d.amount)} · ${vrTime(d)}</small></div>`;
+    const list = wait.filter(t => vrMatch(t, $("vrQ").value));
+    $("vrWaitH").textContent = `قائمة الانتظار${wait.length ? ` (${AR(wait.length)})` : ""}`;
+    $("vrWait").innerHTML = list.length ? list.map((t, i) => vrItem(t, i, "wait")).join("")
+      : `<li class="vr-empty" style="display:block">${!vrReady && !vrErr ? "جارٍ التحميل…" : wait.length ? "لا توجد نتيجة بهذا البحث." : "لا أحد بالانتظار الآن."}</li>`;
+  } else if (vrTab === "in") {
+    const list = ins.filter(t => vrMatch(t, $("vrInQ").value));
+    $("vrInH").textContent = `دخلوا اليوم${ins.length ? ` (${AR(ins.length)})` : ""}`;
+    $("vrInList").innerHTML = list.length ? list.map((t, i) => vrItem(t, i, "in")).join("") : `<li class="vr-empty" style="display:block">${ins.length ? "لا توجد نتيجة بهذا البحث." : "لم يدخل أحد بعد اليوم."}</li>`;
+  } else vrDrawInv();
+}
+function vrDrawInv() {
+  const days = vrDaysList(), today = dayKey(Date.now());
+  if (!days.includes(vrInvDay)) vrInvDay = today;
+  const sel = $("vrInvDay"), sig = days.join(",");
+  if (sel.dataset.sig !== sig) { sel.dataset.sig = sig; sel.innerHTML = days.map(k => `<option value="${k}">${esc(dayLabel(k))}${k === today ? " (اليوم)" : ""}</option>`).join(""); }
+  sel.value = vrInvDay;
+  const list = vrT.filter(t => vrDayOf(t) === vrInvDay).sort((a, b) => (b.no || 0) - (a.no || 0)), r = vrStats(list), d = vrDays.get(vrInvDay) || {};
+  $("vrInvSum").innerHTML = vrSumHtml(r);
+  const diff = (d.cash || 0) - r.net;
+  $("vrCloseBox").innerHTML = d.closed
+    ? `<h4>أُغلق جرد هذا اليوم</h4>
+      <div class="res"><span>المفروض بالصندوق</span><b>${fmt(r.net)}</b></div>
+      <div class="res"><span>الموجود فعلياً</span><b>${fmt(d.cash)}</b></div>
+      <div class="res"><span>الفرق</span><b class="vr-diff ${diff === 0 ? "ok" : "bad"}">${diff === 0 ? "مطابق" : (diff > 0 ? "زيادة " : "نقص ") + fmt(Math.abs(diff))}</b></div>
+      ${d.note ? `<p class="hint">ملاحظة: ${esc(d.note)}</p>` : ""}
+      <button class="btn btn-ghost" type="button" data-vopen="${esc(vrInvDay)}" style="width:100%;margin-top:10px">إعادة فتح اليوم</button>`
+    : `<h4>إغلاق اليوم</h4><div class="res"><span>المفروض بالصندوق</span><b>${fmt(r.net)}</b></div>
+      ${r.n ? `<button class="btn btn-main" type="button" data-vclose="${esc(vrInvDay)}" style="width:100%;margin-top:10px">إغلاق اليوم ومطابقة الصندوق</button>` : `<p class="hint">لا توجد تذاكر في هذا اليوم.</p>`}`;
+  $("vrLogH").textContent = `تذاكر ${vrInvDay === today ? "اليوم" : dayLabel(vrInvDay)}${list.length ? ` (${AR(list.length)})` : ""}`;
+  $("vrLog").innerHTML = list.length ? list.map((t, i) => vrItem(t, i, "log")).join("") : `<li class="vr-empty" style="display:block">لا توجد تذاكر في هذا اليوم.</li>`;
+}
+$("vrInvDay").onchange = () => { vrInvDay = $("vrInvDay").value; vrDrawInv(); };
+$("vrInvExport").onclick = () => vrExport(vrInvDay);
+$("vrQ").oninput = () => vrDraw(); $("vrInQ").oninput = () => vrDraw();
+$("vrPay").onclick = e => { const b = e.target.closest("[data-free]"); if (!b) return; vrFree = b.dataset.free === "1" && vrCan("vrFree"); vrDraw(); };
+
+/* الاسم قد يكون موجوداً من قبل: أثناء الكتابة تظهر الأسماء المطابقة ممن قطعوا سابقاً، وضغطة تملأ الاسم والكنية والجوال */
+function vrPeople() {
+  const m = new Map();
+  [...vrT].sort((a, b) => vrMs(a) - vrMs(b)).forEach(t => m.set(t.phone || norm(vrName(t)), t));
+  return [...m.values()];
+}
+function vrSuggest() {
+  const f = norm($("vrFirst").value), l = norm($("vrLastName").value), p = vrPhoneOf($("vrPhone").value).replace(/\D/g, ""), box = $("vrSug");
+  if (f.length < 2 && l.length < 2 && p.length < 3) { box.classList.add("hidden"); box.innerHTML = ""; return; }
+  const today = dayKey(Date.now());
+  const hits = vrPeople().filter(t => (!f || norm(t.first || vrName(t)).includes(f)) && (!l || norm(t.last || vrName(t)).includes(l)) && (!p || String(t.phone || "").includes(p)))
+    .filter(t => !(norm(t.first) === f && norm(t.last) === l && String(t.phone || "").replace(/\D/g, "") === p))
+    .sort((a, b) => vrMs(b) - vrMs(a)).slice(0, 4);
+  box.classList.toggle("hidden", !hits.length);
+  box.innerHTML = hits.map(t => `<button type="button" data-sug="${esc(t.id)}"><span><b>${esc(vrName(t))}</b> · <bdi dir="ltr">${esc(t.phone || "")}</bdi></span><small>${vrDayOf(t) === today ? `اليوم · دور ${AR(t.no)}` : esc(dayLabel(vrDayOf(t)))}</small></button>`).join("");
+}
+["vrFirst", "vrLastName", "vrPhone"].forEach(id => $(id).addEventListener("input", vrSuggest));
+$("vrSug").onclick = e => {
+  const b = e.target.closest("[data-sug]"), t = b && vrT.find(x => x.id === b.dataset.sug); if (!t) return;
+  const parts = vrName(t).split(" ");
+  $("vrFirst").value = t.first || parts[0] || ""; $("vrLastName").value = t.last || parts.slice(1).join(" "); $("vrPhone").value = t.phone || "";
+  $("vrSug").classList.add("hidden"); $("vrSug").innerHTML = "";
+};
+// قطع تذكرة: رقم الدور يُؤخذ من عدّاد اليوم داخل عملية واحدة، فلا يتكرر الرقم بين جهازين
+$("vrForm").onsubmit = async e => {
+  e.preventDefault(); if (vrBusy) return;
+  const first = clean($("vrFirst").value).replace(/\s+/g, " ").slice(0, 30), last = clean($("vrLastName").value).replace(/\s+/g, " ").slice(0, 30), phone = vrPhoneOf($("vrPhone").value).slice(0, 20), msg = $("vrMsg");
+  const bad = (x, el) => { msg.className = "msg bad"; msg.textContent = x; $(el).focus(); };
+  if (first.length < 2) return bad("اكتبي الاسم.", "vrFirst");
+  if (last.length < 2) return bad("اكتبي الكنية.", "vrLastName");
+  if (phone.replace(/\D/g, "").length < 6) return bad("اكتبي رقم الجوال.", "vrPhone");
+  const day = dayKey(Date.now()), name = `${first} ${last}`, free = vrFree && vrCan("vrFree");
+  if (vrDays.get(day)?.closed) return bad("جرد اليوم مُغلق. أعيدي فتحه من «الجرد» أولاً.", "vrFirst");
+  const dup = vrT.find(t => vrDayOf(t) === day && t.status !== "refunded" && (t.phone === phone || norm(vrName(t)) === norm(name)));
+  if (dup && !confirm(`«${vrName(dup)}» له تذكرة اليوم برقم ${dup.no} (${vrStatus(dup)}).\nقطع تذكرة ثانية؟`)) return;
+  vrBusy = true; $("vrGo").disabled = true; msg.className = "msg"; msg.textContent = "جارٍ قطع التذكرة…";
+  try {
+    const dref = VRDAY.doc(day), tref = VR.doc(), amount = free ? 0 : vrPrice();
+    const no = await db.runTransaction(async tr => {
+      const s = await tr.get(dref), n = (s.exists ? Number(s.data().n) || 0 : 0) + 1;
+      tr.set(dref, { n, at: FV.serverTimestamp() }, { merge: true });
+      tr.set(tref, { no: n, day, first, last, name, phone, free, amount, status: "wait", by: vrWho(), station: station(), ms: Date.now(), at: FV.serverTimestamp() });
+      return n;
+    });
+    vrDoneId = tref.id; vrFree = false;
+    ["vrFirst", "vrLastName", "vrPhone"].forEach(id => $(id).value = ""); $("vrSug").classList.add("hidden"); $("vrSug").innerHTML = "";
+    msg.textContent = ""; toast(`تذكرة رقم ${no} · ${name} · ${free ? "مجاني" : "مدفوع " + fmt(amount)}`);
+    $("vrFirst").focus();
+  } catch (ex) { console.error(ex); msg.className = "msg bad"; msg.textContent = "لم تُقطع التذكرة. " + errText(ex); }
+  vrBusy = false; vrDraw();
+};
+// تغيير حالة تذكرة: دخول / تراجع / مجاني↔مدفوع / إرجاع المبلغ — وللإدارة: إلغاء الإرجاع والحذف
+async function vrAct(id, act) {
+  const t = vrT.find(x => x.id === id); if (!t) return;
+  const ref = VR.doc(id), who = vrWho(), nm = vrName(t);
+  try {
+    if (act === "in") { await ref.update({ status: "in", inAt: FV.serverTimestamp(), inBy: who }); toast(`تم دخول ${nm} (دور ${t.no})`); }
+    else if (act === "back") { if (!confirm(`التراجع عن دخول ${nm}؟ يرجع إلى قائمة الانتظار.`)) return; await ref.update({ status: "wait", inAt: null, inBy: null }); }
+    else if (act === "free") {
+      const free = !t.free, amount = free ? 0 : vrPrice();
+      if (!confirm(free ? `جعل تذكرة ${nm} مجانية؟\nيُطرح ${t.amount} من صندوق اليوم.` : `جعل تذكرة ${nm} مدفوعة بـ ${amount}؟`)) return;
+      await ref.update({ free, amount, freeBy: who }); toast(free ? `تذكرة ${nm} صارت مجانية` : `تذكرة ${nm} صارت مدفوعة`);
+    }
+    else if (act === "refund") {
+      if (!confirm(t.free ? `إلغاء تذكرة ${nm} المجانية (دور ${t.no})؟` : `إرجاع ${t.amount} لـ ${nm} (دور ${t.no})؟\nتخرج التذكرة من الانتظار ويُطرح المبلغ من صندوق اليوم.`)) return;
+      await ref.update({ status: "refunded", refundAt: FV.serverTimestamp(), refundBy: who }); toast(t.free ? `أُلغيت تذكرة ${nm}` : `أُرجع ${fmt(t.amount)} لـ ${nm}`);
+    }
+    else if (act === "unrefund" && role === "admin") { if (!confirm(`إلغاء ${t.free ? "الإلغاء" : "الإرجاع"} وإعادة ${nm} إلى قائمة الانتظار؟`)) return; await ref.update({ status: "wait", refundAt: null, refundBy: null }); }
+    else if (act === "del" && role === "admin") { if (!confirm(`حذف تذكرة ${nm} (دور ${t.no}) نهائياً؟\nتختفي من الجرد كأنها لم تُقطع.`)) return; await ref.delete(); toast("تم حذف التذكرة"); }
+  } catch (ex) { console.error(ex); toast("لم تتم العملية. " + errText(ex), true); }
+}
+const vrClick = e => { const b = e.target.closest("[data-va]"); if (b) vrAct(b.dataset.id, b.dataset.va); };
+["vrWait", "vrInList", "vrLog"].forEach(id => $(id).addEventListener("click", vrClick));
+// إغلاق اليوم: يُكتب المبلغ الموجود فعلياً بالصندوق فيظهر الفرق عن المفروض
+function vrCloseModal(day) {
+  const r = vrStats(vrT.filter(t => vrDayOf(t) === day)), d = vrDays.get(day) || {};
+  openModal(`<h3>إغلاق جرد ${esc(dayLabel(day))}</h3>
+    <div class="fund-sum" style="margin-top:12px"><div><b>${fmt(r.net)}</b><span>المفروض بالصندوق (${fmt(r.paid)} تذكرة مدفوعة)</span></div></div>
+    <form id="vcf"><label class="f"><span>المبلغ الموجود فعلياً بالصندوق</span><input type="text" id="vcCash" inputmode="numeric" dir="ltr" autocomplete="off" value="${d.cash ?? ""}"></label>
+    <p class="msg" id="vcDiff"></p>
+    <label class="f"><span>ملاحظة (اختياري)</span><input type="text" id="vcNote" maxlength="200" value="${esc(d.note || "")}"></label>
+    <div class="acts"><button class="btn btn-main" type="submit">إغلاق اليوم</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="vcMsg"></p></form>`);
+  const show = () => { const c = vrInt($("vcCash").value), el = $("vcDiff"); if (!Number.isFinite(c)) { el.textContent = ""; return; } const x = c - r.net; el.className = "msg " + (x === 0 ? "ok" : "bad"); el.textContent = x === 0 ? "مطابق للمفروض." : `${x > 0 ? "زيادة" : "نقص"} ${fmt(Math.abs(x))} عن المفروض.`; };
+  $("vcCash").oninput = show; show();
+  $("vcf").onsubmit = async ev => {
+    ev.preventDefault();
+    const cash = vrInt($("vcCash").value), m = $("vcMsg");
+    if (!Number.isFinite(cash)) { m.className = "msg bad"; m.textContent = "اكتبي المبلغ الموجود بالصندوق."; return; }
+    try { await VRDAY.doc(day).set({ closed: true, cash, note: clean($("vcNote").value).slice(0, 200), closedBy: vrWho(), closedAt: FV.serverTimestamp() }, { merge: true }); closeModal(); toast("تم إغلاق جرد اليوم"); }
+    catch (ex) { console.error(ex); m.className = "msg bad"; m.textContent = "لم يتم الإغلاق. " + errText(ex); }
+  };
+}
+async function vrReopen(day) {
+  if (!confirm(`إعادة فتح جرد ${dayLabel(day)}؟`)) return;
+  try { await VRDAY.doc(day).set({ closed: false, closedBy: vrWho(), closedAt: FV.serverTimestamp() }, { merge: true }); toast("أُعيد فتح اليوم"); }
+  catch (ex) { console.error(ex); toast("لم تتم العملية. " + errText(ex), true); }
+}
+const vrDayClick = e => { const c = e.target.closest("[data-vclose]"), o = e.target.closest("[data-vopen]"); if (c) { e.stopPropagation(); vrCloseModal(c.dataset.vclose); } else if (o) { e.stopPropagation(); vrReopen(o.dataset.vopen); } return !!(c || o); };
+$("vrCloseBox").addEventListener("click", vrDayClick);
+// Excel: الجرد اليومي + حسب الحساب + كل التذاكر (day فارغ = كل الأيام)
+async function vrExport(day, list0) {
+  try { await loadXLSX(); } catch (ex) { alert(ex.message); return; }
+  const cmp = (a, b) => vrDayOf(a) < vrDayOf(b) ? -1 : vrDayOf(a) > vrDayOf(b) ? 1 : (a.no || 0) - (b.no || 0);
+  const list = (list0 || vrT.filter(t => !day || vrDayOf(t) === day)).slice().sort(cmp), days = [...new Set(list.map(vrDayOf))].sort();
+  const row = (label, k, r, d) => ({ "اليوم": label, "التاريخ": k, "قُطعت": r.n, "مدفوعة": r.paid, "مجانية": r.free, "مُرجعة": r.ref, "مجانية ملغاة": r.cancel, "دخلوا": r.in, "لم يدخلوا": r.wait, "مجموع المُرجع": r.refSum, "صافي الصندوق": r.net,
+    "الموجود فعلياً": d?.closed ? d.cash : "", "الفرق": d?.closed ? d.cash - r.net : "", "ملاحظة": d?.note || "" });
+  const dayRows = days.map(k => row(dayLabel(k), k, vrStats(list.filter(t => vrDayOf(t) === k)), vrDays.get(k)));
+  if (days.length > 1) dayRows.push(row("المجموع", "", vrStats(list)));
+  const accs = new Map(); list.forEach(t => { const k = vrDayOf(t) + "\t" + vrByName(t); (accs.get(k) || accs.set(k, []).get(k)).push(t); });
+  const accRows = [...accs.entries()].map(([k, l]) => { const [d, a] = k.split("\t"), r = vrStats(l); return { "التاريخ": d, "الحساب": a, "قُطعت": r.n, "مدفوعة": r.paid, "مجانية": r.free, "مُرجعة": r.ref, "مجموع المُرجع": r.refSum, "صافي الصندوق": r.net }; });
+  const when = v => tsDate(v)?.toLocaleString("ar") || "";
+  const rows = list.map(t => ({ "التاريخ": vrDayOf(t), "الدور": t.no ?? "", "وقت القطع": vrMs(t) ? new Date(vrMs(t)).toLocaleString("ar") : "", "الاسم": t.first || "", "الكنية": t.last || "", "الجوال": t.phone || "", "النوع": t.free ? "مجاني" : "مدفوع", "المبلغ": t.amount || 0,
+    "الحالة": vrStatus(t), "وقت الدخول": when(t.inAt), "وقت الإرجاع": when(t.refundAt), "الحساب": vrByName(t) }));
+  const wb = XLSX.utils.book_new(); wb.Workbook = { Views: [{ RTL: true }] };
+  const add = (r, name, w) => { const ws = XLSX.utils.json_to_sheet(r.length ? r : [{}]); ws["!cols"] = w.map(x => ({ wch: x })); XLSX.utils.book_append_sheet(wb, ws, name); };
+  add(dayRows, "الجرد اليومي", [24, 12, 8, 8, 8, 8, 12, 8, 10, 13, 14, 14, 10, 30]); add(accRows, "حسب الحساب", [12, 22, 8, 8, 8, 8, 13, 14]); add(rows, "التذاكر", [12, 7, 22, 14, 16, 15, 9, 10, 13, 22, 22, 18]);
+  XLSX.writeFile(wb, `جرد-VR${day ? "-" + day : ""}-${new Date().toISOString().slice(0, 10)}.xlsx`);
+}
+
+/* ---------- لوحة التحكم: تبويب VR ---------- */
+function vrAdminList() {
+  const st = $("vStatus").value, ty = $("vType").value, by = $("vBy").value, q = $("vSearch").value;
+  return vrT.filter(t => (!vDaySel || vrDayOf(t) === vDaySel) && (!st || t.status === st) && (!ty || (ty === "free") === !!t.free) && (!by || t.by === by) && vrMatch(t, q))
+    .sort((a, b) => vrDayOf(a) < vrDayOf(b) ? 1 : vrDayOf(a) > vrDayOf(b) ? -1 : (b.no || 0) - (a.no || 0));
+}
+function renderVrAdmin() {
+  if (role !== "admin") return;
+  if (document.activeElement?.id !== "vPrice") $("vPrice").value = vrPrice();
+  const today = dayKey(Date.now()), days = vrDaysList();
+  if (vDaySel && !days.includes(vDaySel)) vDaySel = "";
+  const tAll = vrStats(vrT), tDay = vrStats(vrT.filter(t => vrDayOf(t) === today));
+  $("vSum").innerHTML = `<div><b>${fmt(tDay.net)}</b><span>صافي صندوق اليوم</span></div><div><b>${fmt(tDay.n)}</b><span>تذكرة اليوم (${fmt(tDay.free)} مجانية)</span></div>
+    <div><b>${fmt(tDay.wait)}</b><span>بالانتظار الآن</span></div><div><b>${fmt(tDay.in)}</b><span>دخلوا اليوم</span></div><div><b>${fmt(tAll.net)}</b><span>صافي كل الأيام · ${fmt(tAll.n)} تذكرة</span></div>`;
+  const cells = r => `<td class="num">${fmt(r.n)}</td><td class="num">${fmt(r.paid)}</td><td class="num">${fmt(r.free)}</td><td class="num">${fmt(r.ref)}${r.refSum ? ` <small style="color:var(--muted)">(${fmt(r.refSum)})</small>` : ""}</td><td class="num">${fmt(r.in)}</td><td class="num">${fmt(r.wait)}</td><td class="num"><b>${fmt(r.net)}</b></td>`;
+  const used = days.filter(k => k !== today || tDay.n || vrDays.get(k)?.closed);
+  $("vDays").innerHTML = used.map(k => {
+    const r = vrStats(vrT.filter(t => vrDayOf(t) === k)), d = vrDays.get(k) || {}, diff = (d.cash || 0) - r.net;
+    return `<tr class="${k === vDaySel ? "vsel" : ""}" data-vday="${k}" style="cursor:pointer"><td>${esc(dayLabel(k))}${k === today ? " (اليوم)" : ""}</td>${cells(r)}
+      <td class="num">${d.closed ? fmt(d.cash) : "—"}</td><td class="num">${d.closed ? `<b class="vr-diff ${diff === 0 ? "ok" : "bad"}">${diff === 0 ? "مطابق" : (diff > 0 ? "+" : "−") + fmt(Math.abs(diff))}</b>` : "—"}</td>
+      <td>${d.closed ? `<button class="mini" data-vopen="${k}">إعادة فتح</button>` : `<button class="mini" data-vclose="${k}">إغلاق</button>`}</td></tr>`;
+  }).join("") + (used.length > 1 ? `<tr class="vtot"><td>المجموع</td>${cells(tAll)}<td></td><td></td><td></td></tr>` : "");
+  $("vDaysEmpty").classList.toggle("hidden", !!used.length);
+  $("vDaysEmpty").textContent = vrErr ? (vrErr.code === "permission-denied" ? "لا توجد صلاحية للقراءة. انشري قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر التحميل: " + vrErr.message) : vrReady ? "لم تُقطع أي تذكرة بعد." : "جارٍ التحميل…";
+  const scope = vrT.filter(t => !vDaySel || vrDayOf(t) === vDaySel), accs = new Map();
+  scope.forEach(t => { const k = t.by || ""; (accs.get(k) || accs.set(k, []).get(k)).push(t); });
+  $("vAccH").textContent = `حسب الحساب · ${vDaySel ? dayLabel(vDaySel) : "كل الأيام"}`;
+  $("vAcc").innerHTML = [...accs.values()].map(l => { const r = vrStats(l); return `<tr><td class="name" style="min-width:0">${esc(vrByName(l[0]))}</td><td class="num">${fmt(r.n)}</td><td class="num">${fmt(r.paid)}</td><td class="num">${fmt(r.free)}</td><td class="num">${fmt(r.ref)}</td><td class="num"><b>${fmt(r.net)}</b></td></tr>`; }).join("")
+    || `<tr><td colspan="6" style="color:var(--muted)">لا توجد تذاكر.</td></tr>`;
+  const dsel = $("vDay"), sig = days.join(",");
+  if (dsel.dataset.sig !== sig) { dsel.dataset.sig = sig; dsel.innerHTML = `<option value="">كل الأيام</option>` + days.map(k => `<option value="${k}">${esc(dayLabel(k))}${k === today ? " (اليوم)" : ""}</option>`).join(""); }
+  dsel.value = vDaySel;
+  const bsel = $("vBy"), bys = [...new Map(vrT.map(t => [t.by || "", vrByName(t)])).entries()], bsig = bys.map(b => b.join(":")).join(","), bv = bsel.value;
+  if (bsel.dataset.sig !== bsig) { bsel.dataset.sig = bsig; bsel.innerHTML = `<option value="">كل الحسابات</option>` + bys.map(([id, n]) => `<option value="${esc(id)}">${esc(n)}</option>`).join(""); bsel.value = bys.some(b => b[0] === bv) ? bv : ""; }
+  const list = vrAdminList();
+  $("vRows").innerHTML = list.slice(0, 500).map(t => {
+    const id = `data-id="${esc(t.id)}"`;
+    return `<tr class="${t.status === "refunded" ? "strike" : ""}"><td class="num"><b>${AR(t.no ?? "")}</b></td>
+      <td>${vrMs(t) ? esc(new Date(vrMs(t)).toLocaleString("ar", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })) : "…"}</td>
+      <td class="name">${esc(vrName(t))}</td><td class="num"><bdi dir="ltr">${esc(t.phone || "")}</bdi></td>
+      <td><span class="badge ${t.free ? "free" : "paid"}">${t.free ? "مجاني" : "مدفوع"}</span></td><td class="num">${fmt(t.amount)}</td>
+      <td><span class="badge ${esc(t.status)}">${vrStatus(t)}</span></td><td>${esc(vrByName(t))}</td>
+      <td><button class="mini" data-ve="${esc(t.id)}">تعديل</button>${t.status === "wait" ? `<button class="mini" data-va="in" ${id}>تم الدخول</button><button class="mini r" data-va="refund" ${id}>${t.free ? "إلغاء" : "إرجاع المبلغ"}</button>`
+        : t.status === "in" ? `<button class="mini" data-va="back" ${id}>تراجع عن الدخول</button>` : `<button class="mini" data-va="unrefund" ${id}>${t.free ? "إلغاء الإلغاء" : "إلغاء الإرجاع"}</button>`}<button class="mini r" data-va="del" ${id}>حذف</button></td></tr>`;
+  }).join("");
+  $("vEmpty").classList.toggle("hidden", !!list.length);
+  $("vEmpty").textContent = vrT.length ? "لا توجد تذاكر بهذا البحث." : vrReady ? "لم تُقطع أي تذكرة بعد." : "جارٍ التحميل…";
+}
+$("vDays").addEventListener("click", e => { if (vrDayClick(e)) return; const tr = e.target.closest("[data-vday]"); if (!tr) return; vDaySel = vDaySel === tr.dataset.vday ? "" : tr.dataset.vday; renderVrAdmin(); });
+$("vDay").onchange = () => { vDaySel = $("vDay").value; renderVrAdmin(); };
+["vStatus", "vType", "vBy"].forEach(id => $(id).onchange = () => renderVrAdmin());
+$("vSearch").oninput = () => renderVrAdmin();
+$("vExport").onclick = () => vrExport(vDaySel, vrAdminList());
+$("vRows").addEventListener("click", e => {
+  const a = e.target.closest("[data-va]"); if (a) return vrAct(a.dataset.id, a.dataset.va);
+  const b = e.target.closest("[data-ve]"), t = b && vrT.find(x => x.id === b.dataset.ve); if (!t) return;
+  openModal(`<h3>تعديل تذكرة · دور ${AR(t.no ?? "")}</h3><form id="vef">
+    <div class="vr-two" style="margin-top:10px"><label class="f"><span>الاسم</span><input type="text" id="veFirst" maxlength="30" value="${esc(t.first || "")}"></label><label class="f"><span>الكنية</span><input type="text" id="veLast" maxlength="30" value="${esc(t.last || "")}"></label></div>
+    <label class="f" style="margin-top:10px"><span>رقم الجوال</span><input type="text" id="vePhone" inputmode="tel" dir="ltr" maxlength="20" value="${esc(t.phone || "")}"></label>
+    <div class="vr-two" style="margin-top:10px"><label class="f"><span>النوع</span><select id="veFree"><option value="0" ${t.free ? "" : "selected"}>مدفوع</option><option value="1" ${t.free ? "selected" : ""}>مجاني</option></select></label>
+      <label class="f"><span>المبلغ</span><input type="text" id="veAmt" inputmode="numeric" dir="ltr" value="${t.free ? vrPrice() : t.amount ?? vrPrice()}"></label></div>
+    <div class="acts"><button class="btn btn-main" type="submit">حفظ</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="veMsg"></p></form>`);
+  const sync = () => { $("veAmt").disabled = $("veFree").value === "1"; }; $("veFree").onchange = sync; sync();
+  $("vef").onsubmit = async ev => {
+    ev.preventDefault();
+    const first = clean($("veFirst").value).slice(0, 30), last = clean($("veLast").value).slice(0, 30), free = $("veFree").value === "1", amount = free ? 0 : vrInt($("veAmt").value), m = $("veMsg");
+    if (first.length < 2 || last.length < 2) { m.className = "msg bad"; m.textContent = "اكتبي الاسم والكنية."; return; }
+    if (!Number.isFinite(amount)) { m.className = "msg bad"; m.textContent = "اكتبي المبلغ."; return; }
+    try { await VR.doc(t.id).update({ first, last, name: `${first} ${last}`, phone: vrPhoneOf($("vePhone").value).slice(0, 20), free, amount }); closeModal(); toast("تم حفظ التذكرة"); }
+    catch (ex) { console.error(ex); m.className = "msg bad"; m.textContent = "لم يتم الحفظ. " + errText(ex); }
+  };
+});
+$("vSetForm").onsubmit = async e => {
+  e.preventDefault();
+  const p = vrInt($("vPrice").value), m = $("vSetMsg");
+  if (!Number.isFinite(p)) { m.className = "msg bad"; m.textContent = "اكتبي سعراً صحيحاً."; return; }
+  try { await SET.set({ vrPrice: p }, { merge: true }); m.className = "msg ok"; m.textContent = `تم حفظ السعر: ${fmt(p)}`; toast("تم حفظ سعر تذكرة VR"); }
+  catch (ex) { console.error(ex); m.className = "msg bad"; m.textContent = "لم يتم الحفظ. " + errText(ex); }
 };
 </script>
 </body>
