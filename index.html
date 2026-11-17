@@ -658,7 +658,7 @@ tr.vtot td{font-weight:700;background:#FDF9FA}
           <label class="f"><span>الاسم</span><input type="text" id="vrFirst" maxlength="30" enterkeyhint="next" spellcheck="false"></label>
           <label class="f"><span>الكنية</span><input type="text" id="vrLastName" maxlength="30" enterkeyhint="next" spellcheck="false"></label>
         </div>
-        <label class="f"><span>رقم الجوال</span><input type="text" id="vrPhone" inputmode="tel" dir="ltr" maxlength="20" placeholder="09xxxxxxxx" enterkeyhint="done"></label>
+        <label class="f"><span>رقم الجوال</span><input type="text" id="vrPhone" inputmode="numeric" dir="ltr" maxlength="20" placeholder="09xxxxxxxx" enterkeyhint="done"></label>
         <div class="vr-sug hidden" id="vrSug"></div>
         <div class="vr-pay" id="vrPay">
           <button type="button" data-free="0" class="on">مدفوع<b id="vrPriceLbl"></b></button>
@@ -3866,7 +3866,10 @@ const vrMs = t => tsDate(t.at)?.getTime() ?? t.ms ?? 0;
 const vrDayOf = t => t.day || dayKey(vrMs(t));
 const vrName = t => t.name || `${t.first || ""} ${t.last || ""}`.trim();
 const vrDigits = v => String(v ?? "").replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
-const vrPhoneOf = v => { const s = vrDigits(v).trim(); return (s.startsWith("+") ? "+" : "") + s.replace(/\D/g, ""); };
+const VR_PHONE_MAX = 10;   // رقم الجوال: أرقام فقط وبحد أقصى ١٠
+const vrPhoneOf = v => vrDigits(v).replace(/\D/g, "").slice(0, VR_PHONE_MAX);
+// أثناء الكتابة أو اللصق: يُحذف أي حرف غير الأرقام ولا يُقبل أكثر من ١٠ أرقام
+const vrPhoneInput = el => el.addEventListener("input", () => { const v = vrPhoneOf(el.value); if (el.value !== v) el.value = v; });
 const vrInt = v => { const s = vrDigits(v).replace(/[^\d]/g, ""); return s === "" ? NaN : parseInt(s, 10); };
 const vrStatus = t => t.status === "refunded" ? (t.free ? "أُلغيت" : "أُرجع المبلغ") : t.status === "in" ? "دخل" : "بالانتظار";
 const vrByName = t => staff.find(s => s.id === t.by)?.name || t.station || (t.by === "admin" ? "الإدارة" : t.by || "");
@@ -4020,6 +4023,7 @@ function vrSuggest() {
   box.classList.toggle("hidden", !hits.length);
   box.innerHTML = hits.map(t => `<button type="button" data-sug="${esc(t.id)}"><span><b>${esc(vrName(t))}</b> · <bdi dir="ltr">${esc(t.phone || "")}</bdi></span><small>${vrDayOf(t) === today ? `اليوم · دور ${AR(t.no)}` : esc(dayLabel(vrDayOf(t)))}</small></button>`).join("");
 }
+vrPhoneInput($("vrPhone"));
 ["vrFirst", "vrLastName", "vrPhone"].forEach(id => $(id).addEventListener("input", vrSuggest));
 $("vrSug").onclick = e => {
   const b = e.target.closest("[data-sug]"), t = b && vrT.find(x => x.id === b.dataset.sug); if (!t) return;
@@ -4030,11 +4034,11 @@ $("vrSug").onclick = e => {
 // قطع تذكرة: رقم الدور يُؤخذ من عدّاد اليوم داخل عملية واحدة، فلا يتكرر الرقم بين جهازين
 $("vrForm").onsubmit = async e => {
   e.preventDefault(); if (vrBusy) return;
-  const first = clean($("vrFirst").value).replace(/\s+/g, " ").slice(0, 30), last = clean($("vrLastName").value).replace(/\s+/g, " ").slice(0, 30), phone = vrPhoneOf($("vrPhone").value).slice(0, 20), msg = $("vrMsg");
+  const first = clean($("vrFirst").value).replace(/\s+/g, " ").slice(0, 30), last = clean($("vrLastName").value).replace(/\s+/g, " ").slice(0, 30), phone = vrPhoneOf($("vrPhone").value), msg = $("vrMsg");
   const bad = (x, el) => { msg.className = "msg bad"; msg.textContent = x; $(el).focus(); };
   if (first.length < 2) return bad("اكتبي الاسم.", "vrFirst");
   if (last.length < 2) return bad("اكتبي الكنية.", "vrLastName");
-  if (phone.replace(/\D/g, "").length < 6) return bad("اكتبي رقم الجوال.", "vrPhone");
+  if (phone.length < 6) return bad("اكتبي رقم الجوال.", "vrPhone");
   const day = dayKey(Date.now()), name = `${first} ${last}`, free = vrFree && vrCan("vrFree");
   if (vrDays.get(day)?.closed) return bad("جرد اليوم مُغلق. أعيدي فتحه من «الجرد» أولاً.", "vrFirst");
   const dup = vrT.find(t => vrDayOf(t) === day && t.status !== "refunded" && (t.phone === phone || norm(vrName(t)) === norm(name)));
@@ -4181,17 +4185,17 @@ $("vRows").addEventListener("click", e => {
   const b = e.target.closest("[data-ve]"), t = b && vrT.find(x => x.id === b.dataset.ve); if (!t) return;
   openModal(`<h3>تعديل تذكرة · دور ${AR(t.no ?? "")}</h3><form id="vef">
     <div class="vr-two" style="margin-top:10px"><label class="f"><span>الاسم</span><input type="text" id="veFirst" maxlength="30" value="${esc(t.first || "")}"></label><label class="f"><span>الكنية</span><input type="text" id="veLast" maxlength="30" value="${esc(t.last || "")}"></label></div>
-    <label class="f" style="margin-top:10px"><span>رقم الجوال</span><input type="text" id="vePhone" inputmode="tel" dir="ltr" maxlength="20" value="${esc(t.phone || "")}"></label>
+    <label class="f" style="margin-top:10px"><span>رقم الجوال</span><input type="text" id="vePhone" inputmode="numeric" dir="ltr" maxlength="20" value="${esc(t.phone || "")}"></label>
     <div class="vr-two" style="margin-top:10px"><label class="f"><span>النوع</span><select id="veFree"><option value="0" ${t.free ? "" : "selected"}>مدفوع</option><option value="1" ${t.free ? "selected" : ""}>مجاني</option></select></label>
       <label class="f"><span>المبلغ</span><input type="text" id="veAmt" inputmode="numeric" dir="ltr" value="${t.free ? vrPrice() : t.amount ?? vrPrice()}"></label></div>
     <div class="acts"><button class="btn btn-main" type="submit">حفظ</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="veMsg"></p></form>`);
-  const sync = () => { $("veAmt").disabled = $("veFree").value === "1"; }; $("veFree").onchange = sync; sync();
+  const sync = () => { $("veAmt").disabled = $("veFree").value === "1"; }; $("veFree").onchange = sync; sync(); vrPhoneInput($("vePhone"));
   $("vef").onsubmit = async ev => {
     ev.preventDefault();
     const first = clean($("veFirst").value).slice(0, 30), last = clean($("veLast").value).slice(0, 30), free = $("veFree").value === "1", amount = free ? 0 : vrInt($("veAmt").value), m = $("veMsg");
     if (first.length < 2 || last.length < 2) { m.className = "msg bad"; m.textContent = "اكتبي الاسم والكنية."; return; }
     if (!Number.isFinite(amount)) { m.className = "msg bad"; m.textContent = "اكتبي المبلغ."; return; }
-    try { await VR.doc(t.id).update({ first, last, name: `${first} ${last}`, phone: vrPhoneOf($("vePhone").value).slice(0, 20), free, amount }); closeModal(); toast("تم حفظ التذكرة"); }
+    try { await VR.doc(t.id).update({ first, last, name: `${first} ${last}`, phone: vrPhoneOf($("vePhone").value), free, amount }); closeModal(); toast("تم حفظ التذكرة"); }
     catch (ex) { console.error(ex); m.className = "msg bad"; m.textContent = "لم يتم الحفظ. " + errText(ex); }
   };
 });
