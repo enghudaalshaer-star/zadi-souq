@@ -488,6 +488,35 @@ tr.s-exp td{background:#FFF6F6}tr.s-soon td{background:#FFF9F2}
 .stk-cart .tot{display:flex;justify-content:space-between;font-weight:700;font-size:17px;margin:8px 0}
 .stk-cart form{display:flex;gap:6px}.stk-cart form input{flex:1;min-width:0;direction:ltr;text-align:center}
 .stk-sell{grid-column:1/-1;background:#3A4FA8!important;color:#fff!important}
+/* وضع «بيع»: كاشير بسيط — مسح المادة يضيفها للسلة مباشرة */
+#stkTop{grid-template-columns:repeat(3,1fr)}
+#stkTop button.on{background:#3A4FA8}
+#stkTop button.on[data-sm=store]{background:#8A5300}
+.stk-gq{margin-top:10px}
+.stk-grid2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+@media (min-width:520px){.stk-grid2{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stk-tile{position:relative;border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:10px 6px 8px;display:grid;justify-items:center;align-content:start;gap:2px;cursor:pointer;min-height:84px;font:inherit;color:var(--ink);touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.stk-tile:active{transform:scale(.96)}
+.stk-tile b{font-size:14px;line-height:1.3;text-align:center;overflow-wrap:anywhere}
+.stk-tile .pr{font-size:13px;font-weight:700;color:#3A4FA8}
+.stk-tile small{font-size:11px;color:var(--muted)}
+.stk-tile.on{border-color:#3A4FA8;background:#F4F6FF}
+.stk-tile.off{opacity:.45}
+.stk-tile .q{position:absolute;top:5px;left:5px;min-width:24px;height:24px;border-radius:12px;background:#3A4FA8;color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center;padding:0 6px}
+.stk-tile.flash{animation:stkpop .35s ease-out}
+@keyframes stkpop{from{box-shadow:0 0 0 6px rgba(58,79,168,.35)}to{box-shadow:0 0 0 0 rgba(58,79,168,0)}}
+@media (prefers-reduced-motion:reduce){.stk-tile.flash{animation:none}}
+#stkCart{margin-top:14px}
+#stkCart .cl{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;background:#fff;border-radius:12px;padding:6px 10px;font-size:15px}
+#stkCart .cl small{display:block;color:var(--muted);font-size:12px}
+#stkCart .cq{display:flex;align-items:center;gap:4px}
+#stkCart .cq button{width:36px;height:36px;border-radius:10px;border:0;background:#E8EEFF;color:#3A4FA8;font-size:20px;font-weight:700;cursor:pointer}
+#stkCart .cq b{min-width:24px;text-align:center;font-variant-numeric:tabular-nums}
+#stkCart .cv{font-weight:700;font-variant-numeric:tabular-nums;min-width:56px;text-align:end}
+#stkCart .tot{font-size:22px;color:#3A4FA8}
+#stkCart .empty{padding:14px;font-size:14px}
+#scFind{margin:6px 0 0}#scFind button.on{background:#3A4FA8}
+#scHits{margin-top:8px}
 .lbl-sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 /* سجل تقرير البيع: عنوان لكل يوم، والتاريخ والوقت واضحان لكل عملية */
 #rvList li.dh{background:none;border:0;padding:8px 2px 0;font-weight:700;font-size:13px;color:var(--ink);display:flex;justify-content:space-between}
@@ -791,13 +820,19 @@ tr.s-exp td{background:#FFF6F6}tr.s-soon td{background:#FFF9F2}
       </div>
     </div>
 
+    <div class="seg hidden" id="stkTop" role="tablist">
+      <button type="button" data-sm="sell">بيع</button>
+      <button type="button" data-sm="rep">تقرير البيع</button>
+      <button type="button" data-sm="store">مخزن</button>
+    </div>
+    <div class="vr-warn hidden" id="stkErrBox"></div>
+    <div id="stkStoreBox">
     <div class="stk-alerts" id="stkAlerts"></div>
     <div class="seg" id="stkSeg" role="tablist">
       <button type="button" data-st="scan" class="on">مسح</button>
       <button type="button" data-st="list">المواد</button>
       <button type="button" data-st="log">السجل</button>
     </div>
-    <div class="vr-warn hidden" id="stkErrBox"></div>
 
     <div id="stkScan">
       <div id="stkCamSlot"></div>
@@ -807,7 +842,6 @@ tr.s-exp td{background:#FFF6F6}tr.s-soon td{background:#FFF9F2}
       </form>
       <div class="stk-hits hidden" id="stkHits"></div>
       <div id="stkCard"></div>
-      <div id="stkCart" class="stk-cart hidden"></div>
       <div class="vr-bar"><h3 id="stkMineH">حركاتي اليوم</h3></div>
       <ol class="stk-log" id="stkMine"></ol>
     </div>
@@ -821,6 +855,44 @@ tr.s-exp td{background:#FFF6F6}tr.s-soon td{background:#FFF9F2}
     <div id="stkLog" class="hidden">
       <div class="rv-bar"><h3>سجل الحركات</h3><select class="rv-sel" id="stkLogDay" aria-label="اليوم"></select></div>
       <ol class="stk-log" id="stkLogList"></ol>
+    </div>
+    </div>
+
+    <!-- بيع: مسح المادة يضيفها للسلة، ثم بطاقة المشترية -->
+    <div id="stkSellBox" class="hidden">
+      <div id="stkSellCam"></div>
+      <input type="search" id="stkGridQ" class="stk-gq hidden" placeholder="ابحثي عن مادة بالاسم" autocomplete="off" spellcheck="false">
+      <div class="stk-grid2" id="stkGrid"></div>
+      <div id="stkCart" class="stk-cart">
+        <h4><span id="scTitle">السلة</span><button type="button" class="mini r hidden" id="scClear">تفريغ</button></h4>
+        <div id="scLines"></div>
+        <div id="scPay" class="hidden">
+          <div class="tot"><span>المجموع</span><span id="scTotal"></span></div>
+          <div class="seg stabs" id="scFind" role="tablist"><button type="button" data-f="card" class="on">برقم البطاقة</button><button type="button" data-f="name">بالاسم والكنية</button></div>
+          <form class="manual" id="scForm" autocomplete="off"><input type="text" id="scNum" inputmode="numeric" placeholder="اكتبي رقم البطاقة"><button class="btn btn-main" type="submit">بحث</button></form>
+          <div class="choose" id="scHits"></div>
+          <p class="hint" id="scHint"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- تقرير البيع: عدد كل مادة + سجل البيع مع الإرجاع والتصدير -->
+    <div id="stkRepBox" class="hidden">
+      <div class="rv-bar"><h3 id="srTitle">عدد مبيعاتي</h3><select class="rv-sel" id="srDay" aria-label="اليوم"></select></div>
+      <div class="rv-sum" id="srSum"></div>
+      <ol class="rv-prods" id="srProds"></ol>
+      <div class="recent">
+        <h3>سجل البيع</h3>
+        <div class="rv-find">
+          <select class="rv-sel" id="srItem" aria-label="المادة"></select>
+          <select class="rv-sel" id="srLogDay" aria-label="التاريخ"></select>
+          <input type="search" id="srQ" placeholder="اسم صاحبة البطاقة أو رقمها (اختياري)" autocomplete="off" spellcheck="false">
+        </div>
+        <p class="rv-note" id="srCount"></p>
+        <ol id="srList"></ol>
+        <button class="btn btn-ghost more hidden" type="button" id="srMore" style="width:100%">عرض المزيد</button>
+        <button class="btn btn-soft" type="button" id="srExport" style="width:100%;margin-top:8px">تصدير السجلات Excel (مع الرصيد النهائي)</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1299,7 +1371,8 @@ const VR = db.collection("zp_vr"), VRDAY = db.collection("zp_vrday"), VR_PRICE =
 // zp_stock/{id}: مادة {name, codes[] باركود, unit, min حد التنبيه (null = الافتراضي), qty, lots: [{q, e "YYYY-MM-DD" أو ""}], lastMv, by, createdAt, updatedAt}
 // zp_stockmv/{id}: حركة {mid, name, type: new|out|in|count|waste|undo, qty الفرق (±), before, after, lots الدفعات المتأثرة, note, ref, by, station, ms, at, undone, undoMv}
 const STK = db.collection("zp_stock"), STKMV = db.collection("zp_stockmv");
-let scanHook = null, scanHome = null, stkCart = [], stkPaying = false;   // stkCart: سلة البيع بالبطاقة [{mid, q}]   // مسح باركود المادة من داخل نافذة «مادة جديدة» / «تعديل»
+let scanHook = null, scanHome = null, stkCart = [], stkPaying = false;
+let stkMode = "", stkModeSig = "", stkFindBy = "card", stkTx = [], stkTxUnsub = null, stkTxErr = null, srDayV = "", srLogDayV = "", srItemV = "", srLimit = 50, stkRepPrep = null, stkSeen = { code: "", at: 0 }, stkNameT = null, stkFlashId = "";   // stkCart: سلة البيع بالبطاقة [{mid, q}]   // مسح باركود المادة من داخل نافذة «مادة جديدة» / «تعديل»
 let stkM = new Map(), stkMv = [], stkUnsubs = [], stkReady = false, stkErr = null, stkTab = "scan", stkCur = null, stkUnknown = null, stkN = 1, stkOk = "", stkBusy = false, stkFilter = "", stkLogDayV = "", stkDrawT = null, kDaySel = "", stkLast = { code: "", at: 0 }, stkCodeIdx = new Map();
 let vrT = [], vrDays = new Map(), vrUnsubs = [], vrReady = false, vrErr = null, vrTab = "cut", vrFree = false, vrBusy = false, vrDoneId = null, vrInvDay = "", vrDrawT = null, vDaySel = "";
 
@@ -3399,6 +3472,7 @@ function refreshItemFilter() {
 const canDelete = t => !t.undone && (["buy", "topup", "adjust", "fund"].includes(t.type) || ((t.type === "transfer" || t.type === "gift") && !t.full && !!t.pair));
 async function deleteTx(t, o = {}) {
   if (t.type === "transfer" || t.type === "gift") return undoTransfer(t);
+  if (t.type === "buy" && (t.items || []).some(i => i.mv)) return stkRefund(t);
   const by = o.by || "admin", st = o.station || "لوحة التحكم", verb = o.verb || "حذف", ret = verb === "إرجاع";
   const back = t.type === "buy" ? t.amount : -t.amount;   // شراء: يرجع المبلغ — شحن/تعديل: يُسحب
   const what = t.type === "buy" || back > 0 ? `وإرجاع ${Math.abs(back)} ${S.unit} إلى رصيدها` : `وسحب ${Math.abs(t.amount)} ${S.unit} من رصيدها`;
@@ -3987,7 +4061,7 @@ async function exportReport(rep) {
   try { [, bals] = await prepExport(); } catch (ex) { alert(ex.message); return; }
   writeReport(rep, bals);
 }
-function writeReport(rep, bals) {
+function writeReport(rep, bals, opt = {}) {
   const C = REP[rep.type], buy = rep.type === "buy";
   const wb = XLSX.utils.book_new(); wb.Workbook = { Views: [{ RTL: true }] };
   const XO = buy ? "شحنت (خارج هذا المجموع)" : "باعت (خارج هذا المجموع)";
@@ -4003,7 +4077,8 @@ function writeReport(rep, bals) {
   add(daysRows, "حسب اليوم", [26, 24, 14, 16]);
   add(finalSheet(rep.details, bals, buy), "الرصيد النهائي", [22, 30, 12, 10, 14, 16, 22, 18, 18]);
   add(det, "التفاصيل", buy ? [22, 22, 32, 12, 34, 12, 12, 16, 8] : [22, 22, 32, 12, 12, 12, 16, 8]);
-  XLSX.writeFile(wb, `${C.file}${rep.day ? "-" + rep.day : ""}-${new Date().toISOString().slice(0, 10)}.xlsx`);
+  if (opt.extra) opt.extra(add);   // أوراق إضافية (مثل المخزون والدفعات والحركات)
+  XLSX.writeFile(wb, `${opt.file || C.file}${rep.day ? "-" + rep.day : ""}-${new Date().toISOString().slice(0, 10)}.xlsx`);
 }
 $("repExport").onclick = () => exportReport(buildReport(txs, staff, "topup", $("repDay").value));
 $("salesExport").onclick = () => exportReport(buildReport(txs, staff, "buy", $("salesDay").value));
@@ -4489,18 +4564,18 @@ function stkListen() {
   stkUnsubs.push(STKMV.orderBy("at", "desc").limit(2000).onSnapshot(q => { stkMv = q.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })); stkChanged(); },
     err => console.warn("stockmv", err?.code || err)));
 }
-function stkStop() { stkUnsubs.forEach(u => u()); stkUnsubs = []; stkM = new Map(); stkMv = []; stkCodeIdx = new Map(); stkReady = false; stkErr = null; clearTimeout(stkDrawT); }
+function stkStop() { stkTxUnsub?.(); stkTxUnsub = null; stkTx = []; stkUnsubs.forEach(u => u()); stkUnsubs = []; stkM = new Map(); stkMv = []; stkCodeIdx = new Map(); stkReady = false; stkErr = null; clearTimeout(stkDrawT); }
 function stkChanged() {
   clearTimeout(stkDrawT);
   stkDrawT = setTimeout(() => {
-    if (stkOn()) stkDraw();
+    if (stkOn()) { if (stkModes().join(",") !== stkModeSig) stkSetMode(stkMode); else stkDraw(); }
     if (!$("adminView").classList.contains("hidden") && adminTab === "stock") renderStkAdmin();
   }, 40);
 }
 
 /* ---------- الكاميرا: نفس قارئ البطاقات، ينتقل إلى واجهة الجرد ويقرأ باركود المنتجات (EAN / UPC) ---------- */
 function stkMountCam(on) {
-  const box = $("camBox"), slot = $(on ? "stkCamSlot" : "posCamSlot");
+  const box = $("camBox"), slot = $(on ? (stkMode === "sell" ? "stkSellCam" : "stkCamSlot") : "posCamSlot");
   if (!box || !slot || box.parentNode === slot) return;
   if (camOn) stopCam();
   slot.appendChild(box);
@@ -4515,7 +4590,24 @@ function initStock() {
   stkMountCam(true);
   if (window.requestIdleCallback) window.requestIdleCallback(() => preloadScanner(), { timeout: 2000 }); else setTimeout(preloadScanner, 300);
   stkListen(); stkSetTab(stkTab);
+  stkSetMode(stkMode || (stkSellOn() ? "sell" : "store"));
 }
+// الأوضاع: «بيع» و«تقرير البيع» عند تفعيل البيع، و«مخزن» لمن له صلاحيات المخزن (أو إذا كان البيع مطفأ)
+const stkCanStore = () => role === "admin" || !stkSellOn() || ["stkIn", "stkNew", "stkCount"].some(k => !!me?.[k]);
+const stkModes = () => stkSellOn() ? ["sell", "rep", ...(stkCanStore() ? ["store"] : [])] : ["store"];
+function stkSetMode(m) {
+  const ms = stkModes(); if (!ms.includes(m)) m = ms[0];
+  stkMode = m; stkModeSig = ms.join(",");
+  $("stkTop").classList.toggle("hidden", ms.length < 2);
+  $("stkTop").style.gridTemplateColumns = `repeat(${ms.length},1fr)`;
+  $("stkTop").querySelectorAll("button").forEach(b => { b.classList.toggle("hidden", !ms.includes(b.dataset.sm)); b.classList.toggle("on", b.dataset.sm === m); });
+  $("stkStoreBox").classList.toggle("hidden", m !== "store"); $("stkSellBox").classList.toggle("hidden", m !== "sell"); $("stkRepBox").classList.toggle("hidden", m !== "rep");
+  if (m !== "store") { stkCur = null; stkUnknown = null; }
+  if (m === "rep") { if (camOn) stopCam(); stkTxListen(); if (!stkRepPrep) { stkRepPrep = prepExport(); stkRepPrep.catch(() => { stkRepPrep = null; }); } }
+  stkMountCam(true);
+  stkDraw();
+}
+$("stkTop").onclick = e => { const b = e.target.closest("[data-sm]"); if (b) stkSetMode(b.dataset.sm); };
 function stkSetTab(t) {
   stkTab = t;
   $("stkSeg").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.st === t));
@@ -4536,9 +4628,12 @@ function stkAlertsHtml() {
 $("stkAlerts").onclick = e => { const b = e.target.closest("[data-alert]"); if (!b) return; stkFilter = b.dataset.alert; stkSetTab("list"); };
 function stkDraw() {
   if (!role) return;
+  const er = stkErr || (stkMode === "rep" && stkTxErr);
+  $("stkErrBox").classList.toggle("hidden", !er);
+  if (er) $("stkErrBox").textContent = er.code === "permission-denied" ? "لا توجد صلاحية للقراءة. انشري قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر التحميل: " + (er.message || er);
+  if (stkMode === "sell") return stkDrawSell();
+  if (stkMode === "rep") return stkDrawRep();
   $("stkAlerts").innerHTML = stkAlertsHtml();
-  $("stkErrBox").classList.toggle("hidden", !stkErr);
-  if (stkErr) $("stkErrBox").textContent = stkErr.code === "permission-denied" ? "لا توجد صلاحية لقراءة المواد. انشري قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر تحميل المواد: " + (stkErr.message || stkErr);
   const today = dayKey(Date.now()), mine = stkMv.filter(t => t.by === stkWho() && stkMvDay(t) === today);
   $("stkSeg").querySelector('[data-st="list"]').textContent = `المواد${stkM.size ? ` (${AR(stkM.size)})` : ""}`;
   if (stkTab === "scan") {
@@ -4547,7 +4642,6 @@ function stkDraw() {
     $("stkMine").innerHTML = mine.slice(0, 20).map(stkMvItem).join("") || `<li class="vr-empty" style="display:block">${stkReady || stkErr ? "امسحي باركود مادة لتظهر كميتها وتخصمي منها." : "جارٍ التحميل…"}</li>`;
   } else if (stkTab === "list") stkDrawList();
   else stkDrawLog();
-  stkDrawCart();
 }
 function stkMvItem(t) {
   const sign = t.qty > 0 ? "+" : t.qty < 0 ? "−" : "", q = Math.abs(t.qty || 0);
@@ -4558,12 +4652,13 @@ function stkMvItem(t) {
 
 /* ---------- المسح ---------- */
 function stkScan(text) {
+  if (stkMode === "sell") return stkSellScan(text);
+  if (stkMode !== "store") return;
   const code = keyOf(text), now = Date.now();
   if (!code || stkBusy || stkTab !== "scan") return;
   if (code === stkLast.code && now - stkLast.at < 2500) return;
   stkLast = { code, at: now };
   const id = stkFind(code);
-  if (!id && stkSellOn() && (stkCart.length || /^[EV]T\d/.test(code))) { if (stkPaying || $("modal").classList.contains("hidden") === false) return; if (!stkCart.length) { beep(false); toast("أضيفي المواد للسلة أولاً، ثم امسحي البطاقة.", true); return; } beep(true, true); stkPayCode(code); return; }
   if (id ? id === stkCur : code === stkUnknown) return;   // نفس المادة مفتوحة: الكاميرا ما زالت تراها
   beep(!!id, !!id);
   stkOpen(id, code);
@@ -4620,7 +4715,6 @@ function stkDrawCard() {
       ${stkCan("stkIn") ? `<button class="btn btn-main" type="button" data-k="in">إضافة كمية</button>` : " اطلبي من الإدارة إضافة كمية."}</div>` : ""}
     <div class="stk-acts">
       <button class="btn wide" type="button" data-k="out" ${short || stkBusy ? "disabled" : ""}>خصم ${fmt(n)} ${esc(stkUnit(m))}</button>
-      ${stkSellOn() ? (m.price > 0 ? `<button class="btn stk-sell" type="button" data-k="cart" ${n + stkCartQty(m.id) > sell ? "disabled" : ""}>أضيفي ${fmt(n)} للسلة بـ ${fmt(n * m.price)} ${esc(S.unit)}</button>` : `<p class="hint" style="grid-column:1/-1;margin:0">لا سعر لهذه المادة، فلا تُباع بالبطاقة. ${role === "admin" ? "حدّديه من «تعديل»." : "اطلبي من الإدارة تحديده."}</p>`) : ""}
       ${stkCan("stkIn") && !short ? `<button class="btn btn-soft" type="button" data-k="in">إضافة كمية</button>` : ""}
       ${stkCan("stkCount") ? `<button class="btn btn-soft" type="button" data-k="count">جرد فعلي</button>` : ""}
       ${stkCan("stkCount") && lots.length ? `<button class="btn btn-danger" type="button" data-k="waste">إتلاف</button>` : ""}
@@ -4644,7 +4738,6 @@ $("stkCard").addEventListener("click", e => {
   if (k === "waste") return stkWasteModal(m);
   if (k === "print") return stkPrint([m]);
   if (k === "edit") return stkEditModal(m);
-  if (k === "cart") return stkCartAdd(m, stkN);
 });
 
 /* ---------- الحركات: كل تغيير بالكمية يُكتب مع حركته في نفس العملية ---------- */
@@ -4893,40 +4986,109 @@ const stkSellOn = () => !!S.stkSell && (role === "admin" || !!me?.stkSell);
 const stkEmpOnly = () => S.stkSellWho !== "all";
 const stkCartQty = mid => stkCart.find(l => l.mid === mid)?.q || 0;
 const stkCartTotal = () => stkCart.reduce((s, l) => s + (stkM.get(l.mid)?.price || 0) * l.q, 0);
+const STK_CART_MAX = 5;   // حد المواد المختلفة في الشراء الواحد (حدود قواعد Firestore في العملية الواحدة)
 function stkCartAdd(m, n) {
-  if (!stkSellOn() || !(m.price > 0) || !(n > 0)) return;
-  if (stkCartQty(m.id) + n > stkSellable(m)) { beep(false); toast("الكمية لا تكفي لهذا العدد.", true); return; }
-  if (!stkCartQty(m.id) && stkCart.length >= 6) { beep(false); toast("السلة تتسع لست مواد مختلفة. أتمّي الشراء أولاً.", true); return; }
+  if (!m || !stkSellOn() || !(n > 0)) return;
+  if (!(m.price > 0)) { beep(false); toast(`«${m.name}» بلا سعر، فلا تُباع بالبطاقة.`, true); return; }
+  if (stkCartQty(m.id) + n > stkSellable(m)) { beep(false); toast(stkSellable(m) <= 0 ? `«${m.name}» نفدت.` : `الموجود من «${m.name}» ${fmt(stkSellable(m))} فقط.`, true); return; }
+  if (!stkCartQty(m.id) && stkCart.length >= STK_CART_MAX) { beep(false); toast(`السلة تتسع لـ${AR(STK_CART_MAX)} مواد مختلفة. أتمّي الشراء أولاً.`, true); return; }
   const l = stkCart.find(x => x.mid === m.id); if (l) l.q += n; else stkCart.push({ mid: m.id, q: n });
-  beep(true, true); stkN = 1; stkOk = `✓ أُضيف ${fmt(n)} للسلة`; stkDraw();
+  beep(true, true); stkFlashId = m.id; stkDraw();
 }
+function stkSellScan(text) {
+  const code = keyOf(text), now = Date.now();
+  if (!code || stkBusy || stkPaying || !$("modal").classList.contains("hidden")) return;
+  // الكاميرا ما زالت ترى نفس الباركود: لا يُضاف مرة ثانية حتى يبتعد ثم يرجع
+  if (code === stkSeen.code && now - stkSeen.at < 1500) { stkSeen.at = now; return; }
+  stkSeen = { code, at: now };
+  const id = stkFind(code);
+  if (id) return stkCartAdd(stkM.get(id), 1);
+  if (!stkCart.length) { beep(false); toast(/^[EV]T\d/.test(code) ? "أضيفي المواد للسلة أولاً، ثم امسحي البطاقة." : `باركود غير معرّف (${code}). يُعرَّف من «مخزن».`, true); return; }
+  stkPayCode(code);
+}
+// شبكة المواد: الأكثر بيعاً في آخر ٣٠ يوماً أولاً
+function stkPopular() {
+  const since = Date.now() - 30 * 864e5, c = new Map();
+  stkMv.forEach(t => { if (t.type === "out" && !t.undone && stkMvMs(t) > since) c.set(t.mid, (c.get(t.mid) || 0) - t.qty); });
+  return c;
+}
+function stkDrawSell() {
+  const pop = stkPopular(), q = $("stkGridQ").value.trim();
+  const priced = [...stkM.values()].filter(m => m.price > 0);
+  $("stkGridQ").classList.toggle("hidden", priced.length <= 12);
+  const list = (q ? stkSearch(q).filter(m => m.price > 0) : priced).sort((a, b) => (stkSellable(b) > 0) - (stkSellable(a) > 0) || (pop.get(b.id) || 0) - (pop.get(a.id) || 0) || String(a.name).localeCompare(String(b.name), "ar"));
+  $("stkGrid").innerHTML = list.map(m => { const sell = stkSellable(m), cq = stkCartQty(m.id);
+    return `<button type="button" class="stk-tile ${cq ? "on" : ""} ${sell <= 0 ? "off" : ""} ${stkFlashId === m.id ? "flash" : ""}" data-add="${esc(m.id)}">${cq ? `<span class="q">${AR(cq)}</span>` : ""}<b>${esc(m.name)}</b><span class="pr">${fmt(m.price)}</span><small>${sell > 0 ? `متبقٍ ${fmt(sell)}` : "نفدت"}</small></button>`; }).join("")
+    || `<p class="hint" style="grid-column:1/-1">${!stkReady ? "جارٍ التحميل…" : q ? "لا توجد مادة بهذا الاسم." : "لا توجد مواد لها سعر بيع. يُحدَّد السعر من «تعديل» المادة في لوحة التحكم."}</p>`;
+  stkFlashId = "";
+  stkDrawCart();
+}
+$("stkGrid").onclick = e => { const b = e.target.closest("[data-add]"); if (b) stkCartAdd(stkM.get(b.dataset.add), 1); };
+$("stkGridQ").oninput = () => stkDrawSell();
 function stkDrawCart() {
-  const box = $("stkCart"); stkCart = stkCart.filter(l => stkM.has(l.mid));
-  const show = stkSellOn() && stkTab === "scan" && stkCart.length;
-  box.classList.toggle("hidden", !show); if (!show) return;
-  const keep = document.activeElement?.id === "scNum" ? $("scNum").value : null;
-  box.innerHTML = `<h4><span>سلة البيع بالبطاقة</span><button type="button" class="mini r" data-cc="clear">تفريغ</button></h4>
-    <ul>${stkCart.map(l => { const m = stkM.get(l.mid); return `<li><span>${fmt(l.q)} × ${esc(m.name)}</span><span>${fmt(l.q * (m.price || 0))} <button type="button" class="mini r" data-cc="rm" data-id="${esc(l.mid)}" aria-label="حذف">✕</button></span></li>`; }).join("")}</ul>
-    <div class="tot"><span>المجموع</span><span>${fmt(stkCartTotal())} ${esc(S.unit)}</span></div>
-    <p class="hint" style="margin:0 0 6px">امسحي باركود بطاقة ${stkEmpOnly() ? "الموظفة" : "المشترية"}، أو اكتبي رقمها:</p>
-    <form id="scForm" autocomplete="off"><input type="text" id="scNum" inputmode="numeric" placeholder="رقم البطاقة"><button class="btn btn-main" type="submit">شراء</button></form>`;
-  if (keep != null) { $("scNum").value = keep; $("scNum").focus(); }
-  $("scForm").onsubmit = e => { e.preventDefault(); const v = $("scNum").value.trim(); if (v) stkPayCode(v, true); };
+  stkCart = stkCart.filter(l => stkM.has(l.mid));
+  const has = stkCart.length > 0;
+  $("scTitle").textContent = has ? `السلة (${AR(stkCart.reduce((s, l) => s + l.q, 0))})` : "السلة";
+  $("scClear").classList.toggle("hidden", !has); $("scPay").classList.toggle("hidden", !has);
+  $("scLines").innerHTML = has ? `<ul>${stkCart.map(l => { const m = stkM.get(l.mid); return `<li class="cl"><span>${esc(m.name)}<small>${fmt(m.price)} ${esc(S.unit)}</small></span>
+      <span class="cq"><button type="button" data-cq="-" data-id="${esc(l.mid)}" aria-label="إنقاص">−</button><b>${AR(l.q)}</b><button type="button" data-cq="+" data-id="${esc(l.mid)}" aria-label="زيادة">+</button></span><span class="cv">${fmt(l.q * m.price)}</span></li>`; }).join("")}</ul>`
+    : `<div class="empty">امسحي باركود المادة بالكاميرا، أو اضغطي عليها من الأعلى، فتُضاف هنا.</div>`;
+  $("scTotal").textContent = `${fmt(stkCartTotal())} ${S.unit}`;
+  $("scHint").textContent = `أو امسحي باركود بطاقة ${stkEmpOnly() ? "الموظفة" : "المشترية"} بالكاميرا.${stkEmpOnly() ? " البيع لبطاقات الموظفات فقط." : ""}`;
+  if (!has) $("scHits").innerHTML = "";
 }
-$("stkCart").addEventListener("click", e => { const b = e.target.closest("[data-cc]"); if (!b) return; if (b.dataset.cc === "clear") stkCart = []; else stkCart = stkCart.filter(l => l.mid !== b.dataset.id); stkDraw(); });
-// البطاقة: بالباركود (مثل E.T.20003) أو برقمها — والبيع للموظفات فقط إن كان الإعداد كذلك
+$("scLines").onclick = e => {
+  const b = e.target.closest("[data-cq]"); if (!b) return;
+  const l = stkCart.find(x => x.mid === b.dataset.id), m = stkM.get(b.dataset.id); if (!l || !m) return;
+  if (b.dataset.cq === "+") return stkCartAdd(m, 1);
+  l.q--; if (l.q <= 0) stkCart = stkCart.filter(x => x !== l); stkDraw();
+};
+$("scClear").onclick = () => { stkCart = []; $("scNum").value = ""; stkDraw(); };
+// البحث عن البطاقة: برقمها أو بالاسم والكنية — نفس نقطة البيع
+$("scFind").onclick = e => {
+  const b = e.target.closest("[data-f]"); if (!b) return; stkFindBy = b.dataset.f;
+  $("scFind").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b));
+  const n = $("scNum"); n.value = ""; $("scHits").innerHTML = "";
+  n.inputMode = stkFindBy === "card" ? "numeric" : "text"; n.classList.toggle("nameq", stkFindBy === "name");
+  n.placeholder = stkFindBy === "card" ? "اكتبي رقم البطاقة" : "الاسم والكنية، مثلاً: سارة الأحمد"; n.focus();
+  if (stkFindBy === "name") loadAllMembers().catch(() => {});
+};
+$("scForm").onsubmit = e => { e.preventDefault(); const v = $("scNum").value.trim(); if (!v) return; if (stkFindBy === "card") stkPayCode(v, true); else { clearTimeout(stkNameT); stkNameSearch(v, false); } };
+$("scNum").addEventListener("input", () => { if (stkFindBy !== "name") return; clearTimeout(stkNameT); stkNameT = setTimeout(() => stkNameSearch($("scNum").value.trim(), true), allMem ? 0 : 150); });
+const stkHitBtn = m => `<button type="button" data-pk="${esc(m.id)}"${isEmpId(m.id) ? ' class="emp"' : ""}><b>${esc(m.name)}</b>${empTag(m)}<small>رقم البطاقة ${m.card != null ? AR(m.card) : "—"}${m.balance != null ? " · الرصيد " + fmt(m.balance) : ""}${m.group ? " · " + esc(m.group) : ""}</small></button>`;
+async function stkNameSearch(q, auto) {
+  const box = $("scHits");
+  if (norm(q).length < 2) { box.innerHTML = auto ? "" : `<p class="nohit">اكتبي الاسم والكنية.</p>`; return; }
+  if (!allMem) box.innerHTML = `<p class="nohit">جارٍ تجهيز قائمة الأسماء…</p>`;
+  try { await loadAllMembers(); } catch (ex) { console.error(ex); box.innerHTML = `<p class="nohit">تعذّر البحث. ${esc(errText(ex))}</p>`; return; }
+  let list = nameMatches(q);
+  if (!list.length) { try { if (await addRecent()) list = nameMatches(q); } catch (e) { console.warn("recent", e?.code || e); } }
+  if ($("scNum").value.trim() !== q) return;
+  const all = list; if (stkEmpOnly()) list = list.filter(m => isEmpId(m.id));
+  box.innerHTML = list.length ? `<p class="hint" style="margin:0 0 4px">${AR(list.length)} نتيجة. اختاري صاحبة البطاقة:</p>` + list.slice(0, 20).map(stkHitBtn).join("")
+    : `<p class="nohit">${all.length ? "لا توجد بطاقة موظفة بهذا الاسم (البيع للموظفات فقط)." : "لا توجد بطاقة بهذا الاسم."}</p>`;
+}
+$("scHits").onclick = async e => {
+  const b = e.target.closest("[data-pk]"); if (!b || stkPaying) return;
+  stkPaying = true;
+  try { const s = await MEM.doc(b.dataset.pk).get(); if (!s.exists) { toast("البطاقة غير مسجّلة.", true); return; } stkCheckout({ id: s.id, ...s.data() }); }
+  catch (ex) { console.error(ex); toast("تعذّر فتح البطاقة. " + errText(ex), true); }
+  finally { stkPaying = false; }
+};
+// البطاقة بالباركود (مثل E.T.20003) أو برقمها
 async function stkPayCode(raw, typed) {
   if (stkPaying) return;
+  if (!stkCart.length) { toast("أضيفي المواد للسلة أولاً.", true); return; }
   stkPaying = true;
   try {
     let list = [];
     const k = keyOf(raw); if (k && !/^\d+$/.test(k)) { const s = await MEM.doc(k).get(); if (s.exists) list = [{ id: s.id, ...s.data() }]; }
-    if (!list.length) { const n = toCode(raw); if (n != null) { const q = await MEM.where("card", "==", n).limit(10).get(); list = q.docs.map(d => ({ id: d.id, ...d.data() })); } }
+    if (!list.length && (typed || /^\d{1,6}$/.test(k))) { const n = toCode(raw); if (n != null) { const q = await MEM.where("card", "==", n).limit(10).get(); list = q.docs.map(d => ({ id: d.id, ...d.data() })); } }
     const all = list; if (stkEmpOnly()) list = list.filter(m => isEmpId(m.id));
-    if (!list.length) { beep(false); toast(all.length ? "هذه بطاقة متطوعة، والبيع من الجرد لبطاقات الموظفات فقط." : "البطاقة غير مسجّلة.", true); return; }
-    if (list.length === 1) return stkCheckout(list[0]);
-    openModal(`<h3>اختاري البطاقة</h3><div class="stk-hits">${list.map(m => `<button type="button" data-pm="${esc(m.id)}"><b>${esc(m.name)}</b><small>${kindOf(m.id)} · ${fmt(m.balance || 0)}</small></button>`).join("")}</div><div class="acts"><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div>`);
-    $("modalBox").querySelector(".stk-hits").onclick = e => { const b = e.target.closest("[data-pm]"); if (b) stkCheckout(list.find(m => m.id === b.dataset.pm)); };
+    if (!list.length) { beep(false); toast(all.length ? "هذه بطاقة متطوعة، والبيع من الجرد لبطاقات الموظفات فقط." : typed ? "لا توجد بطاقة بهذا الرقم." : `باركود غير معروف (${k}): ليس مادة ولا بطاقة.`, true); return; }
+    beep(true, true);
+    if (list.length === 1) { $("scHits").innerHTML = ""; return stkCheckout(list[0]); }
+    $("scHits").innerHTML = `<p class="hint" style="margin:0 0 4px">الرقم يطابق أكثر من بطاقة. اختاري صاحبتها:</p>` + list.map(stkHitBtn).join("");
   } catch (ex) { console.error(ex); beep(false); toast("تعذّر البحث عن البطاقة. " + errText(ex), true); }
   finally { stkPaying = false; }
 }
@@ -4955,8 +5117,9 @@ async function stkPay(mid) {
         let need = q; const L = stkLotsOf(sd).map(x => ({ ...x })), taken = [];
         for (const l of L) { if (!need) break; if (stkIsExp(l.e)) continue; const k = Math.min(l.q, need); l.q -= k; need -= k; taken.push({ q: k, e: l.e || "" }); }
         if (need > 0) throw { stk: "low", have: q - need, name: sd.name };
-        total += price * q; items.push({ id: "stk:" + lines[i].mid, name: sd.name, qty: q, price });
-        return { sd, L, taken, q, mvRef: STKMV.doc() };
+        const mvRef = STKMV.doc();
+        total += price * q; items.push({ id: "stk:" + lines[i].mid, name: sd.name, qty: q, price, mv: mvRef.id });
+        return { sd, L, taken, q, mvRef };
       });
       if (bal < total) throw { stk: "bal", bal };
       t.update(memRef, { balance: bal - total, spent: (d.spent || 0) + total, updatedAt: FV.serverTimestamp() });
@@ -4970,9 +5133,8 @@ async function stkPay(mid) {
       return { after: bal - total, d, tx, total };
     });
     syncBal(mid, res.d, res.after, histOf(txRef.id, res.tx));
-    stkCart = []; closeModal(); beep(true);
-    stkOk = `✓ ${esc(res.d.name)} · خُصم ${fmt(res.total)} · رصيدها ${fmt(res.after)}`;
-    toast(`تم الشراء: ${res.d.name} · خُصم ${fmt(res.total)}`);
+    stkCart = []; closeModal(); beep(true); $("scNum").value = ""; $("scHits").innerHTML = "";
+    flash("ok", "✓", `${res.d.name} · خُصم ${fmt(res.total)}`, `الرصيد المتبقي <b>${fmt(res.after)}</b>`, true);
   } catch (ex) {
     console.error(ex); beep(false);
     const m = $("scoMsg"), t = ex?.stk === "bal" ? `الرصيد لا يكفي (${fmt(ex.bal)}).` : ex?.stk === "low" ? `كمية «${ex.name}» لا تكفي.` : ex?.stk === "price" ? `«${ex.name}» بلا سعر.` : ex?.stk === "emp" ? "البيع لبطاقات الموظفات فقط." : ex?.stk === "card" ? "البطاقة غير مسجّلة." : ex?.stk === "gone" ? "مادة في السلة محذوفة." : errText(ex);
@@ -4980,6 +5142,114 @@ async function stkPay(mid) {
     if ($("scoGo")) $("scoGo").disabled = false;
   }
   stkBusy = false; stkDraw();
+}
+
+/* ---------- تقرير البيع (مثل نقطة البيع): عدد كل مادة، سجل البيع، الإرجاع، Excel ---------- */
+const stkIsSale = t => t.type === "buy" && (t.items || []).some(i => /^stk:/.test(i.id || ""));
+function stkTxListen() {
+  if (stkTxUnsub || !role) return;
+  // حساب الجرد يقرأ عملياته فقط، والإدارة كل مبيعات المواد
+  const q = role === "admin" ? TX.where("type", "==", "buy") : TX.where("by", "==", me.id);
+  stkTxUnsub = q.onSnapshot(s => { stkTx = s.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })).filter(stkIsSale); stkTxErr = null; stkChanged(); },
+    err => { stkTxErr = err; console.warn("stock tx", err?.code || err); stkChanged(); });
+}
+const srDayOf = t => dayKey(txMs(t) || Date.now());
+function srFill(sel, opts, v) { const sig = opts.map(o => o[0]).join("|"); if (sel.dataset.sig !== sig) { sel.dataset.sig = sig; sel.innerHTML = opts.map(([k, t]) => `<option value="${esc(k)}">${esc(t)}</option>`).join(""); } sel.value = v; }
+function stkDrawRep() {
+  const today = dayKey(Date.now()), days = [...new Set([today, ...stkTx.map(srDayOf)])].sort().reverse();
+  if (srDayV && srDayV !== "all" && !days.includes(srDayV)) srDayV = "";
+  const dayOpts = days.map(k => [k === today ? "" : k, k === today ? "اليوم" : dayLabel(k)]);
+  srFill($("srDay"), [...dayOpts, ["all", "كل الأيام"]], srDayV);
+  $("srTitle").textContent = role === "admin" ? "مبيعات المواد" : "عدد مبيعاتي";
+  const inDay = (t, d) => d === "all" || srDayOf(t) === (d || today);
+  const live = stkTx.filter(t => !t.undone && inDay(t, srDayV)), prods = new Map();
+  live.forEach(t => (t.items || []).forEach(i => { const p = prods.get(i.name) || { q: 0, v: 0 }; p.q += i.qty || 0; p.v += (i.qty || 0) * (i.price || 0); prods.set(i.name, p); }));
+  const sum = live.reduce((a, t) => a + (t.amount || 0), 0);
+  $("srSum").innerHTML = `<div><b>${fmt(live.length)}</b><span>عملية بيع</span></div><div><b>${fmt(sum)}</b><span>مجموع المبيعات (${esc(S.unit)})</span></div>`;
+  const pr = [...prods.entries()].sort((a, b) => b[1].q - a[1].q), max = pr[0]?.[1].q || 1;
+  $("srProds").innerHTML = pr.map(([n, p], i) => `<li data-item="${esc(n)}"><span class="rk">${AR(i + 1)}</span><div class="nm">${esc(n)}<span class="br"><i style="width:${Math.round(p.q / max * 100)}%"></i></span></div><div class="qn">${fmt(p.q)}<small>${fmt(p.v)}</small></div></li>`).join("")
+    || `<li class="z" style="cursor:default;grid-template-columns:1fr"><span class="nm" style="font-weight:500;color:var(--muted)">${stkTxUnsub && !stkTx.length && !stkTxErr ? "لا توجد مبيعات بعد." : "لا توجد مبيعات في هذا اليوم."}</span></li>`;
+  // السجل
+  const names = [...new Set(stkTx.flatMap(t => (t.items || []).map(i => i.name)))].sort((a, b) => a.localeCompare(b, "ar"));
+  if (srItemV && !names.includes(srItemV)) srItemV = "";
+  srFill($("srItem"), [["", "كل المواد"], ...names.map(n => [n, n])], srItemV);
+  if (srLogDayV && srLogDayV !== "all" && !days.includes(srLogDayV)) srLogDayV = "";
+  srFill($("srLogDay"), [...dayOpts, ["all", "كل الأيام"]], srLogDayV);
+  const q = norm(latinDigits($("srQ").value)), qd = latinDigits($("srQ").value).replace(/\D/g, "");
+  const list = stkTx.filter(t => inDay(t, srLogDayV) && (!srItemV || (t.items || []).some(i => i.name === srItemV))
+      && (!q || norm(t.name).includes(q) || (qd && String(t.card ?? "") === qd)))
+    .sort((a, b) => txMs(b) - txMs(a));
+  const amt = list.filter(t => !t.undone).reduce((a, t) => a + (t.amount || 0), 0);
+  $("srCount").textContent = list.length ? `${AR(list.length)} عملية · ${fmt(amt)} ${S.unit}` : "";
+  $("srList").innerHTML = list.slice(0, srLimit).map(t => {
+    const can = !t.undone && (role === "admin" || t.by === me?.id);
+    return `<li class="${t.undone ? "u" : ""}"><div style="min-width:0"><div class="who"><b>${esc(t.name)}</b>${t.card != null ? ` · ${AR(t.card)}` : ""}${role === "admin" && t.station ? ` · <small>${esc(t.station)}</small>` : ""}</div>
+      <div class="t">${esc(dateStr(t.at))} · ${esc(txDetails(t))}</div></div>
+      <div class="r"><span><span class="amt minus">${fmt(t.amount)}</span><br><span class="t">بعدها ${fmt(t.balanceAfter)}</span></span>${can ? `<button type="button" class="mini r" data-sref="${esc(t.id)}">إرجاع</button>` : t.undone ? `<span class="done">مُرجعة</span>` : ""}</div></li>`;
+  }).join("") || `<li style="justify-content:center;color:var(--muted)">لا توجد عمليات.</li>`;
+  $("srMore").classList.toggle("hidden", list.length <= srLimit);
+}
+$("srDay").onchange = () => { srDayV = $("srDay").value; stkDrawRep(); };
+$("srLogDay").onchange = () => { srLogDayV = $("srLogDay").value; srLimit = 50; stkDrawRep(); };
+$("srItem").onchange = () => { srItemV = $("srItem").value; srLimit = 50; stkDrawRep(); };
+$("srQ").oninput = () => { srLimit = 50; stkDrawRep(); };
+$("srMore").onclick = () => { srLimit += 50; stkDrawRep(); };
+$("srProds").onclick = e => { const li = e.target.closest("[data-item]"); if (!li) return; srItemV = li.dataset.item; srLogDayV = srDayV; srLimit = 50; stkDrawRep(); $("srList").scrollIntoView({ behavior: "smooth", block: "start" }); };
+$("srList").onclick = async e => { const b = e.target.closest("[data-sref]"); if (!b) return; const t = stkTx.find(x => x.id === b.dataset.sref); if (!t) return; b.disabled = true; if (!(await stkRefund(t))) b.disabled = false; };
+// أوراق المخزون في Excel (تُضاف لأوراق تقرير البيع)
+function stkSheets(add, mvs = stkMv) {
+  const mats = [...stkM.values()].sort((a, b) => stkRank(a) - stkRank(b) || String(a.name).localeCompare(String(b.name), "ar"));
+  const st = m => { const s = stkState(m); return [s.exp && "فيها منتهية", s.soon && "تنتهي قريباً", s.zero ? "نفدت" : s.low && "قاربت تنفد"].filter(Boolean).join("، ") || "جيدة"; };
+  add(mats.map(m => ({ "المادة": m.name, "الباركود": stkCodes(m).join(", "), "الوحدة": stkUnit(m), "السعر": m.price || "", "تاريخ الإضافة": tsDate(m.createdAt) ? dayKey(tsDate(m.createdAt).getTime()) : "", "الكمية": m.qty || 0, "الصالح للبيع": stkSellable(m), "حد التنبيه": stkMin(m), "أقرب انتهاء": stkState(m).near, "الحالة": st(m) })), "المخزون", [26, 22, 8, 8, 12, 8, 12, 10, 12, 22]);
+  add(mats.flatMap(m => stkLotsOf(m).map(l => ({ "المادة": m.name, "تاريخ الانتهاء": l.e || "بدون تاريخ", "تاريخ الإنتاج": l.p || "", "تاريخ الإضافة": l.a || "", "الكمية": l.q, "الأيام المتبقية": l.e ? stkDaysTo(l.e) : "", "الحالة": stkIsExp(l.e) ? "منتهية" : l.e && stkDaysTo(l.e) <= stkDays() ? "تنتهي قريباً" : "" }))), "الدفعات", [26, 14, 14, 14, 8, 12, 12]);
+  add(mvs.map(t => ({ "الوقت": new Date(stkMvMs(t)).toLocaleString("ar"), "التاريخ": stkMvDay(t), "المادة": t.name, "الحركة": STK_TYPE[t.type] || t.type, "الكمية": t.qty, "قبل": t.before, "بعد": t.after, "الدفعة": stkLotsTxt(t.lots), "ملاحظة": t.note || "", "تم التراجع": t.undone ? "نعم" : "", "الحساب": stkWhoName(t) })), "حركات المخزون", [20, 11, 24, 10, 8, 8, 8, 26, 22, 9, 16]);
+}
+const stkStaffList = () => role === "admin" ? (staff.length ? staff : accounts) : [{ id: me?.id, name: me?.name, role: "stock" }];
+$("srExport").onclick = async () => {
+  const b = $("srExport"); b.disabled = true; b.textContent = "جارٍ تجهيز الملف…";
+  try {
+    const [, bals] = await (stkRepPrep || prepExport()); stkRepPrep = null;
+    const d = srLogDayV === "all" ? "" : (srLogDayV || dayKey(Date.now()));
+    writeReport(buildReport(stkTx, stkStaffList(), "buy", d, false), bals, { file: "تقرير-بيع-المواد", extra: add => stkSheets(add) });
+  } catch (ex) { console.error(ex); alert("تعذّر التصدير: " + (ex.message || ex)); }
+  finally { b.disabled = false; b.textContent = "تصدير السجلات Excel (مع الرصيد النهائي)"; stkRepPrep = prepExport(); stkRepPrep.catch(() => { stkRepPrep = null; }); }
+};
+// إرجاع شراء من الجرد: يرجع المبلغ لرصيدها وترجع المواد للمخزون، في عملية واحدة
+async function stkRefund(t) {
+  if (t.undone) return false;
+  if (!confirm(`إرجاع شراء ${t.name} (${txDetails(t)})؟\nيرجع ${fmt(t.amount)} ${S.unit} إلى رصيدها، وترجع المواد إلى المخزون.`)) return false;
+  const mid = t.mid, ref = MEM.doc(mid), tref = TX.doc(t.id), nref = TX.doc(), its = (t.items || []).filter(i => i.mv && /^stk:/.test(i.id || ""));
+  try {
+    const r = await db.runTransaction(async tr => {
+      const s = await tr.get(ref), ts = await tr.get(tref);
+      if (!s.exists) throw new Error("البطاقة غير موجودة");
+      if (!ts.exists || ts.data().undone) throw new Error("العملية مُرجعة مسبقاً");
+      const mvs = [], sts = [];
+      for (const i of its) { mvs.push(await tr.get(STKMV.doc(i.mv))); sts.push(await tr.get(STK.doc(i.id.slice(4)))); }
+      const d = s.data(), bal = (d.balance || 0) + t.amount;
+      tr.update(ref, { balance: bal, spent: Math.max(0, (d.spent || 0) - t.amount), updatedAt: FV.serverTimestamp(), lastUndo: t.id });
+      tr.update(tref, { undone: true });
+      const tx = { type: "refund", note: "إرجاع شراء من الجرد", mid, card: t.card ?? null, name: t.name, amount: t.amount, balanceAfter: bal, station: station(), by: me?.id || role, ref: t.id };
+      tr.set(nref, { ...tx, at: FV.serverTimestamp() });
+      its.forEach((i, k) => {
+        const mv = mvs[k], st = sts[k]; if (!mv.exists || !st.exists || mv.data().undone) return;
+        const md = mv.data(), sd = st.data(), before = sd.qty || 0, sid = i.id.slice(4), uref = STKMV.doc();
+        let lots = stkLotsOf(sd); (md.lots?.length ? md.lots : [{ q: -md.qty, e: "" }]).forEach(l => { lots = stkPut(lots, l.e, l.q); });
+        const after = before - md.qty;
+        tr.update(STK.doc(sid), { qty: after, lots: stkSort(lots), lastMv: uref.id, by: stkWho(), updatedAt: FV.serverTimestamp() });
+        tr.set(uref, { mid: sid, name: sd.name, type: "undo", qty: after - before, before, after, lots: md.lots || [], note: ("إرجاع شراء: " + t.name).slice(0, 200), ref: i.mv, by: stkWho(), station: station(), ms: Date.now(), at: FV.serverTimestamp() });
+        tr.update(STKMV.doc(i.mv), { undone: true, undoMv: uref.id });
+      });
+      return { d, bal, tx };
+    });
+    BAL.doc(mid).get().then(s => {
+      const hist = (s.exists && Array.isArray(s.data().hist) ? s.data().hist : []).map(h => h.i === t.id ? { ...h, u: 1 } : h);
+      hist.push(histOf(nref.id, r.tx));
+      return BAL.doc(mid).set({ ...balData(r.d, r.bal), hist });
+    }).catch(e => console.warn("zp_bal", e?.code || e));
+    toast(`أُرجع ${fmt(t.amount)} لـ${t.name}، ورجعت المواد للمخزون`);
+    return true;
+  } catch (ex) { console.error(ex); alert("لم يتم الإرجاع: " + (ex.code ? errText(ex) : ex.message)); return false; }
 }
 
 /* ---------- المواد والسجل ---------- */
@@ -5097,16 +5367,11 @@ $("kSetForm").onsubmit = async e => {
   catch (ex) { m.className = "msg bad"; m.textContent = "لم يتم الحفظ. " + errText(ex); }
 };
 $("kExport").onclick = async () => {
-  try { await loadXLSX(); } catch (ex) { alert(ex.message); return; }
-  const mats = [...stkM.values()].sort((a, b) => stkRank(a) - stkRank(b) || String(a.name).localeCompare(String(b.name), "ar"));
-  const st = m => { const s = stkState(m); return [s.exp && "فيها منتهية", s.soon && "تنتهي قريباً", s.zero ? "نفدت" : s.low && "قاربت تنفد"].filter(Boolean).join("، ") || "جيدة"; };
-  const r1 = mats.map(m => ({ "المادة": m.name, "الباركود": stkCodes(m).join(", "), "الوحدة": stkUnit(m), "السعر": m.price || "", "تاريخ الإضافة": tsDate(m.createdAt) ? dayKey(tsDate(m.createdAt).getTime()) : "", "الكمية": m.qty || 0, "الصالح للبيع": stkSellable(m), "حد التنبيه": stkMin(m), "أقرب انتهاء": stkState(m).near, "الحالة": st(m) }));
-  const r2 = mats.flatMap(m => stkLotsOf(m).map(l => ({ "المادة": m.name, "تاريخ الانتهاء": l.e || "بدون تاريخ", "تاريخ الإنتاج": l.p || "", "تاريخ الإضافة": l.a || "", "الكمية": l.q, "الأيام المتبقية": l.e ? stkDaysTo(l.e) : "", "الحالة": stkIsExp(l.e) ? "منتهية" : l.e && stkDaysTo(l.e) <= stkDays() ? "تنتهي قريباً" : "" })));
-  const r3 = stkMvList().map(t => ({ "الوقت": new Date(stkMvMs(t)).toLocaleString("ar"), "التاريخ": stkMvDay(t), "المادة": t.name, "الحركة": STK_TYPE[t.type] || t.type, "الكمية": t.qty, "قبل": t.before, "بعد": t.after, "الدفعة": stkLotsTxt(t.lots), "ملاحظة": t.note || "", "تم التراجع": t.undone ? "نعم" : "", "الحساب": stkWhoName(t) }));
-  const wb = XLSX.utils.book_new(); wb.Workbook = { Views: [{ RTL: true }] };
-  const add = (r, name, w) => { const ws = XLSX.utils.json_to_sheet(r.length ? r : [{}]); ws["!cols"] = w.map(x => ({ wch: x })); XLSX.utils.book_append_sheet(wb, ws, name); };
-  add(r1, "المواد", [26, 22, 8, 8, 12, 8, 12, 10, 12, 22]); add(r2, "الدفعات", [26, 14, 14, 14, 8, 12, 12]); add(r3, "الحركات", [20, 11, 24, 10, 8, 8, 8, 26, 22, 9, 16]);
-  XLSX.writeFile(wb, `جرد-المواد-${new Date().toISOString().slice(0, 10)}.xlsx`);
+  const b = $("kExport"); b.disabled = true;
+  try {
+    let bals; try { [, bals] = await prepExport(); } catch (ex) { alert(ex.message); return; }
+    writeReport(buildReport(txs.filter(stkIsSale), staff, "buy", kDaySel, false), bals, { file: "جرد-المواد", extra: add => stkSheets(add, stkMvList()) });
+  } finally { b.disabled = false; }
 };
 </script>
 </body>
