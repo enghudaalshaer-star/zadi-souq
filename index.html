@@ -1280,6 +1280,7 @@ const VR = db.collection("zp_vr"), VRDAY = db.collection("zp_vrday"), VR_PRICE =
 // zp_stock/{id}: مادة {name, codes[] باركود, unit, min حد التنبيه (null = الافتراضي), qty, lots: [{q, e "YYYY-MM-DD" أو ""}], lastMv, by, createdAt, updatedAt}
 // zp_stockmv/{id}: حركة {mid, name, type: new|out|in|count|waste|undo, qty الفرق (±), before, after, lots الدفعات المتأثرة, note, ref, by, station, ms, at, undone, undoMv}
 const STK = db.collection("zp_stock"), STKMV = db.collection("zp_stockmv");
+let scanHook = null, scanHome = null;   // مسح باركود المادة من داخل نافذة «مادة جديدة» / «تعديل»
 let stkM = new Map(), stkMv = [], stkUnsubs = [], stkReady = false, stkErr = null, stkTab = "scan", stkCur = null, stkUnknown = null, stkN = 1, stkOk = "", stkBusy = false, stkFilter = "", stkLogDayV = "", stkDrawT = null, kDaySel = "", stkLast = { code: "", at: 0 }, stkCodeIdx = new Map();
 let vrT = [], vrDays = new Map(), vrUnsubs = [], vrReady = false, vrErr = null, vrTab = "cut", vrFree = false, vrBusy = false, vrDoneId = null, vrInvDay = "", vrDrawT = null, vDaySel = "";
 
@@ -1557,7 +1558,7 @@ async function startCam() {
     if (!SC.video) { SC.video = document.createElement("video"); SC.video.setAttribute("playsinline", ""); SC.video.muted = true; $("reader").innerHTML = ""; $("reader").appendChild(SC.video); }
     SC.video.srcObject = stream; await SC.video.play();
     await tuneCamera();
-    const fk = stkOn() ? "stk" : "pos";   // الجرد يقرأ باركود المنتجات (EAN / UPC) أيضاً، والبيع باركود البطاقات فقط فيبقى أسرع
+    const fk = stkOn() || scanHook ? "stk" : "pos";   // الجرد يقرأ باركود المنتجات (EAN / UPC) أيضاً، والبيع باركود البطاقات فقط فيبقى أسرع
     if (SC.fk !== fk) { SC.det = null; SC.zr = null; SC.fk = fk; }
     if (!SC.det && "BarcodeDetector" in window) {   // قارئ الجوال المدمج (أندرويد): الأسرع
       try { const f = await BarcodeDetector.getSupportedFormats(); const want = (fk === "stk" ? ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "code_93", "itf", "qr_code"] : ["code_128", "code_39", "code_93", "qr_code"]).filter(x => f.includes(x)); if (want.includes("code_128")) SC.det = new BarcodeDetector({ formats: want }); } catch {}
@@ -1655,6 +1656,7 @@ async function scanLoop() {
 }
 
 function onScan(text) {
+  if (scanHook) return scanHook(text);
   if (stkOn()) return stkScan(text);
   const code = keyOf(text), now = Date.now();
   if (busy || mode === "report") return;
@@ -2496,7 +2498,7 @@ $("mRows").addEventListener("click", e => {
 
 /* modal helpers */
 function openModal(html, wide) { $("modalBox").classList.toggle("wide", !!wide); $("modalBox").innerHTML = html; $("modal").classList.remove("hidden"); setTimeout(() => $("modalBox").querySelector("input")?.focus(), 30); }
-function closeModal() { $("modal").classList.add("hidden"); }
+function closeModal() { if (scanHook) stkScanEnd(); $("modal").classList.add("hidden"); }
 /* رسالة نجاح تظهر بعد كل عملية في لوحة التحكم */
 let okT = null;
 function toast(text, bad = false) {
@@ -4739,6 +4741,8 @@ function stkEditModal(m, code = "") {
   openModal(`<h3>${isNew ? "مادة جديدة" : "تعديل · " + esc(m.name)}</h3><form id="sef">
     <label class="f" style="margin-top:10px"><span>اسم المادة</span><input type="text" id="seName" maxlength="60" value="${esc(m?.name || "")}" placeholder="مثلاً: عصير برتقال صغير"></label>
     <label class="f" style="margin-top:10px"><span>الباركود (أكثر من باركود: افصلي بينها بفاصلة)</span><input type="text" id="seCodes" dir="ltr" value="${esc(codes.join(", "))}" placeholder="امسحي أو اكتبي، أو ولّدي باركوداً"></label>
+    <button class="btn btn-main" type="button" id="seScan" style="width:100%;margin-top:6px">📷 امسحي باركود المادة بالكاميرا</button>
+    <div id="seCamSlot"></div><p class="msg" id="seScanMsg" role="status"></p>
     <button class="btn btn-ghost" type="button" id="seGen" style="width:100%;margin-top:6px">المادة بلا باركود؟ ولّدي باركوداً للطباعة</button>
     <div class="vr-two" style="margin-top:10px"><label class="f"><span>الوحدة</span><input type="text" id="seUnit" maxlength="20" value="${esc(m?.unit || "قطعة")}"></label>
       <label class="f"><span>تنبيه عند كمية</span><input type="text" id="seMin" inputmode="numeric" dir="ltr" value="${Number.isFinite(m?.min) ? m.min : ""}" placeholder="${stkLowDef()}"></label></div>
@@ -4746,6 +4750,7 @@ function stkEditModal(m, code = "") {
       <button class="btn btn-ghost" type="button" id="seAdd" style="width:100%;margin-top:8px">إضافة دفعة بتاريخ آخر</button><p class="msg" id="seTot"></p>` : ""}
     <div class="acts"><button class="btn btn-main" type="submit">${isNew ? "حفظ المادة" : "حفظ"}</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="seMsg"></p></form>`, true);
   $("seGen").onclick = () => { const c = stkNextCode(), cur = stkParseCodes($("seCodes").value); $("seCodes").value = [...cur, c].join(", "); };
+  $("seScan").onclick = () => scanHook ? stkScanEnd() : stkScanInto(m, $("seCodes"), $("seScanMsg"), $("seCamSlot"), $("seScan"));
   if (isNew) { const add = stkLotsUi("seLots", "seTot", "قطعة"); $("seAdd").onclick = add; }
   $("sef").onsubmit = async ev => {
     ev.preventDefault();
@@ -4789,6 +4794,35 @@ function stkLinkModal(code) {
   };
 }
 $("stkNewBtn").onclick = () => stkEditModal(null);
+
+/* ---------- مسح باركود المادة من داخل النافذة: الكاميرا تنتقل إلى النافذة، وأول قراءة تُكتب في خانة الباركود ---------- */
+function stkScanInto(m, input, msg, slot, btn) {
+  const box = $("camBox"); if (!box) return;
+  if (camOn) stopCam();
+  scanHome = box.parentNode; slot.appendChild(box);
+  $("camHint").textContent = "وجّهي الكاميرا إلى باركود المادة";
+  btn.textContent = "إيقاف الكاميرا"; btn.classList.replace("btn-main", "btn-ghost");
+  msg.className = "msg"; msg.textContent = "قرّبي باركود المادة من الكاميرا…";
+  scanHook = text => {
+    const c = keyOf(text); if (!c) return;
+    const other = stkFind(c);
+    if (other && other !== m?.id) { beep(false); msg.className = "msg bad"; msg.textContent = `الباركود ${c} مربوط بمادة «${stkM.get(other)?.name}».`; return; }
+    const cur = stkParseCodes(input.value);
+    if (!cur.includes(c)) input.value = [...cur, c].join(", ");
+    beep(true); stkScanEnd();
+    msg.className = "msg ok"; msg.textContent = `✓ قُرئ الباركود ${c}`;
+    $("seName")?.value ? null : $("seName")?.focus();
+  };
+  startCam();
+}
+function stkScanEnd() {
+  scanHook = null;
+  const box = $("camBox"); if (camOn) stopCam();
+  if (box && scanHome && box.parentNode !== scanHome) scanHome.appendChild(box);
+  scanHome = null;
+  $("camHint").textContent = stkOn() ? "وجّهي الكاميرا إلى باركود المادة" : "وجّهي الكاميرا إلى باركود البطاقة";
+  const b = $("seScan"); if (b) { b.textContent = "📷 امسحي باركود المادة بالكاميرا"; b.classList.replace("btn-ghost", "btn-main"); }
+}
 
 /* ---------- المواد والسجل ---------- */
 const STK_FILTERS = [["", "الكل"], ["exp", "منتهية"], ["soon", "تنتهي قريباً"], ["low", "قاربت تنفد"], ["zero", "نفدت"]];
