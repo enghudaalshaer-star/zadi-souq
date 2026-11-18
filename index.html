@@ -401,6 +401,79 @@ tr:last-child td{border-bottom:0}
 tr.vsel td{background:#F4F6FF}
 tr.vtot td{font-weight:700;background:#FDF9FA}
 @media (max-width:420px){.vr-bar input{max-width:52%}}
+/* ===== جرد المواد: باركود المادة، الكميات، الدفعات وتواريخ الانتهاء (بيانات مستقلة في zp_stock) ===== */
+.badge.stk{background:#FFF1DC;color:#8A5300}
+.badge.low{background:#FFF3DF;color:var(--warn)}
+.badge.soon{background:#FFE8D6;color:#B4540A}
+.badge.exp{background:#FBE7E7;color:var(--bad)}
+.badge.zero{background:#EEF0F2;color:var(--muted)}
+.badge.out{background:var(--pink-soft);color:var(--pink-deep)}
+.badge.in{background:#E3F4EA;color:var(--ok)}
+.badge.count{background:#E8EEFF;color:#3A4FA8}
+.badge.waste{background:#FBE7E7;color:var(--bad)}
+.badge.new{background:var(--mint-soft);color:var(--mint-deep)}
+.badge.undo{background:#EEF0F2;color:var(--muted)}
+#stkSeg{grid-template-columns:repeat(3,1fr)}
+#stkSeg button.on{background:#8A5300}
+.stk-alerts{display:grid;gap:6px;margin-bottom:10px}
+.stk-alerts:empty{display:none}
+.stk-alerts button{display:flex;align-items:center;gap:10px;width:100%;border:1px solid;border-radius:14px;padding:9px 12px;font:inherit;font-size:14px;font-weight:600;text-align:right;cursor:pointer}
+.stk-alerts button b{font-size:20px;font-variant-numeric:tabular-nums;min-width:26px;text-align:center}
+.stk-alerts .a-exp{background:#FDECEC;border-color:#F2C2C2;color:#9B2C2C}
+.stk-alerts .a-soon{background:#FFF0E3;border-color:#F5CFA8;color:#8F4207}
+.stk-alerts .a-low{background:#FFF7E6;border-color:#F3D9A4;color:#7A4A00}
+.stk-alerts .a-zero{background:#F3F4F6;border-color:#E2E5E9;color:var(--muted)}
+.stk-card{margin-top:12px;background:#fff;border:1.5px solid #E9D3B0;border-radius:20px;padding:14px 16px}
+.stk-card.alert{border-color:#F2C2C2}
+.stk-card .hd{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.stk-card h3{margin:0;font-size:19px}
+.stk-card .code{font-size:12px;color:var(--muted);direction:ltr;unicode-bidi:isolate}
+.stk-card .qty{text-align:center;flex:none}
+.stk-card .qty b{display:block;font-size:40px;line-height:1;font-variant-numeric:tabular-nums;color:#8A5300}
+.stk-card .qty small{color:var(--muted);font-size:13px}
+.stk-card .tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.stk-fefo{margin-top:10px;background:#FFF7E6;border:1px solid #F3D9A4;border-radius:14px;padding:9px 12px;font-size:14px;color:#6B4200}
+.stk-fefo.bad{background:#FDECEC;border-color:#F2C2C2;color:#9B2C2C}
+.stk-lots{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px}
+.stk-lots li{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px;padding:6px 10px;border-radius:10px;background:var(--bg)}
+.stk-lots li.first{outline:2px solid #E9B867}
+.stk-lots li b{font-variant-numeric:tabular-nums}
+.stk-step{display:grid;grid-template-columns:52px 1fr 52px;gap:8px;margin-top:12px;align-items:center}
+.stk-step button{height:52px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-size:26px;font-weight:700;color:var(--ink);cursor:pointer}
+.stk-step input{height:52px;text-align:center;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;direction:ltr}
+.stk-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.stk-acts .btn{padding:10px 12px}
+.stk-acts .wide{grid-column:1/-1;font-size:18px;background:#8A5300;color:#fff}
+.stk-acts .wide[disabled]{opacity:.45}
+.stk-block{margin-top:10px;background:#FDECEC;border:1px solid #F2C2C2;color:#9B2C2C;border-radius:14px;padding:10px 12px;font-size:14px}
+.stk-block .btn{margin-top:8px;width:100%}
+.stk-hits{display:grid;gap:6px;margin-top:8px}
+.stk-hits button{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;font:inherit;cursor:pointer;text-align:right}
+.stk-tools{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.stk-tools input{flex:1;min-height:44px}
+.stk-tools .btn{flex:none;background:#8A5300}
+.stk-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.stk-chips button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;min-height:38px}
+.stk-chips button.on{border-color:#8A5300;background:#FFF1DC;color:#8A5300}
+.stk-items,.stk-log{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.stk-items li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px;cursor:pointer}
+.stk-items li b.n{font-size:16px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stk-items li small{color:var(--muted);font-size:13px}
+.stk-items li .q{grid-row:span 2;text-align:center}
+.stk-items li .q b{display:block;font-size:24px;font-variant-numeric:tabular-nums;color:#8A5300}
+.stk-items li.exp{border-color:#F2C2C2;background:#FFFAFA}
+.stk-items li.soon{border-color:#F5CFA8}
+.stk-log li{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px 12px;font-size:14px}
+.stk-log li.u{opacity:.55}.stk-log li.u .t{text-decoration:line-through}
+.stk-log .t b{font-variant-numeric:tabular-nums}
+.stk-log small{color:var(--muted);display:block;font-size:12px}
+.stk-log .r{display:flex;align-items:center;gap:4px;flex:none}
+.stk-lotrow{display:grid;grid-template-columns:minmax(0,1fr) 96px 36px;gap:6px;margin-top:6px;align-items:center}
+.stk-lotrow input{min-height:42px}
+.stk-grid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr) minmax(0,320px);align-items:start;margin-bottom:14px}
+@media (max-width:820px){.stk-grid{grid-template-columns:1fr}}
+tr.s-exp td{background:#FFF6F6}tr.s-soon td{background:#FFF9F2}
+.lbl-sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 /* سجل تقرير البيع: عنوان لكل يوم، والتاريخ والوقت واضحان لكل عملية */
 #rvList li.dh{background:none;border:0;padding:8px 2px 0;font-weight:700;font-size:13px;color:var(--ink);display:flex;justify-content:space-between}
 #rvList li.dh small{color:var(--muted);font-weight:600}
@@ -591,17 +664,17 @@ tr.vtot td{font-weight:700;background:#FDF9FA}
       </div>
     </div>
 
-    <div class="cam">
+    <div id="posCamSlot"><div class="cam" id="camBox">
       <div id="reader"></div>
       <div class="cam-line hidden" id="camLine"></div>
       <button type="button" class="cam-stop hidden" id="camStop">إيقاف الكاميرا</button>
       <button type="button" class="cam-torch hidden" id="camTorch">إضاءة الفلاش</button>
       <div class="cam-off" id="camOff">
-        <div>وجّهي الكاميرا إلى باركود البطاقة</div>
+        <div id="camHint">وجّهي الكاميرا إلى باركود البطاقة</div>
         <button class="btn btn-pink" type="button" id="camStart">تشغيل الكاميرا</button>
         <div class="sub" id="camErr" style="color:#f6c7d4"></div>
       </div>
-    </div>
+    </div></div>
 
     <div class="seg stabs" id="findSeg" role="tablist">
       <button type="button" data-find="card" class="on">برقم البطاقة</button>
@@ -688,6 +761,54 @@ tr.vtot td{font-weight:700;background:#FDF9FA}
   </div>
 </section>
 
+<!-- ================= جرد المواد ================= -->
+<!-- حساب «جرد المواد»: مسح باركود المادة ← الخصم من الكمية (الأقرب انتهاءً أولاً). بياناته مستقلة (zp_stock / zp_stockmv) ولا تمس البطاقات والأرصدة -->
+<section id="stockView" class="hidden">
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <div class="brand"><img class="zlogo" alt="" hidden><h1 class="title">جرد المواد</h1></div>
+        <div class="station"><span>الحساب:</span> <strong id="stkWho"></strong></div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <a class="btn btn-ghost hidden" id="stkToAdmin" href="#admin" style="display:inline-grid;place-items:center;text-decoration:none;white-space:nowrap">اللوحة</a>
+        <button class="btn btn-ghost" type="button" data-logout>خروج</button>
+      </div>
+    </div>
+
+    <div class="stk-alerts" id="stkAlerts"></div>
+    <div class="seg" id="stkSeg" role="tablist">
+      <button type="button" data-st="scan" class="on">مسح</button>
+      <button type="button" data-st="list">المواد</button>
+      <button type="button" data-st="log">السجل</button>
+    </div>
+    <div class="vr-warn hidden" id="stkErrBox"></div>
+
+    <div id="stkScan">
+      <div id="stkCamSlot"></div>
+      <form class="manual" id="stkManual" autocomplete="off">
+        <input type="search" id="stkCode" class="nameq" placeholder="الباركود أو اسم المادة" spellcheck="false">
+        <button class="btn btn-soft" type="submit">بحث</button>
+      </form>
+      <div class="stk-hits hidden" id="stkHits"></div>
+      <div id="stkCard"></div>
+      <div class="vr-bar"><h3 id="stkMineH">حركاتي اليوم</h3></div>
+      <ol class="stk-log" id="stkMine"></ol>
+    </div>
+
+    <div id="stkList" class="hidden">
+      <div class="stk-tools"><input type="search" id="stkQ" placeholder="اسم المادة أو الباركود" autocomplete="off" spellcheck="false"><button class="btn btn-main hidden" type="button" id="stkNewBtn">مادة جديدة</button></div>
+      <div class="stk-chips" id="stkChips"></div>
+      <ol class="stk-items" id="stkItems"></ol>
+    </div>
+
+    <div id="stkLog" class="hidden">
+      <div class="rv-bar"><h3>سجل الحركات</h3><select class="rv-sel" id="stkLogDay" aria-label="اليوم"></select></div>
+      <ol class="stk-log" id="stkLogList"></ol>
+    </div>
+  </div>
+</section>
+
 <!-- ================= ADMIN ================= -->
 <section id="adminView" class="hidden">
   <div class="wrap wide">
@@ -722,6 +843,7 @@ tr.vtot td{font-weight:700;background:#FDF9FA}
       <button class="tab" data-tab="report">تقرير الشحن</button>
       <button class="tab" data-tab="sales">تقرير نقاط البيع</button>
       <button class="tab" data-tab="vr">VR</button>
+      <button class="tab" data-tab="stock">المخزون</button>
     </div>
     <div class="bkbar"><button class="btn btn-main" type="button" id="quickAdd">➕ إضافة بطاقة</button><button class="btn btn-soft" type="button" data-bk>💾 نسخة احتياطية لكل شيء</button><span class="bkst" role="status"></span></div>
 
@@ -887,11 +1009,12 @@ tr.vtot td{font-weight:700;background:#FDF9FA}
           <h3>إضافة حساب</h3>
           <label class="f"><span>اسم الحساب (يظهر في صفحة الدخول وفي السجل)</span><input type="text" id="stName" placeholder="مثلاً: كشك البوظة" maxlength="40"></label>
           <label class="f" style="margin-top:10px"><span>نوع الحساب</span>
-            <select id="stRole"><option value="sell">نقطة بيع: تخصم ثمن المنتجات فقط</option><option value="topup">نقطة شحن: تشحن الرصيد فقط</option><option value="both">بيع وشحن: تبيع المنتجات وتشحن الرصيد</option><option value="vr">حساب VR: يقطع تذاكر VR ويدير قائمة الانتظار فقط</option></select></label>
+            <select id="stRole"><option value="sell">نقطة بيع: تخصم ثمن المنتجات فقط</option><option value="topup">نقطة شحن: تشحن الرصيد فقط</option><option value="both">بيع وشحن: تبيع المنتجات وتشحن الرصيد</option><option value="vr">حساب VR: يقطع تذاكر VR ويدير قائمة الانتظار فقط</option><option value="stock">جرد المواد: يمسح باركود المادة ويخصم من كميتها</option></select></label>
           <div id="stItemsBox" style="margin-top:10px"><span class="hint" style="display:block">المنتجات التي تبيعها (بدون تحديد = كل المنتجات)</span><div class="checks" id="stItems"></div></div>
           <span class="hint" style="display:block;margin-top:10px">الصلاحيات</span>
           <div class="checks" id="stRepBox"><label><input type="checkbox" id="stReport"> يرى تقرير حسابات الشحن</label><label><input type="checkbox" id="stSales"> يرى تقرير نقاط البيع</label></div>
           <div class="checks hidden" id="stVrBox"><label><input type="checkbox" id="stVrFree" checked> يقطع تذاكر مجانية</label><label><input type="checkbox" id="stVrRefund" checked> يرجّع المبلغ</label><label><input type="checkbox" id="stVrInv" checked> يرى الجرد اليومي ويغلق اليوم</label></div>
+          <div class="checks hidden" id="stStkBox"><label><input type="checkbox" id="stStkIn" checked> يضيف كمية (توريد)</label><label><input type="checkbox" id="stStkNew" checked> يعرّف مواد جديدة ويربط الباركود</label><label><input type="checkbox" id="stStkCount"> جرد فعلي وإتلاف</label></div>
           <label class="f" style="margin-top:10px"><span>كلمة المرور (٦ أحرف على الأقل)</span><input type="text" id="stPw" dir="ltr" autocomplete="new-password"></label>
           <button class="btn btn-main" type="submit" id="stGo" style="width:100%;margin-top:12px">إنشاء الحساب</button>
           <p class="msg" id="stMsg" role="status"></p>
@@ -901,7 +1024,7 @@ tr.vtot td{font-weight:700;background:#FDF9FA}
           <div class="tablewrap">
             <table><thead><tr><th>الحساب</th><th>الصلاحية</th><th>المنتجات</th><th>الحالة</th><th></th></tr></thead><tbody id="stRows"></tbody></table>
           </div>
-          <p class="hint">حساب «VR» يرى واجهة قطع تذاكر VR فقط، وبياناته في تبويب «VR». حساب «الإدارة» ثابت وله كل الصلاحيات. لا يمكن تغيير كلمة مرور حساب من هنا، احذفيه وأنشئي حساباً جديداً بكلمة مرور جديدة.</p>
+          <p class="hint">حساب «VR» يرى واجهة قطع تذاكر VR فقط، وبياناته في تبويب «VR». حساب «جرد المواد» يرى واجهة الجرد فقط، وبياناته في تبويب «المخزون». حساب «الإدارة» ثابت وله كل الصلاحيات. لا يمكن تغيير كلمة مرور حساب من هنا، احذفيه وأنشئي حساباً جديداً بكلمة مرور جديدة.</p>
         </div>
       </div>
     </div>
@@ -944,6 +1067,49 @@ tr.vtot td{font-weight:700;background:#FDF9FA}
           <tbody id="vRows"></tbody>
         </table>
         <div class="empty hidden" id="vEmpty"></div>
+      </div>
+    </div>
+
+    <!-- المخزون: المواد والكميات والدفعات وتواريخ الانتهاء وسجل الحركات (بيانات مستقلة في zp_stock / zp_stockmv) -->
+    <div id="tab-stock" class="hidden">
+      <p class="hint" style="margin-top:0">حساب «جرد المواد» يمسح باركود المادة ويخصم من كميتها، ويُخصم دائماً من الدفعة الأقرب انتهاءً أولاً. هنا كل المواد ودفعاتها وتنبيهات النفاد والانتهاء وسجل كل الحركات. البيانات مستقلة ولا تمس البطاقات والأرصدة.</p>
+      <div class="fund-sum" id="kSum"></div>
+      <div class="stk-grid">
+        <div class="panel set" style="min-width:0">
+          <div class="tools" style="margin-bottom:8px">
+            <input type="search" id="kSearch" placeholder="اسم المادة أو الباركود">
+            <select id="kFilter" aria-label="الحالة"><option value="">كل المواد</option><option value="exp">منتهية الصلاحية</option><option value="soon">تنتهي قريباً</option><option value="low">قاربت تنفد</option><option value="zero">نفدت</option></select>
+            <button class="btn btn-main" type="button" id="kNew">مادة جديدة</button>
+          </div>
+          <div class="tablewrap">
+            <table><thead><tr><th>المادة</th><th>الباركود</th><th>الكمية</th><th>حد التنبيه</th><th>أقرب انتهاء</th><th>الحالة</th><th></th></tr></thead><tbody id="kRows"></tbody></table>
+            <div class="empty hidden" id="kEmpty"></div>
+          </div>
+        </div>
+        <form class="panel set" id="kSetForm" autocomplete="off">
+          <h3>إعدادات التنبيه</h3>
+          <label class="f"><span>تنبيه «قاربت تنفد» عند كمية (لكل مادة بدون حد خاص)</span><input type="text" id="kLow" inputmode="numeric" dir="ltr"></label>
+          <label class="f" style="margin-top:10px"><span>تنبيه «تنتهي قريباً» قبل الانتهاء بـ (يوم)</span><input type="text" id="kDays" inputmode="numeric" dir="ltr"></label>
+          <button class="btn btn-main" type="submit" style="width:100%;margin-top:10px">حفظ</button>
+          <p class="msg" id="kSetMsg" role="status"></p>
+          <a class="btn btn-soft" href="#stock" style="display:grid;place-items:center;text-decoration:none;margin-top:4px">فتح واجهة الجرد</a>
+          <button class="btn btn-ghost" type="button" id="kPrintAll" style="width:100%;margin-top:8px">طباعة باركود المواد</button>
+          <p class="hint">أنشئي حساب «جرد المواد» وحدّدي صلاحياته من تبويب «الحسابات والصلاحيات».</p>
+        </form>
+      </div>
+      <div class="tools">
+        <select id="kDay" aria-label="اليوم"></select>
+        <select id="kType" aria-label="النوع"><option value="">كل الحركات</option><option value="out">خصم</option><option value="in">إضافة كمية</option><option value="count">جرد فعلي</option><option value="waste">إتلاف</option><option value="new">مادة جديدة</option><option value="undo">تراجع</option></select>
+        <select id="kBy" aria-label="الحساب"></select>
+        <input type="search" id="kMvSearch" placeholder="ابحثي باسم المادة">
+        <button class="btn btn-soft" type="button" id="kExport">تصدير Excel</button>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>الوقت</th><th>المادة</th><th>الحركة</th><th>الكمية</th><th>قبل</th><th>بعد</th><th>الدفعة</th><th>ملاحظة</th><th>الحساب</th><th></th></tr></thead>
+          <tbody id="kMv"></tbody>
+        </table>
+        <div class="empty hidden" id="kMvEmpty"></div>
       </div>
     </div>
 
@@ -1110,6 +1276,11 @@ const IDX = db.collection(COL.index).doc("names");
 // zp_vr: تذاكر VR {no رقم الدور, day, first, last, name, phone, free, amount, status: wait|in|refunded, by, station, ms, at, inAt, inBy, refundAt, refundBy, freeBy}
 // zp_vrday/{YYYY-MM-DD}: {n آخر رقم دور, closed, cash المبلغ الموجود فعلياً, note, closedBy, closedAt}
 const VR = db.collection("zp_vr"), VRDAY = db.collection("zp_vrday"), VR_PRICE = 50000;
+// جرد المواد — بيانات مستقلة عن البطاقات والأرصدة:
+// zp_stock/{id}: مادة {name, codes[] باركود, unit, min حد التنبيه (null = الافتراضي), qty, lots: [{q, e "YYYY-MM-DD" أو ""}], lastMv, by, createdAt, updatedAt}
+// zp_stockmv/{id}: حركة {mid, name, type: new|out|in|count|waste|undo, qty الفرق (±), before, after, lots الدفعات المتأثرة, note, ref, by, station, ms, at, undone, undoMv}
+const STK = db.collection("zp_stock"), STKMV = db.collection("zp_stockmv");
+let stkM = new Map(), stkMv = [], stkUnsubs = [], stkReady = false, stkErr = null, stkTab = "scan", stkCur = null, stkUnknown = null, stkN = 1, stkOk = "", stkBusy = false, stkFilter = "", stkLogDayV = "", stkDrawT = null, kDaySel = "", stkLast = { code: "", at: 0 }, stkCodeIdx = new Map();
 let vrT = [], vrDays = new Map(), vrUnsubs = [], vrReady = false, vrErr = null, vrTab = "cut", vrFree = false, vrBusy = false, vrDoneId = null, vrInvDay = "", vrDrawT = null, vDaySel = "";
 
 const $ = id => document.getElementById(id);
@@ -1172,17 +1343,17 @@ function listenSettings() {
     if (!Array.isArray(S.items)) S.items = DEFAULTS.items;
     // الفئات الجديدة (٥٬٠٠٠ إلى ١٠٠٬٠٠٠) تُكتب مرة واحدة عند أول دخول للإدارة
     if (role === "admin" && s.exists && !S.amountsV && !amountsMigrated) { amountsMigrated = true; SET.set({ quick: AMOUNTS, openQuick: AMOUNTS, amountsV: 2 }, { merge: true }).catch(e => console.warn(e)); }
-    applyTexts(); vrChanged();
+    applyTexts(); vrChanged(); stkChanged();
     if (role) { renderGrid(); if (document.activeElement?.id !== "topCustom") renderResult(); else paintTopup(); if (!$("adminView").classList.contains("hidden")) { fillItemsForm(false); fillSettingsForm(false); refreshItemFilter(); renderStats(); drawStaffItems(); renderStaff(); } }
   }, err => console.warn("settings", err));
 }
 
 /* ---------- auth ---------- */
-function show(v) { window.__booted = true; $("bootView").style.display = "none"; ["loginView", "posView", "vrView", "adminView"].forEach(k => $(k).classList.toggle("hidden", k !== v)); }
+function show(v) { window.__booted = true; $("bootView").style.display = "none"; ["loginView", "posView", "vrView", "stockView", "adminView"].forEach(k => $(k).classList.toggle("hidden", k !== v)); }
 if (window.__pendingFail) window.__bootFail(window.__pendingFail);
 /* login: pick an account, then password */
-const ROLE_LABEL = { sell: "نقطة بيع", topup: "شحن رصيد", both: "بيع وشحن", vr: "تذاكر VR" };
-const ROLE_LONG = { sell: "بيع المنتجات", topup: "شحن الرصيد", both: "بيع وشحن", vr: "تذاكر VR" };
+const ROLE_LABEL = { sell: "نقطة بيع", topup: "شحن رصيد", both: "بيع وشحن", vr: "تذاكر VR", stock: "جرد المواد" };
+const ROLE_LONG = { sell: "بيع المنتجات", topup: "شحن الرصيد", both: "بيع وشحن", vr: "تذاكر VR", stock: "جرد المواد" };
 let accounts = [], accUnsub = null, pickedAcc = localStorage.getItem("zp_acc") || "";
 function listenAccounts() {
   if (accUnsub) return;
@@ -1228,18 +1399,20 @@ auth.onAuthStateChanged(u => {
   const id = email.slice(0, -DOMAIN.length); let first = true;
   meUnsub = STAFF.doc(id).onSnapshot(s => {
     const d = s.exists ? s.data() : null;
-    if (!d || !d.active || !["sell", "topup", "both", "vr"].includes(d.role)) { auth.signOut(); setTimeout(() => loggedOut("هذا الحساب معطّل أو محذوف. راجعي الإدارة."), 50); return; }
-    const changed = !me || me.role !== d.role || JSON.stringify(me.items || []) !== JSON.stringify(d.items || []) || me.name !== d.name || !!me.report !== !!d.report || !!me.salesReport !== !!d.salesReport || ["vrFree", "vrRefund", "vrInv"].some(k => !!me[k] !== !!d[k]);
+    if (!d || !d.active || !["sell", "topup", "both", "vr", "stock"].includes(d.role)) { auth.signOut(); setTimeout(() => loggedOut("هذا الحساب معطّل أو محذوف. راجعي الإدارة."), 50); return; }
+    const changed = !me || me.role !== d.role || JSON.stringify(me.items || []) !== JSON.stringify(d.items || []) || me.name !== d.name || !!me.report !== !!d.report || !!me.salesReport !== !!d.salesReport || ["vrFree", "vrRefund", "vrInv", "stkIn", "stkNew", "stkCount"].some(k => !!me[k] !== !!d[k]);
     const roleWas = me?.role;
     role = d.role; me = { id, ...d };
     if (first) { first = false; listenSettings(); route(); } else if (roleWas !== d.role) route();
-    else if (changed && !$("posView").classList.contains("hidden")) initPos(); else if (changed && !$("vrView").classList.contains("hidden")) initVr();
+    else if (changed && !$("posView").classList.contains("hidden")) initPos(); else if (changed && !$("vrView").classList.contains("hidden")) initVr(); else if (changed && stkOn()) initStock();
   }, err => { console.error(err); auth.signOut(); setTimeout(() => loggedOut("تعذّر التحقق من الحساب. تحققي من الإنترنت وقواعد Firestore."), 50); });
 });
 window.addEventListener("hashchange", () => role && route());
 function route() {
   // حساب VR يرى واجهة التذاكر فقط، والإدارة تفتحها من #vr
-  if (role === "vr" || (location.hash === "#vr" && role === "admin")) { stopCam(); stopAdmin(); show("vrView"); initVr(); }
+  // حساب جرد المواد يرى واجهة الجرد فقط، والإدارة تفتحها من #stock
+  if (role === "stock" || (location.hash === "#stock" && role === "admin")) { stopCam(); stopAdmin(); show("stockView"); initStock(); }
+  else if (role === "vr" || (location.hash === "#vr" && role === "admin")) { stopCam(); stopAdmin(); show("vrView"); initVr(); }
   else if (location.hash === "#admin" && role === "admin") { stopCam(); show("adminView"); startAdmin(); }
   else { stopAdmin(); show("posView"); initPos(); }
 }
@@ -1266,6 +1439,7 @@ function loadZX() {
 }
 function preloadScanner() { loadZX().catch(() => {}); }
 function initPos() {
+  stkMountCam(false);
   listenIdx();
   if (window.requestIdleCallback) window.requestIdleCallback(() => preloadScanner(), { timeout: 2000 }); else setTimeout(preloadScanner, 300);
   $("stationName").textContent = station();
@@ -1383,12 +1557,14 @@ async function startCam() {
     if (!SC.video) { SC.video = document.createElement("video"); SC.video.setAttribute("playsinline", ""); SC.video.muted = true; $("reader").innerHTML = ""; $("reader").appendChild(SC.video); }
     SC.video.srcObject = stream; await SC.video.play();
     await tuneCamera();
+    const fk = stkOn() ? "stk" : "pos";   // الجرد يقرأ باركود المنتجات (EAN / UPC) أيضاً، والبيع باركود البطاقات فقط فيبقى أسرع
+    if (SC.fk !== fk) { SC.det = null; SC.zr = null; SC.fk = fk; }
     if (!SC.det && "BarcodeDetector" in window) {   // قارئ الجوال المدمج (أندرويد): الأسرع
-      try { const f = await BarcodeDetector.getSupportedFormats(); const want = ["code_128", "code_39", "code_93", "qr_code"].filter(x => f.includes(x)); if (want.includes("code_128")) SC.det = new BarcodeDetector({ formats: want }); } catch {}
+      try { const f = await BarcodeDetector.getSupportedFormats(); const want = (fk === "stk" ? ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "code_93", "itf", "qr_code"] : ["code_128", "code_39", "code_93", "qr_code"]).filter(x => f.includes(x)); if (want.includes("code_128")) SC.det = new BarcodeDetector({ formats: want }); } catch {}
     }
     if (!SC.zr && window.ZXing) {
-      const Z = ZXing; SC.zr = new Z.MultiFormatReader();
-      SC.zr.setHints(new Map([[Z.DecodeHintType.POSSIBLE_FORMATS, [Z.BarcodeFormat.CODE_128, Z.BarcodeFormat.CODE_39, Z.BarcodeFormat.CODE_93, Z.BarcodeFormat.QR_CODE]], [Z.DecodeHintType.TRY_HARDER, true]]));
+      const Z = ZXing, F = Z.BarcodeFormat; SC.zr = new Z.MultiFormatReader();
+      SC.zr.setHints(new Map([[Z.DecodeHintType.POSSIBLE_FORMATS, fk === "stk" ? [F.EAN_13, F.EAN_8, F.UPC_A, F.UPC_E, F.CODE_128, F.CODE_39, F.CODE_93, F.ITF, F.QR_CODE] : [F.CODE_128, F.CODE_39, F.CODE_93, F.QR_CODE]], [Z.DecodeHintType.TRY_HARDER, true]]));
     }
     if (!SC.det && !SC.zr) throw new Error("تعذّر تحميل قارئ الباركود. أعيدي تحميل الصفحة.");
     camOn = true; SC.run = true; $("camErr").textContent = "";
@@ -1479,6 +1655,7 @@ async function scanLoop() {
 }
 
 function onScan(text) {
+  if (stkOn()) return stkScan(text);
   const code = keyOf(text), now = Date.now();
   if (busy || mode === "report") return;
   if (code && code === lastCode && now - lastAt < 2500) return;   // نفس البطاقة لا تُخصم مرتين بالخطأ
@@ -1967,7 +2144,7 @@ function queueDraw(...parts) {
     if (d.has("members") && adminTab === "dups") renderDups();
     if (d.has("tx") && adminTab === "tx") renderTx();
     if (d.has("report") && (adminTab === "report" || adminTab === "sales")) renderReport();
-    if (d.has("staff")) { renderStaff(); if (adminTab === "vr") renderVrAdmin(); }
+    if (d.has("staff")) { renderStaff(); if (adminTab === "vr") renderVrAdmin(); if (adminTab === "stock") renderStkAdmin(); }
     if (d.has("gifts") || (d.has("members") && adminTab === "gifts")) { if (adminTab === "gifts") renderGifts(); }
     if ((d.has("fund") || d.has("members")) && adminTab === "fund") renderFund();
     ["members", "tx", "report"].forEach(k => { if (d.has(k) && !((k === "members" && adminTab === "members") || (k === "tx" && adminTab === "tx") || (k === "report" && (adminTab === "report" || adminTab === "sales")))) stale.add(k); });
@@ -1980,6 +2157,7 @@ function drawTab(tab) {
   if (tab === "gifts") renderGifts();
   if (tab === "fund") renderFund();
   if (tab === "vr") { vrListen(); renderVrAdmin(); loadXLSX().catch(() => {}); }
+  if (tab === "stock") { stkListen(); renderStkAdmin(); loadXLSX().catch(() => {}); }
   if (tab === "members" && stale.delete("members")) renderMembers();
   if (tab === "tx" && stale.delete("tx")) renderTx();
   if ((tab === "report" || tab === "sales") && stale.delete("report")) renderReport();
@@ -2050,7 +2228,7 @@ function startAdmin() {
     err => { fundErr = err; console.warn("fund", err?.code || err); queueDraw("fund"); }));
   fillItemsForm(true); fillSettingsForm(true); refreshItemFilter(); drawStaffItems();
 }
-function stopAdmin() { vrStop(); if (idxT) { clearTimeout(idxT); writeIdx(); } idxAdminUnsub?.(); idxAdminUnsub = null; idxRemote = null; clearTimeout(idxT); unsubs.forEach(u => u()); unsubs = []; members = new Map(); txs = []; gifts = []; funds = []; clearTimeout(drawT); drawT = null; dirty = new Set(); stale.clear(); }
+function stopAdmin() { vrStop(); stkStop(); if (idxT) { clearTimeout(idxT); writeIdx(); } idxAdminUnsub?.(); idxAdminUnsub = null; idxRemote = null; clearTimeout(idxT); unsubs.forEach(u => u()); unsubs = []; members = new Map(); txs = []; gifts = []; funds = []; clearTimeout(drawT); drawT = null; dirty = new Set(); stale.clear(); }
 function adminErr(err) { console.error(err); $("mEmpty").classList.remove("hidden"); $("mEmpty").textContent = err.code === "permission-denied" ? "لا توجد صلاحية للقراءة. انسخي قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر تحميل البيانات: " + err.message; }
 
 document.querySelectorAll(".tab").forEach(b => b.onclick = () => {
@@ -2083,14 +2261,15 @@ function drawStaffItems(sel = null) {
   const keep = sel || [...$("stItems").querySelectorAll("input:checked")].map(i => i.value);
   $("stItems").innerHTML = S.items.map(i => `<label><input type="checkbox" value="${esc(i.id)}" ${keep.includes(i.id) ? "checked" : ""}> ${esc(i.name)}</label>`).join("");
 }
-$("stRole").onchange = () => { const r = $("stRole").value; $("stItemsBox").classList.toggle("hidden", r === "topup" || r === "vr"); $("stRepBox").classList.toggle("hidden", r === "vr"); $("stVrBox").classList.toggle("hidden", r !== "vr"); };
+$("stRole").onchange = () => { const r = $("stRole").value, sep = r === "vr" || r === "stock"; $("stItemsBox").classList.toggle("hidden", r === "topup" || sep); $("stRepBox").classList.toggle("hidden", sep); $("stVrBox").classList.toggle("hidden", r !== "vr"); $("stStkBox").classList.toggle("hidden", r !== "stock"); };
+const stkPerms = s => [s.stkIn && "إضافة كمية", s.stkNew && "مواد جديدة", s.stkCount && "جرد وإتلاف"].filter(Boolean);
 const vrPerms = s => [s.vrFree && "مجاني", s.vrRefund && "إرجاع المبلغ", s.vrInv && "الجرد"].filter(Boolean);
 function renderStaff() {
   const rows = [...staff].sort((a, b) => (a.role > b.role ? 1 : -1) || String(a.name).localeCompare(String(b.name), "ar"));
   $("stRows").innerHTML = `<tr><td class="name">الإدارة</td><td><span class="badge buy">كل الصلاحيات</span></td><td>—</td><td>فعّال</td><td></td></tr>` +
     rows.map(s => `<tr><td class="name">${esc(s.name)}</td>
-      <td><span class="badge ${s.role === "vr" ? "vr" : s.role === "topup" ? "topup" : s.role === "both" ? "buy" : "sell"}">${ROLE_LONG[s.role] || "بيع المنتجات"}</span>${s.role === "vr" ? vrPerms(s).map(x => ` <span class="badge adjust">${x}</span>`).join("") : `${s.report ? ` <span class="badge adjust">تقرير الشحن</span>` : ""}${s.salesReport ? ` <span class="badge adjust">تقرير البيع</span>` : ""}`}</td>
-      <td style="white-space:normal">${s.role === "topup" || s.role === "vr" ? "—" : esc(itemNames(s.items))}</td>
+      <td><span class="badge ${s.role === "vr" ? "vr" : s.role === "stock" ? "stk" : s.role === "topup" ? "topup" : s.role === "both" ? "buy" : "sell"}">${ROLE_LONG[s.role] || "بيع المنتجات"}</span>${s.role === "vr" || s.role === "stock" ? (s.role === "vr" ? vrPerms(s) : stkPerms(s)).map(x => ` <span class="badge adjust">${x}</span>`).join("") : `${s.report ? ` <span class="badge adjust">تقرير الشحن</span>` : ""}${s.salesReport ? ` <span class="badge adjust">تقرير البيع</span>` : ""}`}</td>
+      <td style="white-space:normal">${s.role === "topup" || s.role === "vr" || s.role === "stock" ? "—" : esc(itemNames(s.items))}</td>
       <td>${s.active ? "فعّال" : `<span class="badge off">معطّل</span>`}</td>
       <td><button class="mini" data-sedit="${esc(s.id)}">تعديل</button><button class="mini ${s.active ? "r" : ""}" data-stog="${esc(s.id)}">${s.active ? "تعطيل" : "تفعيل"}</button><button class="mini r" data-sdel="${esc(s.id)}">حذف</button></td></tr>`).join("");
 }
@@ -2098,8 +2277,8 @@ let creatorApp = null;
 $("staffForm").onsubmit = async e => {
   e.preventDefault();
   const name = $("stName").value.replace(/\s+/g, " ").trim(), roleV = $("stRole").value, pw = $("stPw").value, msg = $("stMsg");
-  const isVr = roleV === "vr", items = roleV !== "topup" && !isVr ? [...$("stItems").querySelectorAll("input:checked")].map(i => i.value) : [], report = !isVr && $("stReport").checked, salesReport = !isVr && $("stSales").checked;
-  const vrP = isVr ? { vrFree: $("stVrFree").checked, vrRefund: $("stVrRefund").checked, vrInv: $("stVrInv").checked } : {};
+  const isVr = roleV === "vr", isStk = roleV === "stock", sep = isVr || isStk, items = roleV !== "topup" && !sep ? [...$("stItems").querySelectorAll("input:checked")].map(i => i.value) : [], report = !sep && $("stReport").checked, salesReport = !sep && $("stSales").checked;
+  const vrP = isVr ? { vrFree: $("stVrFree").checked, vrRefund: $("stVrRefund").checked, vrInv: $("stVrInv").checked } : isStk ? { stkIn: $("stStkIn").checked, stkNew: $("stStkNew").checked, stkCount: $("stStkCount").checked } : {};
   const err = x => { msg.className = "msg bad"; msg.textContent = x; };
   if (name.length < 2) return err("اكتبي اسماً للحساب.");
   if (staff.some(s => s.name === name)) return err("يوجد حساب بنفس الاسم.");
@@ -2129,20 +2308,21 @@ $("stRows").addEventListener("click", async e => {
   if (b.dataset.sdel) { if (confirm(`حذف حساب «${s.name}»؟ لن يستطيع الدخول بعدها، وسجل عملياته يبقى.`)) await STAFF.doc(s.id).delete(); return; }
   openModal(`<h3>تعديل حساب</h3><form id="mf">
     <label class="f" style="margin-top:10px"><span>اسم الحساب</span><input type="text" id="mfName" value="${esc(s.name)}" maxlength="40"></label>
-    <label class="f" style="margin-top:10px"><span>نوع الحساب</span><select id="mfRole"><option value="sell" ${s.role === "sell" ? "selected" : ""}>نقطة بيع: تخصم ثمن المنتجات فقط</option><option value="topup" ${s.role === "topup" ? "selected" : ""}>نقطة شحن: تشحن الرصيد فقط</option><option value="both" ${s.role === "both" ? "selected" : ""}>بيع وشحن: تبيع المنتجات وتشحن الرصيد</option><option value="vr" ${s.role === "vr" ? "selected" : ""}>حساب VR: يقطع تذاكر VR ويدير قائمة الانتظار فقط</option></select></label>
-    <div id="mfItemsBox" style="margin-top:10px" class="${s.role === "topup" || s.role === "vr" ? "hidden" : ""}"><span class="hint" style="display:block">المنتجات التي تبيعها (بدون تحديد = كل المنتجات)</span>
+    <label class="f" style="margin-top:10px"><span>نوع الحساب</span><select id="mfRole"><option value="sell" ${s.role === "sell" ? "selected" : ""}>نقطة بيع: تخصم ثمن المنتجات فقط</option><option value="topup" ${s.role === "topup" ? "selected" : ""}>نقطة شحن: تشحن الرصيد فقط</option><option value="both" ${s.role === "both" ? "selected" : ""}>بيع وشحن: تبيع المنتجات وتشحن الرصيد</option><option value="vr" ${s.role === "vr" ? "selected" : ""}>حساب VR: يقطع تذاكر VR ويدير قائمة الانتظار فقط</option><option value="stock" ${s.role === "stock" ? "selected" : ""}>جرد المواد: يمسح باركود المادة ويخصم من كميتها</option></select></label>
+    <div id="mfItemsBox" style="margin-top:10px" class="${s.role === "topup" || s.role === "vr" || s.role === "stock" ? "hidden" : ""}"><span class="hint" style="display:block">المنتجات التي تبيعها (بدون تحديد = كل المنتجات)</span>
       <div class="checks">${S.items.map(i => `<label><input type="checkbox" value="${esc(i.id)}" ${(s.items || []).includes(i.id) ? "checked" : ""}> ${esc(i.name)}</label>`).join("")}</div></div>
     <span class="hint" style="display:block;margin-top:10px">الصلاحيات</span>
-    <div class="checks ${s.role === "vr" ? "hidden" : ""}" id="mfRepBox"><label><input type="checkbox" id="mfReport" ${s.report ? "checked" : ""}> يرى تقرير حسابات الشحن</label><label><input type="checkbox" id="mfSales" ${s.salesReport ? "checked" : ""}> يرى تقرير نقاط البيع</label></div>
+    <div class="checks ${s.role === "vr" || s.role === "stock" ? "hidden" : ""}" id="mfRepBox"><label><input type="checkbox" id="mfReport" ${s.report ? "checked" : ""}> يرى تقرير حسابات الشحن</label><label><input type="checkbox" id="mfSales" ${s.salesReport ? "checked" : ""}> يرى تقرير نقاط البيع</label></div>
     <div class="checks ${s.role === "vr" ? "" : "hidden"}" id="mfVrBox"><label><input type="checkbox" id="mfVrFree" ${s.role !== "vr" || s.vrFree ? "checked" : ""}> يقطع تذاكر مجانية</label><label><input type="checkbox" id="mfVrRefund" ${s.role !== "vr" || s.vrRefund ? "checked" : ""}> يرجّع المبلغ</label><label><input type="checkbox" id="mfVrInv" ${s.role !== "vr" || s.vrInv ? "checked" : ""}> يرى الجرد اليومي ويغلق اليوم</label></div>
+    <div class="checks ${s.role === "stock" ? "" : "hidden"}" id="mfStkBox"><label><input type="checkbox" id="mfStkIn" ${s.role !== "stock" || s.stkIn ? "checked" : ""}> يضيف كمية (توريد)</label><label><input type="checkbox" id="mfStkNew" ${s.role !== "stock" || s.stkNew ? "checked" : ""}> يعرّف مواد جديدة ويربط الباركود</label><label><input type="checkbox" id="mfStkCount" ${s.stkCount ? "checked" : ""}> جرد فعلي وإتلاف</label></div>
     <div class="acts"><button class="btn btn-main" type="submit">حفظ</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="mfMsg"></p></form>`);
-  $("mfRole").onchange = () => { const r = $("mfRole").value; $("mfItemsBox").classList.toggle("hidden", r === "topup" || r === "vr"); $("mfRepBox").classList.toggle("hidden", r === "vr"); $("mfVrBox").classList.toggle("hidden", r !== "vr"); };
+  $("mfRole").onchange = () => { const r = $("mfRole").value, sep = r === "vr" || r === "stock"; $("mfItemsBox").classList.toggle("hidden", r === "topup" || sep); $("mfRepBox").classList.toggle("hidden", sep); $("mfVrBox").classList.toggle("hidden", r !== "vr"); $("mfStkBox").classList.toggle("hidden", r !== "stock"); };
   $("mf").onsubmit = async ev => {
     ev.preventDefault();
     const name = $("mfName").value.replace(/\s+/g, " ").trim(), r = $("mfRole").value;
     if (name.length < 2) { $("mfMsg").className = "msg bad"; $("mfMsg").textContent = "اكتبي اسماً للحساب."; return; }
-    const isVr = r === "vr", items = r !== "topup" && !isVr ? [...$("mfItemsBox").querySelectorAll("input:checked")].map(i => i.value) : [];
-    try { await STAFF.doc(s.id).update({ name, role: r, items, report: !isVr && $("mfReport").checked, salesReport: !isVr && $("mfSales").checked, vrFree: isVr && $("mfVrFree").checked, vrRefund: isVr && $("mfVrRefund").checked, vrInv: isVr && $("mfVrInv").checked }); closeModal(); } catch (ex) { $("mfMsg").className = "msg bad"; $("mfMsg").textContent = "لم يتم الحفظ: " + ex.message; }
+    const isVr = r === "vr", isStk = r === "stock", sep = isVr || isStk, items = r !== "topup" && !sep ? [...$("mfItemsBox").querySelectorAll("input:checked")].map(i => i.value) : [];
+    try { await STAFF.doc(s.id).update({ name, role: r, items, report: !sep && $("mfReport").checked, salesReport: !sep && $("mfSales").checked, vrFree: isVr && $("mfVrFree").checked, vrRefund: isVr && $("mfVrRefund").checked, vrInv: isVr && $("mfVrInv").checked, stkIn: isStk && $("mfStkIn").checked, stkNew: isStk && $("mfStkNew").checked, stkCount: isStk && $("mfStkCount").checked }); closeModal(); } catch (ex) { $("mfMsg").className = "msg bad"; $("mfMsg").textContent = "لم يتم الحفظ: " + ex.message; }
   };
 });
 
@@ -3532,7 +3712,7 @@ $("impGo").onclick = async () => {
 };
 
 /* ---------- النسخة الاحتياطية: كل مجموعات Firestore + ملفات الموقع في ZIP واحد ---------- */
-const BK_COLS = ["zp_members", "zp_tx", "zp_settings", "zp_staff", "zp_bal", "zp_index", "zp_pub", "zp_empdata", "zp_gifts", "zp_fund", "zp_vr", "zp_vrday"];
+const BK_COLS = ["zp_members", "zp_tx", "zp_settings", "zp_staff", "zp_bal", "zp_index", "zp_pub", "zp_empdata", "zp_gifts", "zp_fund", "zp_vr", "zp_vrday", "zp_stock", "zp_stockmv"];
 const BK_FILES = ["index.html", "rasid/index.html", "firebase-app-compat.js", "firebase-auth-compat.js", "firebase-firestore-compat.js", "zxing.min.js", "zxing_min.js"];
 const loadZip = () => window.JSZip ? Promise.resolve() : new Promise((ok, no) => { const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"; sc.onload = ok; sc.onerror = () => no(new Error("تعذّر تحميل مكتبة ZIP")); document.head.appendChild(sc); });
 // التواريخ تُحفظ {__ts: ملي ثانية} لترجع تواريخ Firestore حقيقية عند الاسترجاع
@@ -4205,6 +4385,535 @@ $("vSetForm").onsubmit = async e => {
   if (!Number.isFinite(p)) { m.className = "msg bad"; m.textContent = "اكتبي سعراً صحيحاً."; return; }
   try { await SET.set({ vrPrice: p }, { merge: true }); m.className = "msg ok"; m.textContent = `تم حفظ السعر: ${fmt(p)}`; toast("تم حفظ سعر تذكرة VR"); }
   catch (ex) { console.error(ex); m.className = "msg bad"; m.textContent = "لم يتم الحفظ. " + errText(ex); }
+};
+
+/* ====================================================================== */
+/* ============================ جرد المواد ============================== */
+/* ====================================================================== */
+// حساب «جرد المواد» (role: "stock") يرى هذه الواجهة فقط: مسح باركود المادة ← الكمية والدفعات ← خصم.
+// الخصم من الدفعة الأقرب انتهاءً أولاً، والدفعات المنتهية لا تُباع (تُتلف). الكمية لا تنزل تحت الصفر.
+// صلاحيات الحساب من لوحة التحكم: stkIn إضافة كمية · stkNew تعريف مادة وربط باركود · stkCount جرد فعلي وإتلاف
+const stkCan = k => role === "admin" || !!me?.[k];
+const stkWho = () => me?.id || role;
+const stkOn = () => !$("stockView").classList.contains("hidden");
+const stkNum = (v, d) => { const n = intOf(v); return Number.isFinite(n) && n >= 0 ? n : d; };
+const stkLowDef = () => stkNum(S.stkLow, 5);
+const stkDays = () => stkNum(S.stkDays, 30);
+const stkMin = m => Number.isFinite(m?.min) && m.min >= 0 ? m.min : stkLowDef();
+const stkUnit = m => m?.unit || "قطعة";
+const stkSum = lots => lots.reduce((s, l) => s + (l.q || 0), 0);
+const stkEk = e => e || "9999-99-99";
+// الدفعات مرتبة: الأقرب انتهاءً أولاً، وبدون تاريخ في الآخر
+const stkSort = lots => lots.filter(l => (l.q || 0) > 0).map(l => ({ q: l.q, e: l.e || "" })).sort((a, b) => stkEk(a.e) < stkEk(b.e) ? -1 : stkEk(a.e) > stkEk(b.e) ? 1 : 0);
+// الكمية = مجموع الدفعات دائماً (لو اختلفتا: الفرق دفعة بدون تاريخ، أو يُنقص من الأبعد انتهاءً)
+function stkLotsOf(m) {
+  const qty = m.qty || 0; let lots = stkSort(Array.isArray(m.lots) ? m.lots : []), s = stkSum(lots);
+  if (s < qty) lots = stkPut(lots, "", qty - s);
+  else if (s > qty) { let x = s - qty; for (let i = lots.length - 1; i >= 0 && x > 0; i--) { const t = Math.min(lots[i].q, x); lots[i].q -= t; x -= t; } lots = stkSort(lots); }
+  return lots;
+}
+function stkPut(lots, e, q) { const L = lots.map(l => ({ ...l })), f = L.find(l => (l.e || "") === (e || "")); if (f) f.q += q; else L.push({ q, e: e || "" }); return stkSort(L); }
+function stkTakeLot(lots, e, q) { const L = lots.map(l => ({ ...l })), f = L.find(l => (l.e || "") === (e || "")); if (f) f.q = Math.max(0, f.q - q); return stkSort(L); }
+const stkDaysTo = e => { if (!e) return Infinity; const [y, mo, d] = e.split("-").map(Number), n = new Date(); return Math.round((new Date(y, mo - 1, d) - new Date(n.getFullYear(), n.getMonth(), n.getDate())) / 864e5); };
+const stkIsExp = e => !!e && stkDaysTo(e) < 0;
+const stkDate = e => { if (!e) return "بدون تاريخ"; const [y, mo, d] = e.split("-").map(Number); return new Date(y, mo - 1, d).toLocaleDateString("ar", { day: "numeric", month: "long", year: "numeric" }); };
+const stkDaysWord = n => n === 1 ? "يوم" : n === 2 ? "يومين" : n <= 10 ? `${AR(n)} أيام` : `${AR(n)} يوماً`;
+const stkWhen = e => { if (!e) return ""; const n = stkDaysTo(e); return n < 0 ? `انتهت منذ ${stkDaysWord(-n)}` : n === 0 ? "تنتهي اليوم" : n === 1 ? "تنتهي غداً" : `بعد ${stkDaysWord(n)}`; };
+// القابل للبيع = غير المنتهي
+const stkSellable = m => stkLotsOf(m).filter(l => !stkIsExp(l.e)).reduce((s, l) => s + l.q, 0);
+function stkState(m) {
+  const lots = stkLotsOf(m), d = stkDays(), qty = m.qty || 0;
+  const exp = lots.filter(l => stkIsExp(l.e)).reduce((s, l) => s + l.q, 0);
+  const soon = lots.filter(l => l.e && !stkIsExp(l.e) && stkDaysTo(l.e) <= d).reduce((s, l) => s + l.q, 0);
+  return { exp, soon, zero: qty <= 0, low: qty > 0 && qty - exp <= stkMin(m), near: lots.find(l => l.e)?.e || "" };
+}
+function stkTags(m) {
+  const s = stkState(m), t = [];
+  if (s.exp) t.push(`<span class="badge exp">منتهية: ${fmt(s.exp)}</span>`);
+  if (s.soon) t.push(`<span class="badge soon">تنتهي قريباً: ${fmt(s.soon)}</span>`);
+  if (s.zero) t.push(`<span class="badge zero">نفدت</span>`); else if (s.low) t.push(`<span class="badge low">قاربت تنفد</span>`);
+  return t.join(" ");
+}
+const stkRank = m => { const s = stkState(m); return s.exp ? 0 : s.soon ? 1 : s.zero ? 2 : s.low ? 3 : 4; };
+const stkCodes = m => (Array.isArray(m?.codes) ? m.codes : []).filter(Boolean);
+// باركود المنتجات: UPC من ١٢ رقماً و EAN-13 بصفر في أوله نفس الباركود
+const stkVariants = c => { const k = keyOf(c); if (!k) return []; const v = [k]; if (/^\d{12}$/.test(k)) v.push("0" + k); if (/^0\d{12}$/.test(k)) v.push(k.slice(1)); return v; };
+function stkIndex() { stkCodeIdx = new Map(); stkM.forEach(m => stkCodes(m).forEach(c => stkVariants(c).forEach(v => stkCodeIdx.set(v, m.id)))); }
+const stkFind = code => { for (const v of stkVariants(code)) if (stkCodeIdx.has(v)) return stkCodeIdx.get(v); return null; };
+const stkByName = id => stkM.get(id);
+const stkMvMs = t => tsDate(t.at)?.getTime() ?? t.ms ?? 0;
+const stkMvDay = t => dayKey(stkMvMs(t) || Date.now());
+const stkWhoName = t => staff.find(s => s.id === t.by)?.name || t.station || (t.by === "admin" ? "الإدارة" : t.by || "");
+const STK_TYPE = { new: "مادة جديدة", out: "خصم", in: "إضافة كمية", count: "جرد فعلي", waste: "إتلاف", undo: "تراجع" };
+const stkLotsTxt = lots => (lots || []).map(l => `${fmt(l.q)} ${l.e ? "(" + stkDate(l.e) + ")" : "(بدون تاريخ)"}`).join("، ");
+// التراجع: الحساب يتراجع عن خصم نفّذه هو، والإدارة عن الخصم والإضافة والإتلاف
+const stkCanUndo = t => !t.undone && (role === "admin" ? ["out", "in", "waste"].includes(t.type) : t.type === "out" && t.by === stkWho());
+
+function stkListen() {
+  if (stkUnsubs.length) return;
+  stkReady = false; stkErr = null;
+  stkUnsubs.push(STK.onSnapshot(q => {
+    q.docChanges().forEach(c => c.type === "removed" ? stkM.delete(c.doc.id) : stkM.set(c.doc.id, { id: c.doc.id, ...c.doc.data({ serverTimestamps: "estimate" }) }));
+    stkIndex(); stkReady = true; stkErr = null; stkChanged();
+  }, err => { stkErr = err; console.warn("stock", err?.code || err); stkChanged(); }));
+  stkUnsubs.push(STKMV.orderBy("at", "desc").limit(2000).onSnapshot(q => { stkMv = q.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })); stkChanged(); },
+    err => console.warn("stockmv", err?.code || err)));
+}
+function stkStop() { stkUnsubs.forEach(u => u()); stkUnsubs = []; stkM = new Map(); stkMv = []; stkCodeIdx = new Map(); stkReady = false; stkErr = null; clearTimeout(stkDrawT); }
+function stkChanged() {
+  clearTimeout(stkDrawT);
+  stkDrawT = setTimeout(() => {
+    if (stkOn()) stkDraw();
+    if (!$("adminView").classList.contains("hidden") && adminTab === "stock") renderStkAdmin();
+  }, 40);
+}
+
+/* ---------- الكاميرا: نفس قارئ البطاقات، ينتقل إلى واجهة الجرد ويقرأ باركود المنتجات (EAN / UPC) ---------- */
+function stkMountCam(on) {
+  const box = $("camBox"), slot = $(on ? "stkCamSlot" : "posCamSlot");
+  if (!box || !slot || box.parentNode === slot) return;
+  if (camOn) stopCam();
+  slot.appendChild(box);
+  $("camHint").textContent = on ? "وجّهي الكاميرا إلى باركود المادة" : "وجّهي الكاميرا إلى باركود البطاقة";
+}
+
+/* ---------- واجهة حساب الجرد ---------- */
+function initStock() {
+  $("stkWho").textContent = station();
+  $("stkToAdmin").classList.toggle("hidden", role !== "admin");
+  $("stkNewBtn").classList.toggle("hidden", !stkCan("stkNew"));
+  stkMountCam(true);
+  if (window.requestIdleCallback) window.requestIdleCallback(() => preloadScanner(), { timeout: 2000 }); else setTimeout(preloadScanner, 300);
+  stkListen(); stkSetTab(stkTab);
+}
+function stkSetTab(t) {
+  stkTab = t;
+  $("stkSeg").querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.st === t));
+  $("stkScan").classList.toggle("hidden", t !== "scan"); $("stkList").classList.toggle("hidden", t !== "list"); $("stkLog").classList.toggle("hidden", t !== "log");
+  if (t !== "scan" && camOn) stopCam();
+  stkDraw();
+}
+$("stkSeg").onclick = e => { const b = e.target.closest("[data-st]"); if (b) stkSetTab(b.dataset.st); };
+function stkAlertsHtml() {
+  const c = { exp: 0, soon: 0, low: 0, zero: 0 };
+  stkM.forEach(m => { const s = stkState(m); if (s.exp) c.exp++; if (s.soon) c.soon++; if (s.zero) c.zero++; else if (s.low) c.low++; });
+  const b = (k, n, t) => n ? `<button type="button" class="a-${k}" data-alert="${k}"><b>${AR(n)}</b><span>${t}</span></button>` : "";
+  return b("exp", c.exp, c.exp === 1 ? "مادة فيها دفعة منتهية الصلاحية — أتلفيها ولا تبيعيها" : "مواد فيها دفعات منتهية الصلاحية — أتلفيها ولا تبيعيها")
+    + b("soon", c.soon, `${c.soon === 1 ? "مادة تنتهي" : "مواد تنتهي"} صلاحيتها خلال ${stkDaysWord(stkDays())} — بيعيها أولاً`)
+    + b("low", c.low, c.low === 1 ? "مادة قاربت تنفد" : "مواد قاربت تنفد")
+    + b("zero", c.zero, c.zero === 1 ? "مادة نفدت" : "مواد نفدت");
+}
+$("stkAlerts").onclick = e => { const b = e.target.closest("[data-alert]"); if (!b) return; stkFilter = b.dataset.alert; stkSetTab("list"); };
+function stkDraw() {
+  if (!role) return;
+  $("stkAlerts").innerHTML = stkAlertsHtml();
+  $("stkErrBox").classList.toggle("hidden", !stkErr);
+  if (stkErr) $("stkErrBox").textContent = stkErr.code === "permission-denied" ? "لا توجد صلاحية لقراءة المواد. انشري قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر تحميل المواد: " + (stkErr.message || stkErr);
+  const today = dayKey(Date.now()), mine = stkMv.filter(t => t.by === stkWho() && stkMvDay(t) === today);
+  $("stkSeg").querySelector('[data-st="list"]').textContent = `المواد${stkM.size ? ` (${AR(stkM.size)})` : ""}`;
+  if (stkTab === "scan") {
+    stkDrawCard();
+    $("stkMineH").textContent = `حركاتي اليوم${mine.length ? ` (${AR(mine.length)})` : ""}`;
+    $("stkMine").innerHTML = mine.slice(0, 20).map(stkMvItem).join("") || `<li class="vr-empty" style="display:block">${stkReady || stkErr ? "امسحي باركود مادة لتظهر كميتها وتخصمي منها." : "جارٍ التحميل…"}</li>`;
+  } else if (stkTab === "list") stkDrawList();
+  else stkDrawLog();
+}
+function stkMvItem(t) {
+  const sign = t.qty > 0 ? "+" : t.qty < 0 ? "−" : "", q = Math.abs(t.qty || 0);
+  return `<li class="${t.undone ? "u" : ""}"><div class="t"><span class="badge ${esc(t.type)}">${STK_TYPE[t.type] || esc(t.type)}</span> <b>${esc(t.name)}</b> <b dir="ltr">${sign}${fmt(q)}</b>
+    <small>${timeStr(new Date(stkMvMs(t)))} · ${fmt(t.before)} ← ${fmt(t.after)} · ${esc(stkWhoName(t))}${t.lots?.length && t.type !== "count" && t.type !== "new" ? " · " + esc(stkLotsTxt(t.lots)) : ""}${t.note ? " · " + esc(t.note) : ""}${t.undone ? " · تم التراجع" : ""}</small></div>
+    <div class="r">${stkCanUndo(t) ? `<button type="button" class="mini r" data-sundo="${esc(t.id)}">تراجع</button>` : ""}</div></li>`;
+}
+
+/* ---------- المسح ---------- */
+function stkScan(text) {
+  const code = keyOf(text), now = Date.now();
+  if (!code || stkBusy || stkTab !== "scan") return;
+  if (code === stkLast.code && now - stkLast.at < 2500) return;
+  stkLast = { code, at: now };
+  const id = stkFind(code);
+  if (id ? id === stkCur : code === stkUnknown) return;   // نفس المادة مفتوحة: الكاميرا ما زالت تراها
+  beep(!!id, !!id);
+  stkOpen(id, code);
+}
+function stkOpen(id, code = "") {
+  stkCur = id || null; stkUnknown = id ? null : keyOf(code); stkN = 1; stkOk = "";
+  $("stkHits").classList.add("hidden"); $("stkHits").innerHTML = "";
+  if (stkTab !== "scan") stkSetTab("scan"); else stkDrawCard();
+  $("stkCard").scrollIntoView?.({ block: "nearest", behavior: "smooth" });
+}
+function stkSearch(raw) {
+  const q = norm(latinDigits(raw)), k = keyOf(raw);
+  if (!q) return [];
+  return [...stkM.values()].filter(m => q.split(" ").every(w => wordIn(norm(m.name), w)) || (k && stkCodes(m).some(c => keyOf(c).includes(k))))
+    .sort((a, b) => String(a.name).localeCompare(String(b.name), "ar"));
+}
+$("stkManual").onsubmit = e => {
+  e.preventDefault();
+  const v = $("stkCode").value.trim(); if (!v) return;
+  const id = stkFind(v); if (id) { $("stkCode").value = ""; return stkOpen(id, v); }
+  const hits = stkSearch(v);
+  if (hits.length === 1) { $("stkCode").value = ""; return stkOpen(hits[0].id); }
+  if (!hits.length && /^[0-9A-Za-z]{4,}$/.test(keyOf(v))) { $("stkCode").value = ""; return stkOpen(null, v); }   // باركود غير معرّف
+  $("stkHits").classList.remove("hidden");
+  $("stkHits").innerHTML = hits.slice(0, 8).map(m => `<button type="button" data-open="${esc(m.id)}"><span><b>${esc(m.name)}</b></span><small>${fmt(m.qty || 0)} ${esc(stkUnit(m))}</small></button>`).join("") || `<p class="hint">لا توجد مادة بهذا الاسم.</p>`;
+};
+$("stkHits").onclick = e => { const b = e.target.closest("[data-open]"); if (b) { $("stkCode").value = ""; stkOpen(b.dataset.open); } };
+
+function stkDrawCard() {
+  const box = $("stkCard");
+  if (stkUnknown && !stkCur) {
+    box.innerHTML = `<div class="stk-card alert"><div class="hd"><div><h3>باركود غير معرّف</h3><div class="code">${esc(stkUnknown)}</div></div></div>
+      <p class="hint">هذا الباركود غير مربوط بأي مادة.${stkCan("stkNew") ? "" : " اطلبي من الإدارة تعريفه."}</p>
+      <div class="stk-acts">${stkCan("stkNew") ? `<button class="btn btn-main" type="button" data-k="newWith">تعريف مادة جديدة</button><button class="btn btn-soft" type="button" data-k="link">ربطه بمادة موجودة</button>` : ""}
+      <button class="btn btn-ghost wide" type="button" data-k="close" style="background:transparent;color:var(--muted);font-size:15px">إغلاق</button></div></div>`;
+    return;
+  }
+  const m = stkCur && stkM.get(stkCur);
+  if (!m) { box.innerHTML = ""; if (stkCur && stkReady) stkCur = null; return; }
+  const lots = stkLotsOf(m), sell = stkSellable(m), s = stkState(m), first = lots.find(l => !stkIsExp(l.e)), expired = lots.filter(l => stkIsExp(l.e));
+  const dated = lots.some(l => l.e);
+  let fefo = "";
+  if (expired.length) fefo += `<div class="stk-fefo bad">فيها ${fmt(s.exp)} ${esc(stkUnit(m))} منتهية الصلاحية (${esc(stkDate(expired[0].e))}). لا تبيعيها${stkCan("stkCount") ? "، واضغطي «إتلاف»" : "، وأخبري الإدارة"}.</div>`;
+  if (first?.e && sell) fefo += `<div class="stk-fefo">اصرفي أولاً من الدفعة التي ${stkDaysTo(first.e) <= 1 ? esc(stkWhen(first.e)) : "تنتهي " + esc(stkDate(first.e)) + " (" + esc(stkWhen(first.e)) + ")"} · ${fmt(first.q)} ${esc(stkUnit(m))}</div>`;
+  const n = stkN, short = n > sell;
+  box.innerHTML = `<div class="stk-card ${s.exp ? "alert" : ""}">
+    ${stkOk ? `<p class="msg ok" style="margin:0 0 8px">${stkOk}</p>` : ""}
+    <div class="hd"><div style="min-width:0"><h3>${esc(m.name)}</h3><div class="code">${esc(stkCodes(m).join(" · "))}</div><div class="tags">${stkTags(m)}</div></div>
+      <div class="qty"><b>${fmt(m.qty || 0)}</b><small>${esc(stkUnit(m))} موجودة</small></div></div>
+    ${fefo}
+    ${dated || lots.length > 1 ? `<ul class="stk-lots">${lots.map(l => `<li class="${l === first && lots.length > 1 ? "first" : ""}"><span>${esc(stkDate(l.e))}${l.e ? ` <small style="color:${stkIsExp(l.e) ? "var(--bad)" : "var(--muted)"}">${esc(stkWhen(l.e))}</small>` : ""}</span><b>${fmt(l.q)}</b></li>`).join("")}</ul>` : ""}
+    <div class="stk-step"><button type="button" data-k="minus" aria-label="إنقاص">−</button><input type="text" id="stkN" inputmode="numeric" value="${n}" aria-label="الكمية"><button type="button" data-k="plus" aria-label="زيادة">+</button></div>
+    ${short ? `<div class="stk-block">${sell <= 0 ? (s.exp ? "كل الكمية المتبقية منتهية الصلاحية، فلا يمكن الخصم." : "نفدت هذه المادة، فلا يمكن الخصم.") : `الكمية لا تكفي: الموجود الصالح للبيع ${fmt(sell)} ${esc(stkUnit(m))} فقط.`}
+      ${stkCan("stkIn") ? `<button class="btn btn-main" type="button" data-k="in">إضافة كمية</button>` : " اطلبي من الإدارة إضافة كمية."}</div>` : ""}
+    <div class="stk-acts">
+      <button class="btn wide" type="button" data-k="out" ${short || stkBusy ? "disabled" : ""}>خصم ${fmt(n)} ${esc(stkUnit(m))}</button>
+      ${stkCan("stkIn") && !short ? `<button class="btn btn-soft" type="button" data-k="in">إضافة كمية</button>` : ""}
+      ${stkCan("stkCount") ? `<button class="btn btn-soft" type="button" data-k="count">جرد فعلي</button>` : ""}
+      ${stkCan("stkCount") && lots.length ? `<button class="btn btn-danger" type="button" data-k="waste">إتلاف</button>` : ""}
+      ${role === "admin" ? `<button class="btn btn-ghost" type="button" data-k="print">طباعة الباركود</button>` : ""}
+      <button class="btn btn-ghost" type="button" data-k="close">إغلاق</button>
+    </div></div>`;
+}
+$("stkCard").addEventListener("input", e => { if (e.target.id !== "stkN") return; const v = intOf(e.target.value); stkN = Number.isFinite(v) && v > 0 ? Math.min(v, 100000) : 1; const p = e.target.selectionStart; stkDrawCard(); const el = $("stkN"); el.focus(); try { el.setSelectionRange(p, p); } catch {} });
+$("stkCard").addEventListener("click", e => {
+  const b = e.target.closest("[data-k]"); if (!b) return;
+  const k = b.dataset.k, m = stkCur && stkM.get(stkCur);
+  if (k === "close") { stkCur = null; stkUnknown = null; stkOk = ""; stkLast = { code: "", at: 0 }; stkDrawCard(); return; }
+  if (k === "newWith") return stkEditModal(null, stkUnknown);
+  if (k === "link") return stkLinkModal(stkUnknown);
+  if (!m) return;
+  if (k === "minus") { stkN = Math.max(1, stkN - 1); stkOk = ""; return stkDrawCard(); }
+  if (k === "plus") { stkN = stkN + 1; stkOk = ""; return stkDrawCard(); }
+  if (k === "out") return stkOut(m, stkN);
+  if (k === "in") return stkInModal(m);
+  if (k === "count") return stkCountModal(m);
+  if (k === "waste") return stkWasteModal(m);
+  if (k === "print") return stkPrint([m]);
+});
+
+/* ---------- الحركات: كل تغيير بالكمية يُكتب مع حركته في نفس العملية ---------- */
+async function stkMove(mid, fn) {
+  const ref = STK.doc(mid), mvRef = STKMV.doc();
+  return db.runTransaction(async t => {
+    const s = await t.get(ref); if (!s.exists) throw { stk: "gone" };
+    const d = s.data(), before = d.qty || 0, r = fn({ ...d, id: mid, lots: stkLotsOf(d), qty: before });
+    if (!Number.isInteger(r.qty) || r.qty < 0) throw { stk: "low", have: before };
+    if (r.also) r.also(t, mvRef.id);
+    t.update(ref, { qty: r.qty, lots: stkSort(r.lots), lastMv: mvRef.id, by: stkWho(), updatedAt: FV.serverTimestamp() });
+    const mv = { mid, name: d.name, type: r.type, qty: r.qty - before, before, after: r.qty, lots: r.mvLots || [], note: r.note || "", by: stkWho(), station: station(), ms: Date.now(), at: FV.serverTimestamp(), ...(r.ref ? { ref: r.ref } : {}) };
+    t.set(mvRef, mv);
+    return { ...mv, id: mvRef.id };
+  });
+}
+const stkErrText = ex => ex?.stk === "gone" ? "هذه المادة محذوفة." : ex?.stk === "low" ? `الكمية لا تكفي (الموجود ${fmt(ex.have)}).` : ex?.stk === "exp" ? "المتبقي منتهي الصلاحية." : errText(ex);
+// خصم: من الدفعة الأقرب انتهاءً أولاً، والدفعات المنتهية لا تُباع
+async function stkOut(m, n) {
+  if (stkBusy || !(n > 0)) return;
+  stkBusy = true; stkDrawCard();
+  try {
+    const mv = await stkMove(m.id, d => {
+      let need = n; const lots = d.lots.map(l => ({ ...l })), taken = [];
+      for (const l of lots) { if (!need) break; if (stkIsExp(l.e)) continue; const t = Math.min(l.q, need); if (t > 0) { l.q -= t; need -= t; taken.push({ q: t, e: l.e || "" }); } }
+      if (need > 0) throw { stk: "low", have: d.lots.filter(l => !stkIsExp(l.e)).reduce((s, l) => s + l.q, 0) };
+      return { type: "out", qty: d.qty - n, lots, mvLots: taken };
+    });
+    beep(true); stkN = 1;
+    stkOk = `✓ خُصم ${fmt(n)} ${esc(stkUnit(m))} · المتبقي ${fmt(mv.after)}`;
+  } catch (ex) { console.error(ex); beep(false); stkOk = ""; toast("لم يتم الخصم. " + stkErrText(ex), true); }
+  stkBusy = false; stkDraw();
+}
+async function stkUndo(id) {
+  const t = stkMv.find(x => x.id === id); if (!t || !stkCanUndo(t)) return;
+  if (!confirm(`التراجع عن «${STK_TYPE[t.type]} ${fmt(Math.abs(t.qty))}» من ${t.name}؟`)) return;
+  try {
+    await stkMove(t.mid, d => {
+      let lots = d.lots;
+      if (t.qty < 0) (t.lots?.length ? t.lots : [{ q: -t.qty, e: "" }]).forEach(l => { lots = stkPut(lots, l.e, l.q); });
+      else (t.lots?.length ? t.lots : [{ q: t.qty, e: "" }]).forEach(l => { lots = stkTakeLot(lots, l.e, l.q); });
+      const qty = d.qty - t.qty;
+      if (qty < 0 || stkSum(lots) !== qty) throw { stk: "low", have: d.qty };
+      return { type: "undo", qty, lots, mvLots: t.lots || [], ref: t.id, note: `تراجع عن ${STK_TYPE[t.type]}`, also: (tr, mvId) => tr.update(STKMV.doc(t.id), { undone: true, undoMv: mvId }) };
+    });
+    toast("تم التراجع");
+  } catch (ex) { console.error(ex); toast("لم يتم التراجع. " + stkErrText(ex), true); }
+}
+const stkUndoClick = e => { const b = e.target.closest("[data-sundo]"); if (b) stkUndo(b.dataset.sundo); };
+["stkMine", "stkLogList", "kMv"].forEach(id => $(id).addEventListener("click", stkUndoClick));
+
+const stkDateInput = (id, v = "") => `<input type="date" id="${id}" value="${esc(v)}" dir="ltr">`;
+const stkQtyOf = id => { const n = intOf($(id).value); return Number.isFinite(n) ? n : NaN; };
+function stkInModal(m) {
+  openModal(`<h3>إضافة كمية · ${esc(m.name)}</h3><form id="sif">
+    <div class="vr-two" style="margin-top:10px"><label class="f"><span>الكمية (${esc(stkUnit(m))})</span><input type="text" id="siQ" inputmode="numeric" dir="ltr" autocomplete="off"></label>
+      <label class="f"><span>تاريخ الانتهاء (إن وُجد)</span>${stkDateInput("siE")}</label></div>
+    <label class="f" style="margin-top:10px"><span>ملاحظة (اختياري)</span><input type="text" id="siNote" maxlength="200" placeholder="مثلاً: توريد من المستودع"></label>
+    <div class="acts"><button class="btn btn-main" type="submit">إضافة</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="siMsg"></p></form>`);
+  $("sif").onsubmit = async ev => {
+    ev.preventDefault();
+    const q = stkQtyOf("siQ"), e = $("siE").value || "", msg = $("siMsg");
+    if (!(q > 0) || q > 1000000) { msg.className = "msg bad"; msg.textContent = "اكتبي الكمية."; return; }
+    if (e && stkIsExp(e) && !confirm("هذا التاريخ منتهٍ. إضافتها كدفعة منتهية؟")) return;
+    try { const mv = await stkMove(m.id, d => ({ type: "in", qty: d.qty + q, lots: stkPut(d.lots, e, q), mvLots: [{ q, e }], note: clean($("siNote").value).slice(0, 200) })); closeModal(); stkOk = `✓ أُضيف ${fmt(q)} · الكمية الآن ${fmt(mv.after)}`; toast(`أُضيف ${fmt(q)} إلى ${m.name}`); stkDraw(); }
+    catch (ex) { console.error(ex); msg.className = "msg bad"; msg.textContent = "لم تتم الإضافة. " + stkErrText(ex); }
+  };
+}
+// صفوف الدفعات (تاريخ + كمية) للجرد الفعلي وللمادة الجديدة
+function stkLotRows(lots) {
+  return (lots.length ? lots : [{ q: "", e: "" }]).map(l => `<div class="stk-lotrow">${stkDateInput("", l.e)}<input type="text" inputmode="numeric" dir="ltr" value="${l.q === "" ? "" : l.q}" placeholder="الكمية" aria-label="الكمية"><button type="button" class="mini r" data-lrm aria-label="حذف الدفعة">✕</button></div>`).join("");
+}
+function stkReadLots(box) {
+  const out = []; let bad = false;
+  box.querySelectorAll(".stk-lotrow").forEach(r => { const [d, q] = r.querySelectorAll("input"), n = intOf(q.value); if (q.value.trim() === "") return; if (!Number.isFinite(n) || n < 0) bad = true; else if (n > 0) { const f = out.find(l => l.e === (d.value || "")); if (f) f.q += n; else out.push({ q: n, e: d.value || "" }); } });
+  return bad ? null : stkSort(out);
+}
+function stkLotsUi(boxId, totalId, unit) {
+  const box = $(boxId), sum = () => { const l = stkReadLots(box); $(totalId).textContent = l ? `المجموع: ${fmt(stkSum(l))} ${unit}` : "في الكميات رقم غير صحيح."; };
+  box.addEventListener("input", sum);
+  box.addEventListener("click", e => { if (e.target.closest("[data-lrm]")) { e.target.closest(".stk-lotrow").remove(); if (!box.children.length) box.insertAdjacentHTML("beforeend", stkLotRows([])); sum(); } });
+  sum(); return () => { box.insertAdjacentHTML("beforeend", stkLotRows([])); sum(); };
+}
+function stkCountModal(m) {
+  openModal(`<h3>جرد فعلي · ${esc(m.name)}</h3><p class="hint">اكتبي العدد الموجود فعلياً لكل دفعة (حسب تاريخ الانتهاء). الفرق يُسجَّل في السجل.</p>
+    <form id="scf"><div id="scLots">${stkLotRows(stkLotsOf(m))}</div>
+    <button class="btn btn-ghost" type="button" id="scAdd" style="width:100%;margin-top:8px">إضافة دفعة</button>
+    <p class="msg" id="scTot"></p>
+    <label class="f"><span>ملاحظة (اختياري)</span><input type="text" id="scNote" maxlength="200"></label>
+    <div class="acts"><button class="btn btn-main" type="submit">حفظ الجرد</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="scMsg"></p></form>`, true);
+  const add = stkLotsUi("scLots", "scTot", stkUnit(m)); $("scAdd").onclick = add;
+  $("scf").onsubmit = async ev => {
+    ev.preventDefault();
+    const lots = stkReadLots($("scLots")), msg = $("scMsg");
+    if (!lots) { msg.className = "msg bad"; msg.textContent = "في الكميات رقم غير صحيح."; return; }
+    try { const mv = await stkMove(m.id, () => ({ type: "count", qty: stkSum(lots), lots, mvLots: lots, note: clean($("scNote").value).slice(0, 200) })); closeModal(); stkOk = `✓ حُفظ الجرد · ${mv.qty === 0 ? "مطابق" : (mv.qty > 0 ? "زيادة " : "نقص ") + fmt(Math.abs(mv.qty))}`; toast(`حُفظ جرد ${m.name}: ${fmt(mv.after)}`); stkDraw(); }
+    catch (ex) { console.error(ex); msg.className = "msg bad"; msg.textContent = "لم يُحفظ الجرد. " + stkErrText(ex); }
+  };
+}
+function stkWasteModal(m) {
+  const lots = stkLotsOf(m), firstExp = lots.find(l => stkIsExp(l.e)) || lots[0];
+  openModal(`<h3>إتلاف · ${esc(m.name)}</h3><form id="swf">
+    <label class="f" style="margin-top:10px"><span>الدفعة</span><select id="swLot">${lots.map((l, i) => `<option value="${i}" ${l === firstExp ? "selected" : ""}>${esc(stkDate(l.e))}${stkIsExp(l.e) ? " — منتهية" : ""} · ${fmt(l.q)}</option>`).join("")}</select></label>
+    <label class="f" style="margin-top:10px"><span>الكمية</span><input type="text" id="swQ" inputmode="numeric" dir="ltr" value="${firstExp?.q || ""}"></label>
+    <label class="f" style="margin-top:10px"><span>السبب</span><input type="text" id="swNote" maxlength="200" value="${firstExp && stkIsExp(firstExp.e) ? "منتهية الصلاحية" : ""}"></label>
+    <div class="acts"><button class="btn btn-danger" type="submit">إتلاف</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="swMsg"></p></form>`);
+  $("swLot").onchange = () => { const l = lots[+$("swLot").value]; $("swQ").value = l.q; $("swNote").value = stkIsExp(l.e) ? "منتهية الصلاحية" : ""; };
+  $("swf").onsubmit = async ev => {
+    ev.preventDefault();
+    const l = lots[+$("swLot").value], q = stkQtyOf("swQ"), msg = $("swMsg");
+    if (!l || !(q > 0) || q > l.q) { msg.className = "msg bad"; msg.textContent = `اكتبي كمية من ١ إلى ${fmt(l?.q || 0)}.`; return; }
+    try {
+      await stkMove(m.id, d => { const f = d.lots.find(x => (x.e || "") === (l.e || "")); if (!f || f.q < q) throw { stk: "low", have: f?.q || 0 }; return { type: "waste", qty: d.qty - q, lots: stkTakeLot(d.lots, l.e, q), mvLots: [{ q, e: l.e || "" }], note: clean($("swNote").value).slice(0, 200) }; });
+      closeModal(); stkOk = `✓ أُتلف ${fmt(q)}`; toast(`أُتلف ${fmt(q)} من ${m.name}`); stkDraw();
+    } catch (ex) { console.error(ex); msg.className = "msg bad"; msg.textContent = "لم يتم الإتلاف. " + stkErrText(ex); }
+  };
+}
+// باركود داخلي للمواد التي لا تحمل باركوداً: ZM ثم رقم متسلسل
+function stkNextCode() {
+  let n = 0; stkM.forEach(m => stkCodes(m).forEach(c => { const x = /^ZM(\d+)$/.exec(keyOf(c)); if (x) n = Math.max(n, +x[1]); }));
+  let c; do { n++; c = "ZM" + String(n).padStart(6, "0"); } while (stkFind(c)); return c;
+}
+const stkParseCodes = v => [...new Set(String(v || "").split(/[\s,،;]+/).map(keyOf).filter(c => c.length >= 3))].slice(0, 10);
+// مادة جديدة (أو تعديلها من الإدارة)
+function stkEditModal(m, code = "") {
+  const isNew = !m, codes = m ? stkCodes(m) : (code ? [keyOf(code)] : []);
+  openModal(`<h3>${isNew ? "مادة جديدة" : "تعديل · " + esc(m.name)}</h3><form id="sef">
+    <label class="f" style="margin-top:10px"><span>اسم المادة</span><input type="text" id="seName" maxlength="60" value="${esc(m?.name || "")}" placeholder="مثلاً: عصير برتقال صغير"></label>
+    <label class="f" style="margin-top:10px"><span>الباركود (أكثر من باركود: افصلي بينها بفاصلة)</span><input type="text" id="seCodes" dir="ltr" value="${esc(codes.join(", "))}" placeholder="امسحي أو اكتبي، أو ولّدي باركوداً"></label>
+    <button class="btn btn-ghost" type="button" id="seGen" style="width:100%;margin-top:6px">المادة بلا باركود؟ ولّدي باركوداً للطباعة</button>
+    <div class="vr-two" style="margin-top:10px"><label class="f"><span>الوحدة</span><input type="text" id="seUnit" maxlength="20" value="${esc(m?.unit || "قطعة")}"></label>
+      <label class="f"><span>تنبيه عند كمية</span><input type="text" id="seMin" inputmode="numeric" dir="ltr" value="${Number.isFinite(m?.min) ? m.min : ""}" placeholder="${stkLowDef()}"></label></div>
+    ${isNew ? `<span class="hint" style="display:block;margin-top:12px">الكمية الموجودة الآن حسب تاريخ الانتهاء</span><div id="seLots">${stkLotRows([])}</div>
+      <button class="btn btn-ghost" type="button" id="seAdd" style="width:100%;margin-top:8px">إضافة دفعة بتاريخ آخر</button><p class="msg" id="seTot"></p>` : ""}
+    <div class="acts"><button class="btn btn-main" type="submit">${isNew ? "حفظ المادة" : "حفظ"}</button><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="seMsg"></p></form>`, true);
+  $("seGen").onclick = () => { const c = stkNextCode(), cur = stkParseCodes($("seCodes").value); $("seCodes").value = [...cur, c].join(", "); };
+  if (isNew) { const add = stkLotsUi("seLots", "seTot", "قطعة"); $("seAdd").onclick = add; }
+  $("sef").onsubmit = async ev => {
+    ev.preventDefault();
+    const msg = $("seMsg"), bad = x => { msg.className = "msg bad"; msg.textContent = x; };
+    const name = clean($("seName").value).replace(/\s+/g, " ").slice(0, 60), cs = stkParseCodes($("seCodes").value), unit = clean($("seUnit").value).slice(0, 20) || "قطعة";
+    const minV = $("seMin").value.trim(), min = minV === "" ? null : intOf(minV);
+    if (name.length < 2) return bad("اكتبي اسم المادة.");
+    if (min !== null && !(Number.isFinite(min) && min >= 0)) return bad("حد التنبيه رقم غير صحيح.");
+    const taken = cs.find(c => { const o = stkFind(c); return o && o !== m?.id; });
+    if (taken) return bad(`الباركود ${taken} مربوط بمادة «${stkM.get(stkFind(taken))?.name}».`);
+    if ([...stkM.values()].some(x => x.id !== m?.id && norm(x.name) === norm(name)) && !confirm("يوجد مادة بنفس الاسم. المتابعة؟")) return;
+    try {
+      if (isNew) {
+        const lots = stkReadLots($("seLots")); if (!lots) return bad("في الكميات رقم غير صحيح.");
+        const ref = STK.doc(), mvRef = STKMV.doc(), qty = stkSum(lots), b = db.batch();
+        b.set(ref, { name, codes: cs, unit, min, qty, lots, lastMv: mvRef.id, by: stkWho(), createdAt: FV.serverTimestamp(), updatedAt: FV.serverTimestamp() });
+        b.set(mvRef, { mid: ref.id, name, type: "new", qty, before: 0, after: qty, lots, note: "", by: stkWho(), station: station(), ms: Date.now(), at: FV.serverTimestamp() });
+        await b.commit();
+        closeModal(); toast(`أُضيفت «${name}»`);
+        if (stkOn()) { stkM.set(ref.id, { id: ref.id, name, codes: cs, unit, min, qty, lots }); stkIndex(); stkOpen(ref.id); }
+        if (cs.some(c => /^ZM\d+$/.test(c)) && confirm("طباعة الباركود الجديد الآن؟")) stkPrint([{ name, codes: cs }]);
+      } else {
+        await STK.doc(m.id).update({ name, codes: cs, unit, min, by: stkWho(), updatedAt: FV.serverTimestamp() });
+        closeModal(); toast("حُفظت المادة");
+      }
+    } catch (ex) { console.error(ex); bad("لم يتم الحفظ. " + errText(ex)); }
+  };
+}
+// باركود غير معرّف ← يُضاف لمادة موجودة (نفس المادة بباركود ثانٍ)
+function stkLinkModal(code) {
+  openModal(`<h3>ربط الباركود بمادة</h3><p class="hint" dir="ltr" style="text-align:right">${esc(code)}</p>
+    <input type="search" id="slQ" placeholder="ابحثي باسم المادة" style="width:100%;margin-top:8px"><div class="stk-hits" id="slHits"></div>
+    <div class="acts"><button class="btn btn-ghost" type="button" data-close>إلغاء</button></div><p class="msg" id="slMsg"></p>`);
+  const draw = () => { const v = $("slQ").value, l = v.trim() ? stkSearch(v) : [...stkM.values()].sort((a, b) => String(a.name).localeCompare(String(b.name), "ar")); $("slHits").innerHTML = l.slice(0, 10).map(m => `<button type="button" data-lk="${esc(m.id)}"><b>${esc(m.name)}</b><small>${fmt(m.qty || 0)}</small></button>`).join("") || `<p class="hint">لا توجد مادة.</p>`; };
+  $("slQ").oninput = draw; draw();
+  $("slHits").onclick = async e => {
+    const b = e.target.closest("[data-lk]"), m = b && stkM.get(b.dataset.lk); if (!m) return;
+    if (!confirm(`ربط الباركود بـ«${m.name}»؟`)) return;
+    try { await STK.doc(m.id).update({ codes: [...new Set([...stkCodes(m), keyOf(code)])].slice(0, 10), by: stkWho(), updatedAt: FV.serverTimestamp() }); closeModal(); toast(`رُبط الباركود بـ«${m.name}»`); stkM.set(m.id, { ...m, codes: [...stkCodes(m), keyOf(code)] }); stkIndex(); stkOpen(m.id); }
+    catch (ex) { console.error(ex); $("slMsg").className = "msg bad"; $("slMsg").textContent = "لم يتم الربط. " + errText(ex); }
+  };
+}
+$("stkNewBtn").onclick = () => stkEditModal(null);
+
+/* ---------- المواد والسجل ---------- */
+const STK_FILTERS = [["", "الكل"], ["exp", "منتهية"], ["soon", "تنتهي قريباً"], ["low", "قاربت تنفد"], ["zero", "نفدت"]];
+const stkPass = (m, f) => { if (!f) return true; const s = stkState(m); return f === "exp" ? !!s.exp : f === "soon" ? !!s.soon : f === "low" ? s.low && !s.zero : s.zero; };
+function stkDrawList() {
+  const all = [...stkM.values()];
+  $("stkChips").innerHTML = STK_FILTERS.map(([k, t]) => { const n = all.filter(m => stkPass(m, k)).length; return k && !n && stkFilter !== k ? "" : `<button type="button" data-f="${k}" class="${stkFilter === k ? "on" : ""}">${t} (${AR(n)})</button>`; }).join("");
+  const q = $("stkQ").value, list = (q.trim() ? stkSearch(q) : all).filter(m => stkPass(m, stkFilter)).sort((a, b) => stkRank(a) - stkRank(b) || String(a.name).localeCompare(String(b.name), "ar"));
+  $("stkItems").innerHTML = list.map(m => { const s = stkState(m); return `<li class="${s.exp ? "exp" : s.soon ? "soon" : ""}" data-open="${esc(m.id)}"><div style="min-width:0"><b class="n">${esc(m.name)}</b>
+      <small>${s.near ? `أقرب انتهاء: ${esc(stkDate(s.near))} (${esc(stkWhen(s.near))})` : "بدون تاريخ انتهاء"}</small></div>
+      <div class="q"><b>${fmt(m.qty || 0)}</b><small>${esc(stkUnit(m))}</small></div><div style="grid-column:1">${stkTags(m)}</div></li>`; }).join("")
+    || `<li class="vr-empty" style="display:block;cursor:default">${!stkReady && !stkErr ? "جارٍ التحميل…" : all.length ? "لا توجد مادة بهذا البحث." : stkCan("stkNew") ? "لا توجد مواد بعد. اضغطي «مادة جديدة» أو امسحي باركود مادة." : "لا توجد مواد بعد."}</li>`;
+}
+$("stkChips").onclick = e => { const b = e.target.closest("[data-f]"); if (b) { stkFilter = b.dataset.f; stkDrawList(); } };
+$("stkQ").oninput = () => stkDrawList();
+$("stkItems").onclick = e => { const li = e.target.closest("[data-open]"); if (li) stkOpen(li.dataset.open); };
+function stkDrawLog() {
+  const today = dayKey(Date.now()), days = [...new Set([today, ...stkMv.map(stkMvDay)])].sort().reverse();
+  if (!days.includes(stkLogDayV)) stkLogDayV = today;
+  const sel = $("stkLogDay"), sig = days.join(",");
+  if (sel.dataset.sig !== sig) { sel.dataset.sig = sig; sel.innerHTML = days.map(k => `<option value="${k}">${esc(dayLabel(k))}${k === today ? " (اليوم)" : ""}</option>`).join(""); }
+  sel.value = stkLogDayV;
+  const list = stkMv.filter(t => stkMvDay(t) === stkLogDayV);
+  $("stkLogList").innerHTML = list.map(stkMvItem).join("") || `<li class="vr-empty" style="display:block">لا توجد حركات في هذا اليوم.</li>`;
+}
+$("stkLogDay").onchange = () => { stkLogDayV = $("stkLogDay").value; stkDrawLog(); };
+
+/* ---------- طباعة الباركود (Code 128) ---------- */
+const C128 = "212222 222122 222221 121223 121322 131222 122213 122312 132212 221213 221312 231212 112232 122132 122231 113222 123122 123221 223211 221132 221231 213212 223112 312131 311222 321122 321221 312212 322112 322211 212123 212321 232121 111323 131123 131321 112313 132113 132311 211313 231113 231311 112133 112331 132131 113123 113321 133121 313121 211331 231131 213113 213311 213131 311123 311321 331121 312113 312311 332111 314111 221411 431111 111224 111422 121124 121421 141122 141221 112214 112412 122114 122411 142112 142211 241211 221114 413111 241112 134111 111242 121142 121241 114212 124112 124211 411212 421112 421211 212141 214121 412121 111143 111341 131141 114113 114311 411113 411311 113141 114131 311141 411131 211412 211214 211232 2331112".split(" ");
+function c128Svg(text, h = 60) {
+  const s = String(text).replace(/[^\x20-\x7E]/g, ""), vals = [104, ...[...s].map(c => c.charCodeAt(0) - 32)];
+  vals.push(vals.reduce((a, v, i) => a + v * (i || 1), 0) % 103, 106);
+  const w = 2, q = 10 * w; let x = q, bars = "";
+  vals.forEach(v => [...C128[v]].forEach((d, i) => { const ww = +d * w; if (i % 2 === 0) bars += `<rect x="${x}" y="0" width="${ww}" height="${h}"/>`; x += ww; }));
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${x + q} ${h}" width="${x + q}" height="${h}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><g fill="#000">${bars}</g></svg>`;
+}
+function stkPrint(list) {
+  const items = list.filter(m => stkCodes(m).length);
+  if (!items.length) { toast("لا يوجد باركود لهذه المواد. عدّلي المادة وولّدي باركوداً.", true); return; }
+  const nTxt = prompt("كم نسخة من كل باركود؟", "1"); if (nTxt == null) return;
+  const n = Math.max(1, Math.min(200, intOf(nTxt) || 1));
+  const labels = items.flatMap(m => Array.from({ length: n }, () => `<div class="l"><b>${esc(m.name)}</b>${c128Svg(stkCodes(m)[0])}<span>${esc(stkCodes(m)[0])}</span></div>`)).join("");
+  const w = window.open("", "_blank"); if (!w) { toast("اسمحي بالنوافذ المنبثقة للطباعة.", true); return; }
+  w.document.write(`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>باركود المواد</title><style>
+    body{font-family:system-ui,sans-serif;margin:8mm}.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(52mm,1fr));gap:4mm}
+    .l{border:1px dashed #bbb;border-radius:3mm;padding:2mm;text-align:center;break-inside:avoid}.l b{display:block;font-size:12px;margin-bottom:1mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .l svg{width:100%;height:16mm}.l span{display:block;font-size:11px;letter-spacing:.08em;direction:ltr}@media print{.l{border-color:#eee}}</style></head>
+    <body><div class="g">${labels}</div><script>setTimeout(function(){print()},300)<\/script></body></html>`);
+  w.document.close();
+}
+
+/* ---------- لوحة التحكم: تبويب المخزون ---------- */
+function stkAdminList() {
+  const q = $("kSearch").value, f = $("kFilter").value;
+  return (q.trim() ? stkSearch(q) : [...stkM.values()]).filter(m => stkPass(m, f)).sort((a, b) => stkRank(a) - stkRank(b) || String(a.name).localeCompare(String(b.name), "ar"));
+}
+function stkMvList() {
+  const ty = $("kType").value, by = $("kBy").value, q = norm($("kMvSearch").value);
+  return stkMv.filter(t => (!kDaySel || stkMvDay(t) === kDaySel) && (!ty || t.type === ty) && (!by || t.by === by) && (!q || q.split(" ").every(w => wordIn(norm(t.name), w))));
+}
+function renderStkAdmin() {
+  if (role !== "admin") return;
+  if (document.activeElement?.id !== "kLow") $("kLow").value = stkLowDef();
+  if (document.activeElement?.id !== "kDays") $("kDays").value = stkDays();
+  const all = [...stkM.values()], c = { exp: 0, soon: 0, low: 0, zero: 0 };
+  all.forEach(m => { const s = stkState(m); if (s.exp) c.exp++; if (s.soon) c.soon++; if (s.zero) c.zero++; else if (s.low) c.low++; });
+  const today = dayKey(Date.now()), outToday = stkMv.filter(t => t.type === "out" && !t.undone && stkMvDay(t) === today).reduce((s, t) => s - t.qty, 0);
+  $("kSum").innerHTML = `<div><b>${fmt(all.length)}</b><span>مادة</span></div><div><b>${fmt(outToday)}</b><span>قطعة خُصمت اليوم</span></div>
+    <div><b style="color:var(--bad)">${fmt(c.exp)}</b><span>فيها دفعة منتهية</span></div><div><b style="color:#B4540A">${fmt(c.soon)}</b><span>تنتهي خلال ${stkDaysWord(stkDays())}</span></div>
+    <div><b style="color:var(--warn)">${fmt(c.low)}</b><span>قاربت تنفد</span></div><div><b>${fmt(c.zero)}</b><span>نفدت</span></div>`;
+  const list = stkAdminList();
+  $("kRows").innerHTML = list.map(m => { const s = stkState(m); return `<tr class="${s.exp ? "s-exp" : s.soon ? "s-soon" : ""}"><td class="name">${esc(m.name)}</td>
+      <td class="num" dir="ltr" style="font-size:12px">${esc(stkCodes(m).join(", ")) || "—"}</td><td class="num"><b>${fmt(m.qty || 0)}</b> <small style="color:var(--muted)">${esc(stkUnit(m))}</small></td>
+      <td class="num">${fmt(stkMin(m))}${Number.isFinite(m.min) ? "" : ` <small style="color:var(--muted)">(افتراضي)</small>`}</td>
+      <td>${s.near ? `${esc(stkDate(s.near))}<br><small style="color:${stkIsExp(s.near) ? "var(--bad)" : "var(--muted)"}">${esc(stkWhen(s.near))}</small>` : "—"}</td><td>${stkTags(m) || `<span class="badge in">جيدة</span>`}</td>
+      <td><button class="mini" data-kk="in" data-id="${esc(m.id)}">إضافة</button><button class="mini" data-kk="count" data-id="${esc(m.id)}">جرد</button>${(m.qty || 0) > 0 ? `<button class="mini r" data-kk="waste" data-id="${esc(m.id)}">إتلاف</button>` : ""}<button class="mini" data-kk="edit" data-id="${esc(m.id)}">تعديل</button><button class="mini" data-kk="print" data-id="${esc(m.id)}">طباعة</button><button class="mini r" data-kk="del" data-id="${esc(m.id)}">حذف</button></td></tr>`; }).join("");
+  $("kEmpty").classList.toggle("hidden", !!list.length);
+  $("kEmpty").textContent = stkErr ? (stkErr.code === "permission-denied" ? "لا توجد صلاحية للقراءة. انشري قواعد Firestore الجديدة ثم أعيدي التحميل." : "تعذّر التحميل: " + stkErr.message) : !stkReady ? "جارٍ التحميل…" : all.length ? "لا توجد مادة بهذا البحث." : "لا توجد مواد بعد. اضغطي «مادة جديدة».";
+  const days = [...new Set([today, ...stkMv.map(stkMvDay)])].sort().reverse(), dsel = $("kDay"), sig = days.join(",");
+  if (kDaySel && !days.includes(kDaySel)) kDaySel = "";
+  if (dsel.dataset.sig !== sig) { dsel.dataset.sig = sig; dsel.innerHTML = `<option value="">كل الأيام</option>` + days.map(k => `<option value="${k}">${esc(dayLabel(k))}${k === today ? " (اليوم)" : ""}</option>`).join(""); }
+  dsel.value = kDaySel;
+  const bsel = $("kBy"), bys = [...new Map(stkMv.map(t => [t.by || "", stkWhoName(t)])).entries()], bsig = bys.map(b => b.join(":")).join(","), bv = bsel.value;
+  if (bsel.dataset.sig !== bsig) { bsel.dataset.sig = bsig; bsel.innerHTML = `<option value="">كل الحسابات</option>` + bys.map(([id, n]) => `<option value="${esc(id)}">${esc(n)}</option>`).join(""); bsel.value = bys.some(b => b[0] === bv) ? bv : ""; }
+  const mv = stkMvList();
+  $("kMv").innerHTML = mv.slice(0, 500).map(t => `<tr class="${t.undone ? "strike" : ""}"><td>${esc(new Date(stkMvMs(t)).toLocaleString("ar", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }))}</td>
+      <td class="name">${esc(t.name)}</td><td><span class="badge ${esc(t.type)}">${STK_TYPE[t.type] || esc(t.type)}</span></td><td class="num" dir="ltr"><b>${t.qty > 0 ? "+" : t.qty < 0 ? "−" : ""}${fmt(Math.abs(t.qty || 0))}</b></td>
+      <td class="num">${fmt(t.before)}</td><td class="num">${fmt(t.after)}</td><td style="white-space:normal;font-size:13px">${esc(stkLotsTxt(t.lots))}</td><td style="white-space:normal">${esc(t.note || "")}${t.undone ? ` <span class="badge undo">تم التراجع</span>` : ""}</td>
+      <td>${esc(stkWhoName(t))}</td><td>${stkCanUndo(t) ? `<button class="mini r" data-sundo="${esc(t.id)}">تراجع</button>` : ""}</td></tr>`).join("");
+  $("kMvEmpty").classList.toggle("hidden", !!mv.length);
+  $("kMvEmpty").textContent = stkMv.length ? "لا توجد حركات بهذا البحث." : "لا توجد حركات بعد.";
+}
+$("kRows").addEventListener("click", async e => {
+  const b = e.target.closest("[data-kk]"), m = b && stkM.get(b.dataset.id); if (!m) return;
+  const k = b.dataset.kk;
+  if (k === "in") return stkInModal(m);
+  if (k === "count") return stkCountModal(m);
+  if (k === "waste") return stkWasteModal(m);
+  if (k === "edit") return stkEditModal(m);
+  if (k === "print") return stkPrint([m]);
+  if (k === "del") { if (!confirm(`حذف «${m.name}» نهائياً؟\nسجل حركاتها يبقى.`)) return; try { await STK.doc(m.id).delete(); toast("حُذفت المادة"); } catch (ex) { toast("لم يتم الحذف. " + errText(ex), true); } }
+});
+$("kNew").onclick = () => stkEditModal(null);
+$("kPrintAll").onclick = () => stkPrint(stkAdminList());
+["kSearch", "kMvSearch"].forEach(id => $(id).oninput = () => renderStkAdmin());
+["kFilter", "kType", "kBy"].forEach(id => $(id).onchange = () => renderStkAdmin());
+$("kDay").onchange = () => { kDaySel = $("kDay").value; renderStkAdmin(); };
+$("kSetForm").onsubmit = async e => {
+  e.preventDefault();
+  const low = intOf($("kLow").value), days = intOf($("kDays").value), m = $("kSetMsg");
+  if (!(Number.isFinite(low) && low >= 0) || !(Number.isFinite(days) && days >= 0 && days <= 3650)) { m.className = "msg bad"; m.textContent = "اكتبي أرقاماً صحيحة."; return; }
+  try { await SET.set({ stkLow: low, stkDays: days }, { merge: true }); m.className = "msg ok"; m.textContent = "حُفظت إعدادات التنبيه."; }
+  catch (ex) { m.className = "msg bad"; m.textContent = "لم يتم الحفظ. " + errText(ex); }
+};
+$("kExport").onclick = async () => {
+  try { await loadXLSX(); } catch (ex) { alert(ex.message); return; }
+  const mats = [...stkM.values()].sort((a, b) => stkRank(a) - stkRank(b) || String(a.name).localeCompare(String(b.name), "ar"));
+  const st = m => { const s = stkState(m); return [s.exp && "فيها منتهية", s.soon && "تنتهي قريباً", s.zero ? "نفدت" : s.low && "قاربت تنفد"].filter(Boolean).join("، ") || "جيدة"; };
+  const r1 = mats.map(m => ({ "المادة": m.name, "الباركود": stkCodes(m).join(", "), "الوحدة": stkUnit(m), "الكمية": m.qty || 0, "الصالح للبيع": stkSellable(m), "حد التنبيه": stkMin(m), "أقرب انتهاء": stkState(m).near, "الحالة": st(m) }));
+  const r2 = mats.flatMap(m => stkLotsOf(m).map(l => ({ "المادة": m.name, "تاريخ الانتهاء": l.e || "بدون تاريخ", "الكمية": l.q, "الأيام المتبقية": l.e ? stkDaysTo(l.e) : "", "الحالة": stkIsExp(l.e) ? "منتهية" : l.e && stkDaysTo(l.e) <= stkDays() ? "تنتهي قريباً" : "" })));
+  const r3 = stkMvList().map(t => ({ "الوقت": new Date(stkMvMs(t)).toLocaleString("ar"), "التاريخ": stkMvDay(t), "المادة": t.name, "الحركة": STK_TYPE[t.type] || t.type, "الكمية": t.qty, "قبل": t.before, "بعد": t.after, "الدفعة": stkLotsTxt(t.lots), "ملاحظة": t.note || "", "تم التراجع": t.undone ? "نعم" : "", "الحساب": stkWhoName(t) }));
+  const wb = XLSX.utils.book_new(); wb.Workbook = { Views: [{ RTL: true }] };
+  const add = (r, name, w) => { const ws = XLSX.utils.json_to_sheet(r.length ? r : [{}]); ws["!cols"] = w.map(x => ({ wch: x })); XLSX.utils.book_append_sheet(wb, ws, name); };
+  add(r1, "المواد", [26, 22, 8, 8, 12, 10, 12, 22]); add(r2, "الدفعات", [26, 14, 8, 12, 12]); add(r3, "الحركات", [20, 11, 24, 10, 8, 8, 8, 26, 22, 9, 16]);
+  XLSX.writeFile(wb, `جرد-المواد-${new Date().toISOString().slice(0, 10)}.xlsx`);
 };
 </script>
 </body>
